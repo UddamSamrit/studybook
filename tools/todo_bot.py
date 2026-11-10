@@ -124,9 +124,20 @@ def group(gid):
     return next((g for g in groups() if g['id'] == gid), None)
 
 
+def my_tasks(day=None):
+    """Tasks you added yourself with "add ...": X1, X2 ... for that day, shown under the top 3 priorities."""
+    rows = db.execute("SELECT idx, text FROM notes WHERE day=? AND key='task' ORDER BY idx", (day or today_iso(),)).fetchall()
+    return [{'id': f'x{i}', 'code': f'X{i}', 'short': t, 'en': t, 'km': '', 'group': 'priorities', 'mine': True} for i, t in rows]
+
+
 def tasks(g):
     """The tickable tasks of a group (schedule lines that point elsewhere are not counted twice)."""
-    return [it for it in g.get('items', []) if 'id' in it]
+    own = my_tasks() if g.get('kind') == 'priorities' else []
+    return [it for it in g.get('items', []) if 'id' in it] + own
+
+
+def find_item(item_id):
+    return todo()['_items'].get(item_id) or next((it for it in my_tasks() if it['id'] == item_id), None)
 
 
 def daily_tasks():
@@ -139,7 +150,7 @@ def weekly_tasks():
 
 def by_code(code):
     code = code.strip().upper().rstrip('.,')
-    for it in todo()['_items'].values():
+    for it in list(todo()['_items'].values()) + my_tasks():
         if it['code'] == code:
             return it
     return None
@@ -212,7 +223,7 @@ def set_note(key, text, who, append=False):
     idx = 0
     if append:
         top = db.execute('SELECT MAX(idx) FROM notes WHERE day=? AND key=?', (day, key)).fetchone()[0]
-        idx = 0 if top is None else top + 1
+        idx = (1 if key == 'task' else 0) if top is None else top + 1
     db.execute('INSERT OR REPLACE INTO notes VALUES (?,?,?,?,?,?)', (day, key, idx, text, who, now().isoformat(timespec='seconds')))
     db.commit()
 
@@ -278,7 +289,10 @@ def section(g):
         if g.get('weekly'):
             ws, we = week_range()
             head += f' ({ws:%d %b} - {we:%d %b})'
-        return [head] + [task_line(it) for it in tasks(g)]
+        rows = [task_line(it) for it in tasks(g)]
+        if g.get('kind') == 'priorities':
+            rows.append('Your own tasks: <code>add Call the bank</code>' if not my_tasks() else '<i>Add more: <code>add ...</code>  remove: <code>remove X1</code></i>')
+        return [head] + rows
     if k == 'notes':
         return [head] + [f'{esc(f["label"])}: {esc(note(f["key"]) or "-")}' for f in g['fields']]
     if k == 'list':
@@ -315,7 +329,7 @@ def dashboard(greet=False):
         out += ['', *section(g)]
     out += ['', LINE, '<b>HOW TO USE</b>  (write in this group)',
             '<code>done W1 L2</code>  tick   <code>doing W1</code>  in progress   <code>undo W1</code>',
-            '<code>p1 Finish login API</code>   set a priority',
+            '<code>p1 Finish login API</code>   set a priority   <code>add Call the bank</code>   your own task',
             '<code>win Shipped the fix</code>   add an achievement',
             '<code>follow</code> <code>waiting</code> <code>review</code> <code>issue</code> <code>reason</code> <code>next</code> + text',
             '<code>well</code> <code>improve</code> <code>tomorrow</code> + text   end-of-day review',
@@ -367,7 +381,9 @@ def review_prompt():
         out += [f'<code>{f["key"]}</code> {esc(f["label"])}' for f in g['fields']]
     out += ['', 'And your hours: <code>work 8</code> <code>learn 2</code> <code>deep 4</code> <code>focus 8</code>']
     total, done, doing = counts()
-    out += ['', f'Today so far: {done} of {total} tasks done.']
+    out += ['', f'Today so far: {done} of {total} tasks done.', '',
+            '<b>Sleep at 22:00.</b> Phone away from the bed, running clothes ready.',
+            'Seven hours of sleep makes 5:00 easy.']
     return '\n'.join(out), {'inline_keyboard': [[{'text': 'Open dashboard', 'callback_data': 'home'}]]}
 
 
@@ -477,7 +493,7 @@ def log_view(n=25):
     lines = [f'<b>LATEST {len(rows)} TICKS</b>', LINE]
     items = todo()['_items']
     for at, item, done, by in rows:
-        it = items.get(item)
+        it = items.get(item) or find_item(item)
         word = {DONE: 'done ', DOING: 'doing'}.get(done, 'undo ')
         lines.append(f'<code>{at[5:16].replace("T", " ")}  {word}</code>  {esc(short(label(it), 36) if it else item)}  ({esc(by)})')
     if not rows:
@@ -515,12 +531,15 @@ def send_home(greet=False):
 HELP = '\n'.join([
     '<b>HOW TO USE THIS BOT</b>', LINE,
     'Every morning at 5:00 I send your dashboard. At {evening} I remind you to write your review.', '',
-    '<b>Tasks</b>  (codes: P1-P3, W1-W6, L1-L6, J1-J4, T1-T10, A1-A4)',
+    '<b>Tasks</b>  (codes: P1-P3, X1... your own, W1-W6, L1-L6, J1-J4, T1-T10, A1-A4)',
     '<code>done W1 L2</code>  tick',
     '<code>doing W1</code>  mark in progress',
     '<code>undo W1</code>  untick', '',
     '<b>Write things down</b>',
     '<code>p1 Finish login API</code>  set priority 1 (also p2, p3)',
+    '<code>add Call the bank</code>  add your own task for today (X1, X2 ...)',
+    '<code>add Buy shoes; Email Dara</code>  add several at once',
+    '<code>remove X1</code>  remove a task you added',
     '<code>goal Ship the payment fix</code>  daily goal',
     '<code>win Shipped the payment fix</code>  add an achievement',
     '<code>follow</code> <code>waiting</code> <code>review</code>  follow-up and pending',
@@ -589,6 +608,27 @@ def handle_text(m):
     if head in ('done', 'doing', 'undo'):
         value = {'done': DONE, 'doing': DOING, 'undo': 0}[head]
         return mark(rest, value, who, mid) if rest else say(f'Which task? For example <code>{head} W1</code>.', reply_to=mid)
+    if head in ('add', 'task'):
+        if not body:
+            return say('Write the task too, for example <code>add Call the bank</code>.', reply_to=mid)
+        added = []
+        for part in [x.strip() for x in body.split(';') if x.strip()]:  # "add A; B; C" adds three
+            set_note('task', part, who, append=True)
+            added.append(my_tasks()[-1])
+        total, done, doing = counts()
+        return say('<b>Added to today</b>\n' + '\n'.join(f'<code>[ ] {it["code"]:>3}</code>  {esc(it["short"])}' for it in added)
+                   + f'\n\nTick it with <code>done {added[0]["code"]}</code>. Today now has {total} tasks.', reply_to=mid)
+    if head in ('remove', 'delete'):
+        gone = []
+        for c in rest:
+            it = by_code(c)
+            if it and it.get('mine'):
+                db.execute("DELETE FROM notes WHERE day=? AND key='task' AND idx=?", (today_iso(), int(it['id'][1:])))
+                db.execute('DELETE FROM state WHERE period=? AND item=?', (today_iso(), it['id']))
+                gone.append(f'{it["code"]} {it["short"]}')
+        db.commit()
+        return say(('<b>Removed</b>\n' + '\n'.join(esc(g) for g in gone)) if gone else
+                   'Only tasks you added can be removed, for example <code>remove X1</code>.', reply_to=mid)
     if head in ('p1', 'p2', 'p3', 'goal'):
         if not body:
             return say(f'Write the text too, for example <code>{head} Finish the login API</code>.', reply_to=mid)
@@ -640,7 +680,7 @@ def handle(u):
         target = data
         if data.startswith('t:'):
             _, item, target = data.split(':', 2)
-            it = todo()['_items'].get(item)
+            it = find_item(item)
             if it:
                 nxt = {0: DONE, DONE: DOING, DOING: 0}[status(it)]  # tap: done, tap: in progress, tap: clear
                 set_status(it, nxt, who)
@@ -675,6 +715,7 @@ def main():
         {'command': 'done', 'description': 'Tick tasks, e.g. /done W1 L2'},
         {'command': 'doing', 'description': 'Mark in progress, e.g. /doing W1'},
         {'command': 'undo', 'description': 'Untick, e.g. /undo W1'},
+        {'command': 'add', 'description': 'Add your own task, e.g. /add Call the bank'},
         {'command': 'win', 'description': 'Add an achievement'},
         {'command': 'today', 'description': 'What I finished today'},
         {'command': 'week', 'description': 'What I finished this week'},
