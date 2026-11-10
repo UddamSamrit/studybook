@@ -59,6 +59,8 @@ li.note{padding-top:0;border-top:0}
 .sub{font-weight:800;font-size:.85rem;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 0}
 .prog{font-family:ui-monospace,Menlo,monospace;white-space:pre;margin:4px 0 10px}
 .foot{text-align:center;font-weight:800;letter-spacing:.04em}
+.must{font-size:.7rem;font-weight:800;letter-spacing:.06em;color:#fff;background:#D7372B;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:2px}
+.mustline{margin:10px 0 0;font-size:.95rem}
 </style>
 </head>
 <body>
@@ -66,6 +68,7 @@ li.note{padding-top:0;border-top:0}
   <a class="back" href="../">&larr; English</a>
   <h1>Samrit Uddam Life</h1>
   <p class="km" lang="km">ជីវិតរបស់ Samrit Uddam</p>
+  <p class="mustline">Must-do today: <b id="mustTxt">0 of 5</b>. Everything else is a bonus.</p>
   <div class="total"><div class="bar"><span id="totalBar"></span></div><b id="totalTxt">0/36</b></div>
 </div></header>
 <main class="wrap">
@@ -74,7 +77,7 @@ li.note{padding-top:0;border-top:0}
     <h2>1. TOP 3 PRIORITIES <span class="km" lang="km">អាទិភាពកំពូលទាំង 3</span><span class="cnt"></span></h2>
     <div class="bar"><span></span></div>
     <ul>
-      <li><label><input type="checkbox" data-id="p1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">P1</b> Most important task</span><span class="km" lang="km">ការងារសំខាន់បំផុតថ្ងៃនេះ</span></span></label></li>
+      <li><label><input type="checkbox" data-id="p1" data-must=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">P1</b> Most important task <span class=must>MUST</span></span><span class="km" lang="km">ការងារសំខាន់បំផុតថ្ងៃនេះ</span></span></label></li>
       <li class="note"><input type="text" data-note="p1" placeholder="Write your most important task"></li>
       <li><label><input type="checkbox" data-id="p2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">P2</b> Second important task</span><span class="km" lang="km">ការងារសំខាន់ទីពីរ</span></span></label></li>
       <li class="note"><input type="text" data-note="p2" placeholder="Write your second important task"></li>
@@ -98,9 +101,9 @@ li.note{padding-top:0;border-top:0}
     <h2>3. LEARNING AND GROWTH <span class="km" lang="km">ការរៀន និងការរីកចម្រើន</span><span class="cnt"></span></h2>
     <div class="bar"><span></span></div>
     <ul>
-      <li><label><input type="checkbox" data-id="l1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L1</b> English reading: Second Chance, 20 pages, 5 new words</span><span class="km" lang="km">អានសៀវភៅ Second Chance 20 ទំព័រ ហើយសរសេរពាក្យថ្មី 5 ជាមួយអត្ថន័យខ្មែរ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="l1" data-must=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L1</b> English reading: Second Chance, 20 pages, 5 new words <span class=must>MUST</span></span><span class="km" lang="km">អានសៀវភៅ Second Chance 20 ទំព័រ ហើយសរសេរពាក្យថ្មី 5 ជាមួយអត្ថន័យខ្មែរ។</span></span></label></li>
       <li><label><input type="checkbox" data-id="l2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L2</b> English listening: 10 minutes</span><span class="km" lang="km">ស្តាប់ BBC 6 Minute English ឬ VOA 10 នាទី។</span></span></label> <a class="go" href="https://www.bbc.co.uk/learningenglish" target=_blank rel=noopener>open</a></li>
-      <li><label><input type="checkbox" data-id="l3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L3</b> English speaking: 1 minute, recorded</span><span class="km" lang="km">និយាយជាភាសាអង់គ្លេស 1 នាទី អំពីអ្វីដែលអ្នកបានអាន ហើយថតទុក។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="l3" data-must=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L3</b> English speaking: 1 minute, recorded <span class=must>MUST</span></span><span class="km" lang="km">និយាយជាភាសាអង់គ្លេស 1 នាទី អំពីអ្វីដែលអ្នកបានអាន ហើយថតទុក។</span></span></label></li>
       <li><label><input type="checkbox" data-id="l4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L4</b> English writing: 3 sentences</span><span class="km" lang="km">សរសេរប្រយោគ 3 ដោយប្រើពាក្យថ្មីថ្ងៃនេះ។</span></span></label></li>
       <li><label><input type="checkbox" data-id="l5"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L5</b> Technical learning: one Kubernetes unit</span><span class="km" lang="km">រៀនមេរៀន Kubernetes មួយនៅលើ studybook។</span></span></label> <a class="go" href="../../kubernetes/">open</a></li>
       <li><label><input type="checkbox" data-id="l6"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L6</b> AI / New technology</span><span class="km" lang="km">អាន ឬសាកល្បងរឿងថ្មីមួយអំពី AI ឬបច្ចេកវិទ្យាថ្មី។</span></span></label></li>
@@ -180,10 +183,10 @@ li.note{padding-top:0;border-top:0}
     <div class="bar"><span></span></div>
     <ul>
       <li class="sec">Morning (05:00 - 12:00)</li>
-      <li><label><input type="checkbox" data-id="t1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">05:00</b> <b class="code">T1</b> Wake up</span><span class="km" lang="km">ក្រោកម៉ោង 5:00។</span></span></label></li>
-      <li><label><input type="checkbox" data-id="t2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">05:15</b> <b class="code">T2</b> Run 30 minutes</span><span class="km" lang="km">រត់ 30 នាទី។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="t1" data-must=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">05:00</b> <b class="code">T1</b> Wake up <span class=must>MUST</span></span><span class="km" lang="km">ក្រោកម៉ោង 5:00។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="t2" data-must=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">05:15</b> <b class="code">T2</b> Run 30 minutes <span class=must>MUST</span></span><span class="km" lang="km">រត់ 30 នាទី។</span></span></label></li>
       <li><label><input type="checkbox" data-id="t3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">06:00</b> <b class="code">T3</b> Shower / Breakfast</span><span class="km" lang="km">ងូតទឹក និងញ៉ាំអាហារពេលព្រឹក។</span></span></label></li>
-      <li><label><input type="checkbox" data-id="l1" data-ref=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">06:30</b> <b class="code">L1</b> English reading: Second Chance, 20 pages, 5 new words</span><span class="km" lang="km">អានសៀវភៅ Second Chance 20 ទំព័រ ហើយសរសេរពាក្យថ្មី 5 ជាមួយអត្ថន័យខ្មែរ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="l1" data-ref=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">06:30</b> <b class="code">L1</b> English reading: Second Chance, 20 pages, 5 new words <span class=must>MUST</span></span><span class="km" lang="km">អានសៀវភៅ Second Chance 20 ទំព័រ ហើយសរសេរពាក្យថ្មី 5 ជាមួយអត្ថន័យខ្មែរ។</span></span></label></li>
       <li><label><input type="checkbox" data-id="l2" data-ref=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">07:15</b> <b class="code">L2</b> English listening: 10 minutes</span><span class="km" lang="km">ស្តាប់ BBC 6 Minute English ឬ VOA 10 នាទី។</span></span></label> <a class="go" href="https://www.bbc.co.uk/learningenglish" target=_blank rel=noopener>open</a></li>
       <li><label><input type="checkbox" data-id="t4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">08:00</b> <b class="code">T4</b> Start work at Wintex: P1 first</span><span class="km" lang="km">ចាប់ផ្តើមការងារជាមួយអាទិភាពទីមួយ។</span></span></label></li>
       <li class="sec">Afternoon (12:00 - 18:00)</li>
@@ -192,7 +195,7 @@ li.note{padding-top:0;border-top:0}
       <li><label><input type="checkbox" data-id="t7"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">16:30</b> <b class="code">T7</b> Review daily progress</span><span class="km" lang="km">ពិនិត្យអ្វីដែលបានធ្វើ ហើយកត់ម៉ោង។</span></span></label></li>
       <li class="sec">Evening (18:00 - 22:00)</li>
       <li><label><input type="checkbox" data-id="t8"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">20:00</b> <b class="code">T8</b> SOCHEATAAI / personal projects</span><span class="km" lang="km">ការងារ CTO សម្រាប់ SOCHEATAAI ឬគម្រោងផ្ទាល់ខ្លួន។</span></span></label></li>
-      <li><label><input type="checkbox" data-id="l3" data-ref=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">21:00</b> <b class="code">L3</b> English speaking: 1 minute, recorded</span><span class="km" lang="km">និយាយជាភាសាអង់គ្លេស 1 នាទី អំពីអ្វីដែលអ្នកបានអាន ហើយថតទុក។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="l3" data-ref=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">21:00</b> <b class="code">L3</b> English speaking: 1 minute, recorded <span class=must>MUST</span></span><span class="km" lang="km">និយាយជាភាសាអង់គ្លេស 1 នាទី អំពីអ្វីដែលអ្នកបានអាន ហើយថតទុក។</span></span></label></li>
       <li><label><input type="checkbox" data-id="l4" data-ref=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">21:15</b> <b class="code">L4</b> English writing: 3 sentences</span><span class="km" lang="km">សរសេរប្រយោគ 3 ដោយប្រើពាក្យថ្មីថ្ងៃនេះ។</span></span></label></li>
       <li><label><input type="checkbox" data-id="t9"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">21:30</b> <b class="code">T9</b> Review the day, plan tomorrow</span><span class="km" lang="km">សរសេរការពិនិត្យថ្ងៃ ហើយរៀបចំសម្លៀកបំពាក់រត់។</span></span></label></li>
       <li><label><input type="checkbox" data-id="t10"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">22:00</b> <b class="code">T10</b> Sleep</span><span class="km" lang="km">គេង។ ដាក់ទូរស័ព្ទឲ្យឆ្ងាយពីគ្រែ។</span></span></label></li>
@@ -248,6 +251,8 @@ li.note{padding-top:0;border-top:0}
       s.querySelector('.cnt').textContent=n+'/'+bs.length;
       var bar=s.querySelector('.bar span'); if(bar)bar.style.width=(100*n/bs.length)+'%';
     });
+    var ms=document.querySelectorAll('input[data-must]'), md=0; ms.forEach(function(b){if(b.checked)md++;});
+    document.getElementById('mustTxt').textContent=md+' of '+ms.length+(md===ms.length?' (perfect day)':'');
     document.getElementById('totalTxt').textContent=done+'/'+all;
     document.getElementById('totalBar').style.width=(100*done/all)+'%';
     var p=document.getElementById('prog');

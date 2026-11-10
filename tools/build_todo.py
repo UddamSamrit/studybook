@@ -52,8 +52,8 @@ def main():
                         ext = t['link'].startswith('http')
                         link = f' <a class="go" href="{e(t["link"])}"{" target=_blank rel=noopener" if ext else ""}>open</a>'
                     pr = ' data-prio="1"' if kind == 'priorities' else ''
-                    rows.append(f'      <li><label><input type="checkbox" data-id="{e(t["id"])}"{" data-ref=1" if ref else ""}><span class="box" aria-hidden="true"></span>'
-                                f'<span class="txt"><span class="en">{tm}<b class="code">{e(code)}</b> {e(t.get("short") or t["en"])}</span>'
+                    rows.append(f'      <li><label><input type="checkbox" data-id="{e(t["id"])}"{" data-ref=1" if ref else ""}{" data-must=1" if t.get("must") and not ref else ""}><span class="box" aria-hidden="true"></span>'
+                                f'<span class="txt"><span class="en">{tm}<b class="code">{e(code)}</b> {e(t.get("short") or t["en"])}{" <span class=must>MUST</span>" if t.get("must") else ""}</span>'
                                 f'<span class="km" lang="km">{e(t["km"])}</span></span></label>{link}</li>\n')
                     if kind == 'priorities':
                         rows.append(f'      <li class="note"><input type="text" data-note="{e(t["id"])}" placeholder="Write your {e(t["short"].lower())}"></li>\n')
@@ -136,6 +136,8 @@ li.note{{padding-top:0;border-top:0}}
 .sub{{font-weight:800;font-size:.85rem;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 0}}
 .prog{{font-family:ui-monospace,Menlo,monospace;white-space:pre;margin:4px 0 10px}}
 .foot{{text-align:center;font-weight:800;letter-spacing:.04em}}
+.must{{font-size:.7rem;font-weight:800;letter-spacing:.06em;color:#fff;background:#D7372B;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:2px}}
+.mustline{{margin:10px 0 0;font-size:.95rem}}
 </style>
 </head>
 <body>
@@ -143,6 +145,7 @@ li.note{{padding-top:0;border-top:0}}
   <a class="back" href="../">&larr; English</a>
   <h1>{e(todo["title"])}</h1>
   <p class="km" lang="km">{e(todo["title_km"])}</p>
+  <p class="mustline">Must-do today: <b id="mustTxt">0 of 5</b>. Everything else is a bonus.</p>
   <div class="total"><div class="bar"><span id="totalBar"></span></div><b id="totalTxt">0/{total}</b></div>
 </div></header>
 <main class="wrap">
@@ -168,6 +171,8 @@ li.note{{padding-top:0;border-top:0}}
       s.querySelector('.cnt').textContent=n+'/'+bs.length;
       var bar=s.querySelector('.bar span'); if(bar)bar.style.width=(100*n/bs.length)+'%';
     }});
+    var ms=document.querySelectorAll('input[data-must]'), md=0; ms.forEach(function(b){{if(b.checked)md++;}});
+    document.getElementById('mustTxt').textContent=md+' of '+ms.length+(md===ms.length?' (perfect day)':'');
     document.getElementById('totalTxt').textContent=done+'/'+all;
     document.getElementById('totalBar').style.width=(100*done/all)+'%';
     var p=document.getElementById('prog');

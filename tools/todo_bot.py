@@ -289,6 +289,29 @@ def counts(day=None):
     return len(sts), sts.count(DONE), sts.count(DOING)
 
 
+MUST_ORDER = ('t1', 't2', 'l1', 'l3', 'p1')  # the order of the day: wake, run, read, speak, top priority
+
+
+def must_tasks(day=None):
+    ms = [it for it in daily_tasks(day) if it.get('must')]
+    return sorted(ms, key=lambda it: MUST_ORDER.index(it['id']) if it['id'] in MUST_ORDER else 99)
+
+
+def must_counts(day=None):
+    """(must-do done, must-do total, extras done, extras total) for a day."""
+    ms = must_tasks(day)
+    ids = {it['id'] for it in ms}
+    extra = [it for it in daily_tasks(day) if it['id'] not in ids]
+    return (sum(status(it, day) == DONE for it in ms), len(ms),
+            sum(status(it, day) == DONE for it in extra), len(extra))
+
+
+def perfect(day):
+    """A perfect day: every must-do task done."""
+    d_, n, _, _ = must_counts(day)
+    return n > 0 and d_ == n
+
+
 # ---------------------------------------------------------------- the dashboard
 def task_line(it, time_=''):
     t = it.get('target', it)
@@ -327,10 +350,10 @@ def section(g):
         return [head] + rows
     if k == 'progress':
         total, done, doing = counts()
-        pct = round(100 * done / total) if total else 0
-        return [head, f'<code>Total tasks:  {total:>3}</code>', f'<code>Completed:    {done:>3}</code>',
-                f'<code>In progress:  {doing:>3}</code>', f'<code>Pending:      {total - done - doing:>3}</code>',
-                f'<code>Completion:   {pct:>3}%</code>']
+        md, mn, ed, en = must_counts()
+        return [head, f'<code>Must-do:      {md} of {mn}  ({round(100 * md / mn) if mn else 0}%)</code>',
+                f'<code>Extras:       {ed} of {en}</code>', f'<code>In progress:  {doing}</code>',
+                f'<code>Perfect days: {streak_perfect()} in a row</code>']
     if k == 'schedule':
         out = [head]
         for sec in g['sections']:
@@ -363,6 +386,10 @@ def dashboard(greet=False, part=1):
             out += ['<b>Good morning, Uddam. It is 5:00.</b> Get up, then write <code>done T1</code>.', '']
         out += [f'<b>{esc(d.get("title", "Daily dashboard")).upper()}</b>  (1 of 2: PLAN)', LINE,
                 f'Date: {t:%A %d %B %Y}', f'Daily goal: {esc(note("goal") or d.get("goal", "-"))}']
+        md, mn, ed, en = must_counts()
+        out += ['', f'<b>{esc(d.get("must_title", "MUST-DO"))}</b>  {md} of {mn} done' + ('  - perfect day' if md == mn and mn else '')]
+        out += [task_line(it) for it in must_tasks()]
+        out += [f'<i>Extras: {ed} of {en} done. Extras are a bonus, not a must.</i>']
     else:
         out += [f'<b>{esc(d.get("title", "Daily dashboard")).upper()}</b>  (2 of 2: DAY)', LINE, f'Date: {t:%A %d %B %Y}']
     for g in gs:
@@ -414,8 +441,9 @@ def review_prompt():
     if g:
         out += [f'<code>{f["key"]}</code> {esc(f["label"])}' for f in g['fields']]
     out += ['', 'And your hours: <code>work 8</code> <code>learn 2</code> <code>deep 4</code> <code>focus 8</code>']
-    total, done, doing = counts()
-    out += ['', f'Today so far: {done} of {total} tasks done.', '',
+    md, mn, ed, en = must_counts()
+    left = [it['code'] for it in must_tasks() if status(it) != DONE]
+    out += ['', f'Must-do today: {md} of {mn}' + (f'  (still open: {" ".join(left)})' if left else '  - perfect day') + f'.  Extras: {ed}.', '',
             '<b>Sleep at 22:00.</b> Phone away from the bed, running clothes ready.',
             'Seven hours of sleep makes 5:00 easy.']
     return '\n'.join(out), {'inline_keyboard': [[{'text': 'Open dashboard', 'callback_data': 'home'}]]}
@@ -453,12 +481,16 @@ def report_view(kind):
     while d.isoformat() in active:
         streak += 1
         d -= dt.timedelta(days=1)
-    pct = round(100 * daily_done / possible) if possible else 0
+    dd = [since + dt.timedelta(days=i) for i in range(days)]
+    mdone = sum(must_counts(x)[0] for x in dd)
+    mtotal = sum(must_counts(x)[1] for x in dd)
+    perfect_days = sum(perfect(x) for x in dd)
     lines = [f'<b>{title}</b>', LINE,
-             f'<code>Tasks done     {len(rows)}</code>',
-             f'<code>Completion     {daily_done} of {possible} ({pct}%)</code>',
-             f'<code>Active days    {len(per_day)} of {days}</code>',
-             f'<code>Streak         {streak} day{"s" if streak != 1 else ""}</code>']
+             f'<code>Must-do        {mdone} of {mtotal} ({round(100 * mdone / mtotal) if mtotal else 0}%)</code>',
+             f'<code>Perfect days   {perfect_days} of {days}</code>',
+             f'<code>Perfect streak {streak_perfect(end)} day{"s" if streak_perfect(end) != 1 else ""}</code>',
+             f'<code>All tasks done {len(rows)}</code>',
+             f'<code>Active days    {len(per_day)} of {days}</code>']
     if kind in ('month', 'year') and per_day:
         best = max(per_day.items(), key=lambda x: x[1])
         lines.append(f'<code>Best day       {dt.date.fromisoformat(best[0]):%a %d %b} ({best[1]})</code>')
@@ -506,16 +538,28 @@ def report_view(kind):
     return fit(lines), kb
 
 
+def streak_perfect(end=None):
+    d = end or now().date()
+    if not perfect(d):  # today is not over yet: count from yesterday
+        d -= dt.timedelta(days=1)
+    n = 0
+    while n < 400 and perfect(d):
+        n += 1
+        d -= dt.timedelta(days=1)
+    return n
+
+
 def history_view():
     today = now().date()
     ids = [it['id'] for it in daily_tasks()]
-    lines = ['<b>HISTORY</b>', LINE, '<b>Last 14 days</b>  (done of all tasks)']
+    lines = ['<b>HISTORY</b>', LINE, '<b>Last 14 days</b>  (* = perfect day: all must-do done)']
     for i in range(14):
         day = today - dt.timedelta(days=i)
         n = db.execute(f'SELECT COUNT(*) FROM state WHERE period=? AND done=1 AND item IN ({",".join("?" * len(ids))})',
                        [day.isoformat(), *ids]).fetchone()[0]
         w = notes_list('win', day.isoformat())
-        lines.append(f'<code>{day:%a %d %b}  {n:>2}/{len(ids)}  {round(100 * n / len(ids)) if ids else 0:>3}%</code>' + (f'  win: {esc(short(w[0], 30))}' if w else ''))
+        md, mn, ed, en = must_counts(day)
+        lines.append(f'<code>{day:%a %d %b}  must {md}/{mn}  extra {ed:>2}{"  *" if md == mn and mn else ""}</code>' + (f'  win: {esc(short(w[0], 26))}' if w else ''))
     lines += ['', '<b>Week goals, last 6 weeks</b>']
     for i in range(6):
         day = today - dt.timedelta(weeks=i)
@@ -653,8 +697,8 @@ def mark(codes, value, who, reply_to):
     if bad:
         lines.append('I do not know: ' + ', '.join(esc(b) for b in bad) + '. Codes look like P1, W1, L1, J1, T1, A1.')
     if ok:
-        total, done, doing = counts()
-        lines += ['', f'Today: {done} of {total} done, {doing} in progress ({round(100 * done / total) if total else 0}%).']
+        md, mn, ed, en = must_counts()
+        lines += ['', f'Must-do: {md} of {mn}' + ('  - perfect day, well done.' if md == mn else '') + f'   Extras: {ed}']
     say('\n'.join(lines) or 'Nothing to change.', reply_to=reply_to)
 
 

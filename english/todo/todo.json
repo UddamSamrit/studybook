@@ -22,7 +22,8 @@
      "code": "P1",
      "short": "Most important task",
      "en": "Your most important task today. Set it with: p1 your task",
-     "km": "ការងារសំខាន់បំផុតថ្ងៃនេះ"
+     "km": "ការងារសំខាន់បំផុតថ្ងៃនេះ",
+     "must": true
     },
     {
      "id": "p2",
@@ -100,7 +101,8 @@
      "id": "l1",
      "short": "English reading: Second Chance, 20 pages, 5 new words",
      "en": "Read 20 pages of Second Chance and write 5 new words with the Khmer meaning.",
-     "km": "អានសៀវភៅ Second Chance 20 ទំព័រ ហើយសរសេរពាក្យថ្មី 5 ជាមួយអត្ថន័យខ្មែរ។"
+     "km": "អានសៀវភៅ Second Chance 20 ទំព័រ ហើយសរសេរពាក្យថ្មី 5 ជាមួយអត្ថន័យខ្មែរ។",
+     "must": true
     },
     {
      "id": "l2",
@@ -113,7 +115,8 @@
      "id": "l3",
      "short": "English speaking: 1 minute, recorded",
      "en": "Say in English, for 1 minute, what you read today. Record it.",
-     "km": "និយាយជាភាសាអង់គ្លេស 1 នាទី អំពីអ្វីដែលអ្នកបានអាន ហើយថតទុក។"
+     "km": "និយាយជាភាសាអង់គ្លេស 1 នាទី អំពីអ្វីដែលអ្នកបានអាន ហើយថតទុក។",
+     "must": true
     },
     {
      "id": "l4",
@@ -360,7 +363,8 @@
      "time": "05:00",
      "short": "Wake up",
      "en": "Wake up at 5:00. Get out of bed straight away.",
-     "km": "ក្រោកម៉ោង 5:00។"
+     "km": "ក្រោកម៉ោង 5:00។",
+     "must": true
     },
     {
      "id": "t2",
@@ -369,7 +373,8 @@
      "time": "05:15",
      "short": "Run 30 minutes",
      "en": "Run for 30 minutes at an easy pace.",
-     "km": "រត់ 30 នាទី។"
+     "km": "រត់ 30 នាទី។",
+     "must": true
     },
     {
      "id": "t3",
@@ -573,5 +578,6 @@
     }
    ]
   }
- ]
+ ],
+ "must_title": "TODAY'S MUST-DO"
 }
