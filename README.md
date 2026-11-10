@@ -105,6 +105,7 @@ You need Python 3.12+ and `pip install edge-tts`. The builders use only the stan
 ## Folder layout
 
 ```
+.claude/skills/studybook/   the studybook skill (Claude Code reads it: type /studybook)
 index.html          homepage: one "station" per book
 <book>/book.json    a book or section: title, Khmer title, description, order
 <book>/<unit>/      one unit: unit.json, draw.py, index.html, img/, audio/

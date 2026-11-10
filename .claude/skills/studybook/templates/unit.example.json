@@ -1,0 +1,396 @@
+{
+ "slug": "korean-funeral-visit",
+ "title_ko": "장례식장 조문",
+ "title_en": "Visiting a funeral hall",
+ "subtitle": "When a coworker's family member dies",
+ "description": "What to do and what to say when you visit a coworker's family funeral in Korea: picture cards with native audio, workplace Q&A and 21 words.",
+ "sections": [
+  {
+   "id": "news",
+   "ko": "소식",
+   "en": "The news",
+   "color": "#0052A4"
+  },
+  {
+   "id": "prep",
+   "ko": "준비",
+   "en": "Get ready",
+   "color": "#00A84D"
+  },
+  {
+   "id": "altar",
+   "ko": "조문",
+   "en": "At the altar",
+   "color": "#996CAC"
+  },
+  {
+   "id": "family",
+   "ko": "위로",
+   "en": "Comfort",
+   "color": "#EF7C1C"
+  },
+  {
+   "id": "meal",
+   "ko": "식사",
+   "en": "The meal",
+   "color": "#CD7C2F"
+  }
+ ],
+ "spine": {
+  "title": "노선도 · 조문 순서",
+  "note": "One visit, in order: hear the news, get ready, pay respects, comfort the family, share the meal."
+ },
+ "explain": {
+  "title": "한눈에 · The big picture",
+  "why": "A Korean funeral usually lasts 3 days in a hospital funeral hall. Coworkers visit to share the family's grief. You do not need many words.",
+  "tiles": [
+   {
+    "img": "img/x-calendar.svg",
+    "ko": "삼일장",
+    "en": "The funeral lasts 3 days",
+    "color": "#0052A4"
+   },
+   {
+    "img": "img/x-jacket.svg",
+    "ko": "검은 옷",
+    "en": "Dark clothes, nothing bright",
+    "color": "#00A84D"
+   },
+   {
+    "img": "img/c3-envelope.svg",
+    "ko": "흰 봉투",
+    "en": "Money helps the family pay",
+    "color": "#00A84D"
+   },
+   {
+    "img": "img/c5-flower.svg",
+    "ko": "흰 국화",
+    "en": "A white flower says respect",
+    "color": "#996CAC"
+   },
+   {
+    "img": "img/x-bow.svg",
+    "ko": "두 번 · 한 번",
+    "en": "Bow twice to the deceased, once to the family",
+    "color": "#EF7C1C"
+   },
+   {
+    "img": "img/c7-bowl.svg",
+    "ko": "식사",
+    "en": "The family feeds every guest",
+    "color": "#CD7C2F"
+   }
+  ]
+ },
+ "cards": [
+  {
+   "sec": "news",
+   "img": "img/c1-phone.svg",
+   "flat": true,
+   "alt": "A phone showing a message with a black mourning ribbon",
+   "hook": "돌아가시다",
+   "ko": "회사 동료의 아버님이 돌아가셨어요.",
+   "en": "A coworker's father passed away.",
+   "audio": "audio/c1.mp3"
+  },
+  {
+   "sec": "news",
+   "img": "img/c2-message.svg",
+   "flat": true,
+   "alt": "A message bubble with a black ribbon",
+   "hook": "명복",
+   "ko": "동료에게 '삼가 고인의 명복을 빕니다'라고 메시지를 보내요.",
+   "en": "I message my coworker: 'May the deceased rest in peace.'",
+   "audio": "audio/c2.mp3"
+  },
+  {
+   "sec": "prep",
+   "img": "img/c3-envelope.svg",
+   "flat": true,
+   "alt": "A white condolence envelope marked 부의",
+   "hook": "부의금",
+   "ko": "검은 옷을 입고 흰 봉투에 부의금을 넣어요.",
+   "en": "I wear dark clothes and put condolence money in a white envelope.",
+   "audio": "audio/c3.mp3"
+  },
+  {
+   "sec": "altar",
+   "img": "img/c4-guestbook.svg",
+   "flat": true,
+   "alt": "An open guestbook with a pen",
+   "hook": "방명록",
+   "ko": "장례식장에 가서 방명록에 이름을 써요.",
+   "en": "At the funeral hall, I write my name in the guestbook.",
+   "audio": "audio/c4.mp3"
+  },
+  {
+   "sec": "altar",
+   "img": "img/c5-flower.svg",
+   "flat": true,
+   "alt": "One white chrysanthemum",
+   "hook": "국화",
+   "ko": "빈소에서 국화를 놓고 두 번 절해요.",
+   "en": "At the memorial altar, I lay a chrysanthemum and bow twice.",
+   "audio": "audio/c5.mp3"
+  },
+  {
+   "sec": "family",
+   "img": "img/c6-armband.svg",
+   "flat": true,
+   "alt": "A black mourning armband with white stripes, worn by the chief mourner",
+   "hook": "상주",
+   "ko": "상주에게 한 번 절하고 '얼마나 마음이 아프세요' 하고 조용히 말해요.",
+   "en": "I bow once to the chief mourner and quietly say, 'You must be heartbroken.'",
+   "audio": "audio/c6.mp3"
+  },
+  {
+   "sec": "meal",
+   "img": "img/c7-bowl.svg",
+   "flat": true,
+   "alt": "A bowl of red yukgaejang soup with a spoon",
+   "hook": "육개장",
+   "ko": "육개장을 조금 먹고 조용히 나와요.",
+   "en": "I eat a little yukgaejang and leave quietly.",
+   "audio": "audio/c7.mp3"
+  }
+ ],
+ "qa": [
+  {
+   "title": "함정 · 헷갈리는 것",
+   "small": "Traps · read these first",
+   "note": "The two things visitors worry about most.",
+   "kind": "trap",
+   "items": [
+    {
+     "q": "꼭 절해야 돼요?",
+     "qen": "Do I have to bow?",
+     "qaudio": "audio/qt1.mp3",
+     "a": "아니요. 종교 때문에 어려우면 묵념만 해도 돼요.",
+     "aen": "No. If bowing is hard for religious reasons, a silent prayer is fine.",
+     "why": "Many Christian families lay a flower and pray in silence instead of bowing.",
+     "audio": "audio/at1.mp3"
+    },
+    {
+     "q": "부의금은 얼마 내요?",
+     "qen": "How much condolence money do I give?",
+     "qaudio": "audio/qt2.mp3",
+     "a": "보통 오만 원이나 십만 원을 내요. 팀 사람들하고 맞춰도 돼요.",
+     "aen": "Usually 50,000 or 100,000 won. You can match the amount with your team.",
+     "why": "Amounts vary by closeness, so ask a teammate. Odd amounts (3, 5 or 7만 원) are the old custom.",
+     "check": true,
+     "audio": "audio/at2.mp3"
+    }
+   ]
+  },
+  {
+   "title": "회사에서 · At work",
+   "small": "Questions a teammate may ask you",
+   "note": "Answer in your head, then tap Listen to compare.",
+   "kind": "qa",
+   "items": [
+    {
+     "q": "장례식장이 어디예요?",
+     "qen": "Where is the funeral hall?",
+     "qaudio": "audio/qc1.mp3",
+     "a": "병원 장례식장이에요. 같이 갈래요?",
+     "aen": "It's a hospital funeral hall. Shall we go together?",
+     "audio": "audio/ac1.mp3"
+    },
+    {
+     "q": "언제 조문 갈 거예요?",
+     "qen": "When will you go to pay your respects?",
+     "qaudio": "audio/qc2.mp3",
+     "a": "오늘 퇴근하고 갈 거예요.",
+     "aen": "I'll go after work today.",
+     "audio": "audio/ac2.mp3"
+    },
+    {
+     "q": "발인이 언제예요?",
+     "qen": "When is the funeral procession?",
+     "qaudio": "audio/qc3.mp3",
+     "a": "모레 아침이에요.",
+     "aen": "The day after tomorrow, in the morning.",
+     "audio": "audio/ac3.mp3"
+    }
+   ]
+  },
+  {
+   "title": "막힐 때",
+   "small": "When you don't know what to say",
+   "note": "At a funeral, few words are polite. These two are enough.",
+   "kind": "surv",
+   "items": [
+    {
+     "ko": "뭐라고 위로해야 할지 모르겠어요.",
+     "en": "I don't know what to say to comfort you.",
+     "audio": "audio/s1.mp3"
+    },
+    {
+     "ko": "마음이 많이 아프시겠어요.",
+     "en": "This must hurt so much.",
+     "audio": "audio/s2.mp3"
+    }
+   ]
+  }
+ ],
+ "vocab": [
+  {
+   "title": "사람 · People",
+   "color": "#0052A4",
+   "items": [
+    {
+     "ko": "고인",
+     "en": "the deceased",
+     "audio": "audio/v01.mp3"
+    },
+    {
+     "ko": "상주",
+     "en": "chief mourner",
+     "audio": "audio/v02.mp3"
+    },
+    {
+     "ko": "유족",
+     "en": "bereaved family",
+     "audio": "audio/v03.mp3"
+    },
+    {
+     "ko": "조문객",
+     "en": "visitor, mourner",
+     "audio": "audio/v04.mp3"
+    },
+    {
+     "ko": "동료",
+     "en": "coworker",
+     "audio": "audio/v05.mp3"
+    }
+   ]
+  },
+  {
+   "title": "장소 · Places",
+   "color": "#996CAC",
+   "items": [
+    {
+     "ko": "장례식장",
+     "en": "funeral hall",
+     "audio": "audio/v06.mp3"
+    },
+    {
+     "ko": "빈소",
+     "en": "memorial altar room",
+     "audio": "audio/v07.mp3"
+    },
+    {
+     "ko": "영정 사진",
+     "en": "portrait of the deceased",
+     "audio": "audio/v08.mp3"
+    }
+   ]
+  },
+  {
+   "title": "물건 · Things",
+   "color": "#00A84D",
+   "items": [
+    {
+     "ko": "부의금",
+     "en": "condolence money",
+     "audio": "audio/v09.mp3"
+    },
+    {
+     "ko": "흰 봉투",
+     "en": "white envelope",
+     "audio": "audio/v10.mp3"
+    },
+    {
+     "ko": "방명록",
+     "en": "guestbook",
+     "audio": "audio/v11.mp3"
+    },
+    {
+     "ko": "국화",
+     "en": "chrysanthemum",
+     "audio": "audio/v12.mp3"
+    },
+    {
+     "ko": "조화",
+     "en": "funeral wreath",
+     "audio": "audio/v13.mp3"
+    },
+    {
+     "ko": "검은 옷",
+     "en": "dark clothes",
+     "audio": "audio/v14.mp3"
+    }
+   ]
+  },
+  {
+   "title": "말 · 행동 · Words and actions",
+   "color": "#EF7C1C",
+   "items": [
+    {
+     "ko": "돌아가시다",
+     "en": "to pass away (polite)",
+     "audio": "audio/v15.mp3"
+    },
+    {
+     "ko": "조문하다",
+     "en": "to pay condolences",
+     "audio": "audio/v16.mp3"
+    },
+    {
+     "ko": "절하다",
+     "en": "to bow deeply",
+     "audio": "audio/v17.mp3"
+    },
+    {
+     "ko": "묵념하다",
+     "en": "to pray in silence",
+     "audio": "audio/v18.mp3"
+    },
+    {
+     "ko": "명복을 빌다",
+     "en": "to pray for the soul",
+     "audio": "audio/v19.mp3"
+    },
+    {
+     "ko": "위로하다",
+     "en": "to comfort",
+     "audio": "audio/v20.mp3"
+    },
+    {
+     "ko": "발인",
+     "en": "funeral procession",
+     "audio": "audio/v21.mp3"
+    }
+   ]
+  }
+ ],
+ "full_title": "조문 순서 · The visit, start to finish",
+ "full": [
+  {
+   "title": "소식 · The news",
+   "ko": "회사 동료의 아버님이 돌아가셨어요. 동료에게 '삼가 고인의 명복을 빕니다'라고 메시지를 보내요.",
+   "en": "A coworker's father passed away. I message my coworker: 'May the deceased rest in peace.'"
+  },
+  {
+   "title": "준비 · Get ready",
+   "ko": "검은 옷을 입고 흰 봉투에 부의금을 넣어요.",
+   "en": "I wear dark clothes and put condolence money in a white envelope."
+  },
+  {
+   "title": "조문 · At the altar",
+   "ko": "장례식장에 가서 방명록에 이름을 써요. 빈소에서 국화를 놓고 두 번 절해요.",
+   "en": "At the funeral hall, I write my name in the guestbook. At the memorial altar, I lay a chrysanthemum and bow twice."
+  },
+  {
+   "title": "위로 · Comfort",
+   "ko": "상주에게 한 번 절하고 '얼마나 마음이 아프세요' 하고 조용히 말해요.",
+   "en": "I bow once to the chief mourner and quietly say, 'You must be heartbroken.'"
+  },
+  {
+   "title": "식사 · The meal",
+   "ko": "육개장을 조금 먹고 조용히 나와요.",
+   "en": "I eat a little yukgaejang and leave quietly."
+  }
+ ],
+ "published": "2026-11-05"
+}

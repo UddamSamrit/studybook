@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>다라봇 스터디북 · Studybook</title>
+<meta name="description" content="Rex's Korean study units: picture cards with native audio, Q&amp;A, vocabulary and full text.">
+<meta name="theme-color" content="#1C2A4A">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="스터디북">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="alternate" type="application/rss+xml" title="Studybook feed" href="feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="assets/line.css?v=lyric1">
+<script src="assets/script.js?v=lyric1"></script>
+<style>
+/* ---------- sign band ---------- */
+.sign{background:var(--sign);color:var(--on-sign);padding:calc(env(safe-area-inset-top) + 1.4rem) 0 1.1rem}
+.sign .in{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}
+.sign h1{margin:0;font-size:clamp(1.75rem,7.6vw,2.3rem);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.sign p{margin:.35rem 0 0;font-size:.86rem;color:var(--on-sign-2);font-weight:500}
+.install{flex:none;display:inline-flex;align-items:center;gap:.4rem;font:700 .84rem/1 var(--f);color:var(--sign);background:var(--on-sign);
+  border:0;border-radius:10px;padding:.62rem .8rem;cursor:pointer;min-height:40px}
+.install svg{width:16px;height:16px}
+.install[hidden]{display:none}
+.ios-hint{margin:.9rem auto 0;font-size:.86rem;color:var(--on-sign-2);line-height:1.5}
+.ios-hint[hidden]{display:none}
+.ios-hint b{color:var(--on-sign)}
+
+/* ---------- now-at block ---------- */
+.now{margin:1.4rem 0 .4rem;background:var(--surface);border-radius:var(--r);padding:1.05rem 1.05rem 1.1rem;
+  box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:.25rem .9rem;align-items:center}
+.now .ring{grid-row:span 2;width:16px;height:16px;border-radius:50%;background:var(--surface);border:7px solid var(--here)}
+.now .where{margin:0;font-size:.8rem;color:var(--ink-2);font-weight:700}
+.now .title{margin:0;font-size:1.32rem;font-weight:800;letter-spacing:-.01em;line-height:1.25;word-break:keep-all}
+.now .title .sub{display:block;font-size:.86rem;font-weight:500;color:var(--ink-2);letter-spacing:0;margin-top:.1rem}
+.go{grid-column:1/-1;margin-top:.85rem;display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:52px;
+  background:var(--line-ink);color:#fff;border-radius:12px;text-decoration:none;font-weight:800;font-size:1.02rem}
+.go svg{width:18px;height:18px}
+.go:active{transform:translateY(1px)}
+
+/* ---------- the line ---------- */
+.line-h{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:1.9rem 0 .5rem}
+.line-h h2{margin:0;font-size:1.05rem;font-weight:800}
+.line-h span{font-size:.82rem;color:var(--ink-2);font-weight:500}
+.line{position:relative;list-style:none;margin:0;padding:0 0 0 52px}
+.line::before{content:"";position:absolute;left:17px;top:22px;bottom:22px;width:8px;border-radius:4px;background:var(--line)}
+.stop{position:relative;padding:.35rem 0}
+.stop::before{content:"";position:absolute;left:-43px;top:50%;width:14px;height:14px;margin-top:-12px;border-radius:50%;
+  background:var(--surface);border:5px solid var(--line)}
+.station{display:block;background:var(--surface);border-radius:var(--r);padding:.95rem 1rem 1rem;text-decoration:none;color:inherit;
+  box-shadow:var(--shadow);transition:box-shadow .2s var(--ease),transform .2s var(--ease)}
+a.station:hover{box-shadow:var(--shadow-up)}
+a.station:active{transform:scale(.985)}
+.st-top{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.badge{display:inline-grid;place-items:center;min-width:2.3rem;height:1.5rem;padding:0 .45rem;border-radius:7px;background:var(--line-ink);
+  color:#fff;font-weight:800;font-size:.8rem;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.tag{font-size:.72rem;font-weight:800;border-radius:6px;padding:.18rem .45rem;line-height:1.2}
+.tag.new{background:var(--notice);color:#fff}
+.tag.soon{background:var(--ground);color:var(--ink-2);border:1px solid var(--rule)}
+.tag[hidden]{display:none}
+.st-ko{margin:.5rem 0 0;font-size:1.32rem;font-weight:800;line-height:1.3;letter-spacing:-.01em;word-break:keep-all}
+.st-en{margin:.12rem 0 0;font-size:.9rem;color:var(--ink-2);line-height:1.45}
+.st-meta{margin:.65rem 0 0;display:flex;flex-wrap:wrap;gap:.3rem 1rem;font-size:.8rem;color:var(--ink-2);font-weight:500;font-variant-numeric:tabular-nums}
+.st-meta b{color:var(--ink);font-weight:800}
+.stop.closed .station{background:transparent;box-shadow:none;border:2px solid var(--rule)}
+.stop.closed .st-ko{color:var(--ink-2)}
+.stop.closed .badge{background:transparent;color:var(--ink-2);box-shadow:inset 0 0 0 1.5px var(--ink-3)}
+.stop.next::before{border-style:dashed;border-color:var(--ink-3);background:var(--ground)}
+.stop.next .station{background:transparent;box-shadow:none;border:2px dashed var(--rule)}
+.stop.next .st-ko{margin:0;color:var(--ink-2);font-size:1.08rem}
+.stop.next code{font:700 .86rem var(--f);color:var(--ink)}
+
+/* "you are here" marker, slides along the line */
+.marker{position:absolute;left:8px;top:0;width:26px;height:26px;border-radius:50%;background:var(--surface);
+  border:7px solid var(--here);pointer-events:none;z-index:2;
+  transition:transform .42s var(--ease-out);will-change:transform}
+.marker[hidden]{display:none}
+
+/* ---------- footer ---------- */
+footer{margin:2.6rem 0 0;padding:1.2rem 0 calc(env(safe-area-inset-bottom) + 2rem);border-top:1px solid var(--rule);font-size:.84rem;color:var(--ink-2);line-height:1.7}
+footer h2{font-size:.86rem;margin:0 0 .3rem;color:var(--ink);font-weight:800}
+footer ul{list-style:none;margin:0;padding:0}
+footer a{color:var(--ink);text-underline-offset:3px;text-decoration-thickness:1px}
+
+.sign-script{margin-top:.8rem}
+@media (min-width:720px){
+  .now{grid-template-columns:auto 1fr auto;padding:1.2rem 1.3rem}
+  .now .ring{grid-row:1/3}
+  .now .where{grid-column:2;grid-row:1}
+  .now .title{grid-column:2;grid-row:2}
+  .go{grid-column:3;grid-row:1/3;margin:0;padding:0 1.4rem}
+}
+</style>
+</head>
+<body>
+<header class="sign">
+  <div class="in wrap">
+    <div>
+      <h1>다라봇 스터디북</h1>
+      <p>Studybook line · <span id="count">1</span> station open</p>
+    </div>
+    <button class="install" id="install" type="button" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>앱 설치
+    </button>
+  </div>
+  <div class="wrap sign-script"><div class="script" role="group" aria-label="Show text in"><button type="button" data-set="en" aria-pressed="false">English</button><button type="button" data-set="ko" aria-pressed="true" lang="ko">한국어</button><button type="button" data-set="ro" aria-pressed="false">Lyric</button></div></div>
+  <p class="ios-hint wrap" id="iosHint" hidden>On iPhone: tap <b>Share</b>, then <b>Add to Home Screen</b>.</p>
+</header>
+<div class="stripe" aria-hidden="true"></div>
+
+<main class="wrap">
+  <section class="now" aria-label="Continue studying">
+    <span class="ring" aria-hidden="true"></span>
+    <p class="where" id="nowWhere">Start here</p>
+    <p class="title" id="nowTitle">여름 발표 스튜디오<span>Summer speech</span></p>
+    <a class="go" id="nowGo" href="korean-summer-speech/">
+      계속하기 · Continue
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+  <div class="line-h"><h2>노선도 · All stations</h2><span>Tap a station to study</span></div>
+  <ol class="line" id="line">
+    <li class="stop" data-unit="korean-summer-speech" data-en="Summer speech">
+      <a class="station" href="korean-summer-speech/">
+        <span class="st-top"><span class="badge">01</span></span>
+        <p class="st-ko" lang="ko">여름 발표 스튜디오</p>
+        <p class="st-en">Summer weather, Korea vs Cambodia. A K-Specialist speech.</p>
+        <p class="st-meta"><span><b>32</b> lines</span><span><b>29</b> questions</span><span><b>89</b> words</span></p>
+      </a>
+    </li>
+    <li class="stop" data-unit="korean-funeral-visit" data-en="Visiting a funeral hall">
+      <a class="station" href="korean-funeral-visit/">
+        <span class="st-top"><span class="badge">02</span><span class="tag new" hidden>NEW</span></span>
+        <p class="st-ko" lang="ko">장례식장 조문</p>
+        <p class="st-en">Visiting a coworker's family funeral: what to do and what to say.</p>
+        <p class="st-meta"><span><b>7</b> cards</span><span><b>5</b> questions</span><span><b>21</b> words</span></p>
+      </a>
+    </li>
+    <li class="stop next">
+      <div class="station">
+        <p class="st-ko" lang="ko">다음 역</p>
+        <p class="st-en">The next unit is built with <code>/teach-me</code>.</p>
+      </div>
+    </li>
+    <li class="marker" id="marker" aria-hidden="true" hidden></li>
+  </ol>
+
+  <footer>
+    <h2>Also on this site</h2>
+    <ul>
+      <li><a href="feed.xml">RSS feed</a> with every unit's full text, for AI tools</li>
+    </ul>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var KEY_LAST='sb:last', KEY_SEEN='sb:seen';
+  function get(k,d){try{var v=localStorage.getItem(k);return v===null?d:JSON.parse(v);}catch(e){return d;}}
+  function put(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  var live=[].slice.call(document.querySelectorAll('.stop[data-unit]')).filter(function(s){return s.querySelector('a.station');});
+  var n=live.length;
+  document.getElementById('count').parentNode.lastChild.textContent=n===1?' station open':' stations open';
+  document.getElementById('count').textContent=n;
+
+  // NEW holds until the unit is opened once
+  var seen=get(KEY_SEEN,[]);
+  live.forEach(function(s){var t=s.querySelector('.tag.new');if(t)t.hidden=seen.indexOf(s.dataset.unit)!==-1;});
+
+  // You are here: the last opened unit, else the first open station
+  var last=get(KEY_LAST,null), here=null;
+  live.forEach(function(s){if(s.dataset.unit===last)here=s;});
+  if(here){
+    var t=document.getElementById('nowTitle');t.innerHTML=here.querySelector('.st-ko').innerHTML;
+    var sp=document.createElement('span');sp.className='sub not-en';sp.textContent=here.dataset.en||'';t.appendChild(sp);
+    var pos=get('sb:pos:'+here.dataset.unit,null);
+    document.getElementById('nowWhere').textContent=pos&&pos.n?'You are here · card '+(pos.i+1)+' of '+pos.n:'You are here';
+    document.getElementById('nowGo').href=here.querySelector('a.station').getAttribute('href');
+  }
+  var marker=document.getElementById('marker');
+  function place(s,animate){
+    var y=s.offsetTop+s.offsetHeight/2-13;
+    if(!animate)marker.style.transition='none';
+    marker.style.transform='translateY('+y+'px)';
+    if(!animate){void marker.offsetHeight;marker.style.transition='';}
+  }
+  var at=here||live[0];
+  if(at){marker.hidden=false;place(at,false);}
+  window.addEventListener('resize',function(){if(at)place(at,false);});
+
+  function remember(slug){put(KEY_LAST,slug);if(seen.indexOf(slug)===-1){seen.push(slug);put(KEY_SEEN,seen);}}
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  live.forEach(function(s){
+    var a=s.querySelector('a.station');
+    a.addEventListener('click',function(e){
+      remember(s.dataset.unit);
+      if(reduce||e.metaKey||e.ctrlKey||e.shiftKey||s===at)return;
+      e.preventDefault();at=s;place(s,true);
+      setTimeout(function(){location.href=a.href;},430);
+    });
+  });
+  document.getElementById('nowGo').addEventListener('click',function(){
+    var h=this.getAttribute('href');
+    live.forEach(function(s){if(s.querySelector('a.station').getAttribute('href')===h)remember(s.dataset.unit);});
+  });
+
+  // Install as an app
+  var btn=document.getElementById('install'), hint=document.getElementById('iosHint'), deferred=null;
+  var standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;if(!standalone)btn.hidden=false;});
+  if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!standalone)btn.hidden=false;
+  btn.addEventListener('click',function(){
+    if(deferred){deferred.prompt();deferred.userChoice.then(function(){deferred=null;btn.hidden=true;});return;}
+    hint.hidden=!hint.hidden;
+  });
+  window.addEventListener('appinstalled',function(){btn.hidden=true;hint.hidden=true;});
+
+  if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
+})();
+</script>
+</body>
+</html>
