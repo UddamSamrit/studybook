@@ -162,7 +162,7 @@ def set_done(g, it, value, who):
 
 
 def short(s, n=44):
-    return s if len(s) <= n else s[:n - 1].rstrip() + '…'
+    return s if len(s) <= n else s[:n - 1].rstrip() + '...'
 
 
 def esc(s):
@@ -170,22 +170,24 @@ def esc(s):
 
 
 def label(it):
-    return it.get('short') or short(it['en'], 30)
+    return it.get('short') or short(it['en'], 34)
 
 
-def bar(n, total, width=10):
-    k = round(width * n / total) if total else 0
-    return '▰' * k + '▱' * (width - k)
+def box(ok):
+    return '[x]' if ok else '[ ]'
 
 
-def icon(g):
-    return g.get('icon', '•')
+def of(n, total):
+    return f'{n} of {total} done'
 
 
-LINE = '━━━━━━━━━━━━━━━━'
+def week_range(day=None):
+    day = day or now().date()
+    s = day - dt.timedelta(days=day.weekday())
+    return s, s + dt.timedelta(days=6)
 
 
-# ---------------------------------------------------------------- views
+# ---------------------------------------------------------------- views (plain text, no emoji)
 def home_view(greet=False):
     dg = daily()
     today = done_set(period('daily'))
@@ -194,45 +196,31 @@ def home_view(greet=False):
     wk_total = sum(len(g['items']) for g in weekly())
     wk_done = sum(1 for g in weekly() for it in g['items'] if it['id'] in week)
     t = now()
-    y, w, _ = t.isocalendar()
+    ws, we = week_range()
     out = []
     if greet:
-        out += ['☀️ <b>Good morning!</b> It is 5:00. Get up and write <code>done 1</code>.', '']
-    out += [f'<b>📚 {esc(todo().get("title", "To-do"))}</b>',
-            f'<i>{t:%A %d %B} · week {w}</i>', LINE,
-            f'{icon(dg)} <b>TODAY</b>  <code>{bar(n_today, len(dg["items"]), 7)}</code>  <b>{n_today}/{len(dg["items"])}</b>']
+        out += ['<b>Good morning. It is 5:00.</b>', 'Get up, then write: <code>done 1</code>', '']
+    out += [f'<b>TODAY</b>  {t:%A %d %B}', of(n_today, len(dg['items'])), '']
     for it in dg['items']:
-        ok = it['id'] in today
-        out.append(f'{"✅" if ok else "⬜"} <code>{it["code"]:>2}</code>  ' + (f'<s>{esc(label(it))}</s>' if ok else esc(label(it))))
+        out.append(f'<code>{box(it["id"] in today)} {it["code"]:>2}</code>  {esc(label(it))}')
     if n_today == len(dg['items']):
-        out.append('🎉 <b>All done today. Great work!</b>')
-    out += [LINE, f'🗓 <b>THIS WEEK</b>  <code>{bar(wk_done, wk_total, 7)}</code>  <b>{wk_done}/{wk_total}</b>']
+        out += ['', '<b>All daily tasks are done. Well done.</b>']
+    out += ['', f'<b>THIS WEEK</b>  {ws:%d %b} to {we:%d %b}', of(wk_done, wk_total), '']
     for g in weekly():
-        n = sum(it['id'] in week for it in g['items'])
-        codes = ' '.join(f'<s>{it["code"]}</s>' if it['id'] in week else it['code'] for it in g['items'])
-        out.append(f'{icon(g)} {esc(g["title"])}  <b>{n}/{len(g["items"])}</b>  <code>{codes}</code>' + (' ✅' if n == len(g['items']) else ''))
-    out += [LINE, '✍️ Finished one? Write <code>done 2 5</code> · <code>done R1</code>',
-            '↩️ Mistake? <code>undo 2</code> · Tap a group for details']
-    kb, row = [], []
-    for it in dg['items']:  # today's tasks: two per row
-        row.append({'text': f'{"✅" if it["id"] in today else "⬜"} {it["code"]} {label(it)}', 'callback_data': f't:{it["id"]}:home'})
-        if len(row) == 2:
-            kb.append(row)
-            row = []
-    if row:
-        kb.append(row)
-    row = []
-    for g in weekly():
-        n = sum(it['id'] in week for it in g['items'])
-        row.append({'text': f'{icon(g)} {g["title"]} {n}/{len(g["items"])}', 'callback_data': f'g:{g["id"]}'})
-        if len(row) == 2:
-            kb.append(row)
-            row = []
-    if row:
-        kb.append(row)
-    kb.append([{'text': '📅 Today', 'callback_data': 'r:today'}, {'text': '🗓 Week', 'callback_data': 'r:week'},
-               {'text': '📆 Month', 'callback_data': 'r:month'}, {'text': '🏆 Year', 'callback_data': 'r:year'}])
-    kb.append([{'text': '📜 History', 'callback_data': 'h'}, {'text': '🌐 Open on the site', 'url': SITE_URL}])
+        if len(weekly()) > 1:
+            out.append(f'{esc(g["title"])}:')
+        for it in g['items']:
+            out.append(f'<code>{box(it["id"] in week)} {it["code"]:>2}</code>  {esc(label(it))}')
+    ex = weekly()[0]['items'][0]['code'] if weekly() else 'A1'
+    out += ['', '<b>HOW TO USE</b>',
+            f'Finished a task? Write <code>done 2</code> or <code>done 2 5 {ex}</code>',
+            'Made a mistake? Write <code>undo 2</code>',
+            'Or tap a task below.']
+    kb = [[{'text': f'{box(it["id"] in today)} {it["code"]}  {label(it)}', 'callback_data': f't:{it["id"]}:home'}] for it in dg['items']]
+    kb += [[{'text': f'{box(it["id"] in week)} {it["code"]}  {label(it)}', 'callback_data': f't:{it["id"]}:home'}] for g in weekly() for it in g['items']]
+    kb.append([{'text': 'Today', 'callback_data': 'r:today'}, {'text': 'Week', 'callback_data': 'r:week'},
+               {'text': 'Month', 'callback_data': 'r:month'}, {'text': 'Year', 'callback_data': 'r:year'}])
+    kb.append([{'text': 'History', 'callback_data': 'h'}, {'text': 'Website', 'url': SITE_URL}])
     return '\n'.join(out), {'inline_keyboard': kb}
 
 
@@ -243,31 +231,31 @@ def group_view(gid):
     per = period(gid)
     ds = done_set(per)
     n = sum(it['id'] in ds for it in g['items'])
-    when = 'today' if gid == 'daily' else f'this week · {per}'
-    out = [f'{icon(g)} <b>{esc(g["title"]).upper()}</b>  <code>{bar(n, len(g["items"]), 7)}</code>  <b>{n}/{len(g["items"])}</b>',
-           f'<i>{esc(g["km"])} · {when}</i>', LINE]
+    if gid == 'daily':
+        when = f'{now():%A %d %B}'
+    else:
+        ws, we = week_range()
+        when = f'{ws:%d %b} to {we:%d %b}'
+    out = [f'<b>{esc(g["title"]).upper()}</b>  {when}', f'<i>{esc(g["km"])}</i>', of(n, len(g['items'])), '']
     for it in g['items']:
-        ok = it['id'] in ds
-        out += [f'{"✅" if ok else "⬜"} <code>{it["code"]}</code>  <b>{esc(label(it))}</b>',
-                f'      {esc(it["en"])}', f'      <i>{esc(it["km"])}</i>', '']
-    out += [LINE, f'✍️ Write <code>done {g["items"][0]["code"]}</code> or tap below.']
-    kb = [[{'text': f'{"✅" if it["id"] in ds else "⬜"} {it["code"]} {label(it)}', 'callback_data': f't:{it["id"]}:{gid}'}] for it in g['items']]
-    kb.append([{'text': '⬅️ Back', 'callback_data': 'home'}, {'text': '🗓 This week', 'callback_data': 'r:week'}])
+        out += [f'<code>{box(it["id"] in ds)} {it["code"]}</code>  <b>{esc(label(it))}</b>',
+                f'{esc(it["en"])}', f'<i>{esc(it["km"])}</i>', '']
+    out += [f'Finished one? Write <code>done {g["items"][0]["code"]}</code> or tap it below.']
+    kb = [[{'text': f'{box(it["id"] in ds)} {it["code"]}  {label(it)}', 'callback_data': f't:{it["id"]}:{gid}'}] for it in g['items']]
+    kb.append([{'text': 'Back to today', 'callback_data': 'home'}, {'text': 'Week report', 'callback_data': 'r:week'}])
     return '\n'.join(out), {'inline_keyboard': kb}
 
 
 def span(kind):
     t = now().date()
     if kind == 'today':
-        return t, t, f'Today · {t:%A %d %B}'
+        return t, t, f'TODAY  {t:%A %d %B}'
     if kind == 'week':
-        s = t - dt.timedelta(days=t.weekday())
-        return s, t, f'This week · {s:%d %b} – {s + dt.timedelta(days=6):%d %b}'
+        s, e = week_range(t)
+        return s, t, f'THIS WEEK  {s:%d %b} to {e:%d %b}'
     if kind == 'month':
-        s = t.replace(day=1)
-        return s, t, f'This month · {t:%B %Y}'
-    s = t.replace(month=1, day=1)
-    return s, t, f'This year · {t:%Y}'
+        return t.replace(day=1), t, f'THIS MONTH  {t:%B %Y}'
+    return t.replace(month=1, day=1), t, f'THIS YEAR  {t:%Y}'
 
 
 def report_view(kind):
@@ -279,95 +267,91 @@ def report_view(kind):
     days = (end - since).days + 1
     dg = daily()
     daily_ids = {it['id'] for it in dg['items']}
-    per_day = {}
-    counts = {}
+    per_day, counts = {}, {}
     for per, item, at in rows:
-        per_day.setdefault(at[:10], 0)
-        per_day[at[:10]] += 1
+        per_day[at[:10]] = per_day.get(at[:10], 0) + 1
         counts[item] = counts.get(item, 0) + 1
     daily_done = sum(c for i, c in counts.items() if i in daily_ids)
     possible = days * len(dg['items'])
-    # streak: days in a row, up to today (or yesterday if today is still empty), with at least one tick
     active = {r[0] for r in db.execute('SELECT DISTINCT substr(at,1,10) FROM state WHERE done=1')}
     streak, d = 0, end if end.isoformat() in active else end - dt.timedelta(days=1)
     while d.isoformat() in active:
         streak += 1
         d -= dt.timedelta(days=1)
     pct = round(100 * daily_done / possible) if possible else 0
-    lines = [f'<b>📊 {title}</b>', LINE,
-             f'✅ Done  <b>{len(rows)}</b> task{"s" if len(rows) != 1 else ""}',
-             f'📅 Active days  <b>{len(per_day)}/{days}</b>',
-             f'🔥 Streak  <b>{streak}</b> day{"s" if streak != 1 else ""}',
-             f'{icon(dg)} Every day  <code>{bar(daily_done, possible, 10)}</code>  <b>{pct}%</b>']
-    if kind != 'today':
-        if kind == 'week':
-            weeks_done = done_set(period('week'))
-            for g in weekly():
-                n = sum(it['id'] in weeks_done for it in g['items'])
-                lines.append(f'{icon(g)} {esc(g["title"])}  <code>{bar(n, len(g["items"]), 5)}</code>  {n}/{len(g["items"])}')
-        if kind in ('month', 'year') and per_day:
-            best = max(per_day.items(), key=lambda x: x[1])
-            lines.append(f'⭐ Best day  <b>{dt.date.fromisoformat(best[0]):%a %d %b}</b> · {best[1]} tasks')
-    lines.append(LINE)
-    if not rows:
-        lines.append('Nothing ticked yet. Write <code>done 1</code> when you finish a task.')
-    for g in groups():
-        got = [(it, counts[it['id']]) for it in g['items'] if it['id'] in counts]
-        if not got:
-            continue
-        lines.append(f'{icon(g)} <b>{esc(g["title"])}</b>')
-        for it, c in got:
-            lines.append(f'   ✅ <code>{it["code"]}</code> {esc(label(it))}' + (f'  <b>×{c}</b>' if c > 1 else ''))
-    if kind in ('month', 'year') and per_day and kind == 'month':
-        lines += ['', '<b>Days</b>']
+    lines = [f'<b>{title}</b>', '',
+             f'<code>Tasks done    {len(rows)}</code>',
+             f'<code>Daily tasks   {daily_done} of {possible} ({pct}%)</code>',
+             f'<code>Active days   {len(per_day)} of {days}</code>',
+             f'<code>Streak        {streak} day{"s" if streak != 1 else ""}</code>']
+    if kind in ('month', 'year') and per_day:
+        best = max(per_day.items(), key=lambda x: x[1])
+        lines.append(f'<code>Best day      {dt.date.fromisoformat(best[0]):%a %d %b} ({best[1]} tasks)</code>')
+    if kind == 'week':
+        wk = done_set(period('week'))
+        lines += ['', '<b>Week goals</b>']
+        lines += [f'<code>{box(it["id"] in wk)} {it["code"]:>2}</code>  {esc(label(it))}' for g in weekly() for it in g['items']]
+    if kind == 'month' and per_day:
+        lines += ['', '<b>Tasks per week</b>']
         d = start
-        cal = []
         while d <= end:
-            n = per_day.get(d.isoformat(), 0)
-            cal.append('🟩' if n >= 5 else '🟨' if n else '⬜')
-            d += dt.timedelta(days=1)
-        lines.append(''.join(cal) + '  (🟩 5+ · 🟨 some)')
+            ws, we = week_range(d)
+            n = sum(v for k, v in per_day.items() if max(ws, start).isoformat() <= k <= min(we, end).isoformat())
+            lines.append(f'<code>{max(ws, start):%d %b} to {min(we, end):%d %b}   {n}</code>')
+            d = we + dt.timedelta(days=1)
     if kind == 'year' and per_day:
-        lines += ['', '<b>Months</b>']
+        lines += ['', '<b>Tasks per month</b>']
         for m in range(1, end.month + 1):
             n = sum(v for k, v in per_day.items() if int(k[5:7]) == m)
-            lines.append(f'<code>{dt.date(end.year, m, 1):%b}</code> {"▇" * min(n // 5, 20)} {n}')
-    kb = {'inline_keyboard': [[{'text': ('• ' if k == kind else '') + lab, 'callback_data': f'r:{k}'} for k, lab in
+            lines.append(f'<code>{dt.date(end.year, m, 1):%B}  {n}</code>')
+    lines += ['', '<b>What you finished</b>']
+    if not rows:
+        lines.append('Nothing yet. When you finish a task, write <code>done 1</code>.')
+    for g in groups():
+        got = [(it, counts[it['id']]) for it in g['items'] if it['id'] in counts]
+        if got:
+            lines.append(f'{esc(g["title"])}:')
+            lines += [f'<code>  {it["code"]:>2}</code>  {esc(label(it))}' + (f'  ({c} times)' if c > 1 else '') for it, c in got]
+    kb = {'inline_keyboard': [[{'text': ('> ' if k == kind else '') + lab, 'callback_data': f'r:{k}'} for k, lab in
                                (('today', 'Today'), ('week', 'Week'), ('month', 'Month'), ('year', 'Year'))],
-                              [{'text': '⬅️ To-do list', 'callback_data': 'home'}]]}
+                              [{'text': 'Back to today', 'callback_data': 'home'}, {'text': 'History', 'callback_data': 'h'}]]}
     return '\n'.join(lines), kb
 
 
 def history_view():
     dg = daily()
     today = now().date()
-    lines = ['<b>📜 History</b>', '', '<b>Every day</b> · last 14 days']
+    lines = ['<b>HISTORY</b>', '', '<b>Daily tasks, last 14 days</b>']
     for i in range(14):
         day = today - dt.timedelta(days=i)
         ds = done_set(day.isoformat())
-        n = sum(it['id'] in ds for it in dg['items'])
-        lines.append(f'<code>{day:%a %d %b}</code> {"".join("✅" if it["id"] in ds else "⬜" for it in dg["items"])} {n}/{len(dg["items"])}')
-    lines += ['', '<b>Weekly groups</b> · last 6 weeks']
+        got = [it['code'] for it in dg['items'] if it['id'] in ds]
+        lines.append(f'<code>{day:%a %d %b}  {len(got)}/{len(dg["items"])}  {" ".join(got) if got else "-"}</code>')
+    lines += ['', '<b>Week goals, last 6 weeks</b>']
     for i in range(6):
-        per = period('week', today - dt.timedelta(weeks=i))
-        ds = done_set(per)
-        lines.append(f'<code>{per}</code> ' + ' · '.join(f'{g["title"].split()[0]} {sum(it["id"] in ds for it in g["items"])}/{len(g["items"])}' for g in weekly()))
+        day = today - dt.timedelta(weeks=i)
+        ds = done_set(period('week', day))
+        ws, _ = week_range(day)
+        done_n = sum(it['id'] in ds for g in weekly() for it in g['items'])
+        total = sum(len(g['items']) for g in weekly())
+        lines.append(f'<code>Week of {ws:%d %b}  {done_n}/{total}</code>')
     first = db.execute('SELECT MIN(at), COUNT(*) FROM events WHERE done=1').fetchone()
     if first[0]:
-        lines += ['', f'{first[1]} ticks since {first[0][:10]}.']
-    kb = {'inline_keyboard': [[{'text': '⬅️ Back', 'callback_data': 'home'}, {'text': '🧾 Latest ticks', 'callback_data': 'log'}]]}
+        lines += ['', f'{first[1]} tasks ticked since {first[0][:10]}.']
+    kb = {'inline_keyboard': [[{'text': 'Back to today', 'callback_data': 'home'}, {'text': 'Latest ticks', 'callback_data': 'log'}]]}
     return '\n'.join(lines), kb
 
 
 def log_view(n=25):
     rows = db.execute('SELECT at, item, done, by FROM events ORDER BY at DESC LIMIT ?', (n,)).fetchall()
-    lines = [f'<b>🧾 Latest {len(rows)} ticks</b>', '']
+    lines = [f'<b>LATEST {len(rows)} TICKS</b>', '']
     for at, item, done, by in rows:
         _, it = by_id(item)
-        lines.append(f'<code>{at[5:16].replace("T", " ")}</code> {"✅" if done else "↩️"} {esc(short(it["en"] if it else item, 38))} · {esc(by)}')
+        lines.append(f'<code>{at[5:16].replace("T", " ")}  {"done" if done else "undo"}</code>  '
+                     f'{esc(label(it) if it else item)}  ({esc(by)})')
     if not rows:
-        lines.append('No ticks yet. Write <code>done 1</code> when you finish a task.')
-    return '\n'.join(lines), {'inline_keyboard': [[{'text': '⬅️ Back', 'callback_data': 'home'}, {'text': '📜 History', 'callback_data': 'h'}]]}
+        lines.append('Nothing yet. When you finish a task, write <code>done 1</code>.')
+    return '\n'.join(lines), {'inline_keyboard': [[{'text': 'Back to today', 'callback_data': 'home'}, {'text': 'History', 'callback_data': 'h'}]]}
 
 
 def view(name):
@@ -396,20 +380,24 @@ def send_home(greet=False):
     return say(text, kb)
 
 
-HELP = ('<b>English to-do bot</b>\n\n'
-        f'Every morning at {MORNING}:00 I post the day\'s list.\n\n'
-        '<b>Mark done</b>: <code>done 1 3</code> or <code>done R2</code>, or reply to my list with the numbers, '
-        'or tap a task. <code>undo 2</code> takes a tick back.\n\n'
-        '/todo · today\'s list\n'
-        '/today · /week · /month · /year · what you finished\n'
-        '/history · last 14 days and 6 weeks\n'
-        '/log · latest ticks, who and when\n\n'
-        '"Every day" ({daily}) resets each day. Other groups ({weekly}) reset each Monday.')
+HELP = ('<b>HOW TO USE THIS BOT</b>\n\n'
+        f'Every morning at {MORNING}:00 I send the list for the day.\n\n'
+        '<b>Mark a task done</b>\n'
+        '<code>done 2</code>  or  <code>done 2 5 R1</code>\n'
+        'You can also reply to my list with the numbers, or tap a task.\n\n'
+        '<b>Take a tick back</b>\n'
+        '<code>undo 2</code>\n\n'
+        '<b>See your progress</b>\n'
+        '/todo  the list for today\n'
+        '/today  /week  /month  /year  what you finished\n'
+        '/history  the last 14 days and 6 weeks\n'
+        '/log  the latest ticks\n\n'
+        'Daily tasks ({daily}) start again each day. '
+        'Weekly tasks ({weekly}) start again each Monday.')
 
 
-# ---------------------------------------------------------------- handling
 def codes_hint():
-    return f'1–{len(daily()["items"])}, ' + ', '.join(g['items'][0]['code'] for g in weekly()) + ' …'
+    return f'1 to {len(daily()["items"])}, or ' + ', '.join(g['items'][0]['code'] for g in weekly()) + ' and so on'
 
 
 def mark(codes, value, who, reply_to):
@@ -424,17 +412,17 @@ def mark(codes, value, who, reply_to):
             same.append(it)
     lines = []
     if ok:
-        lines.append(('✅ Done' if value else '↩️ Undone') + f' ({who}):')
-        lines += [f'   <code>{it["code"]}</code> {esc(label(it))}' for it in ok]
+        lines.append(f'<b>{"Done" if value else "Undone"}</b> ({esc(who)})')
+        lines += [f'<code>{it["code"]:>3}</code>  {esc(label(it))}' for it in ok]
     if same:
-        lines.append(('Already done: ' if value else 'Was not done: ') + ' '.join(it['code'] for it in same))
+        lines.append(('Already done: ' if value else 'Was not done: ') + ', '.join(it['code'] for it in same))
     if bad:
-        lines.append('Unknown: ' + ' '.join(esc(b) for b in bad) + ' · codes are ' + codes_hint())
-    if value and ok:
+        lines.append('I do not know: ' + ', '.join(esc(b) for b in bad) + '. Use ' + codes_hint() + '.')
+    if ok:
         today = done_set(period('daily'))
-        n = sum(it['id'] in today for it in daily()['items'])
         total = len(daily()['items'])
-        lines.append(f'☀️ Today <code>{bar(n, total, 7)}</code> <b>{n}/{total}</b>' + ('  🎉 all done!' if n == total else ''))
+        n = sum(it['id'] in today for it in daily()['items'])
+        lines += ['', f'Today: {of(n, total)}.' + (' All daily tasks are done. Well done.' if n == total else '')]
     say('\n'.join(lines) or 'Nothing to change.', reply_to=reply_to)
 
 
@@ -450,7 +438,7 @@ def handle_text(m):
     head = words[0].split('@')[0].lower()
     rest = words[1:]
     to_bot = (m.get('reply_to_message') or {}).get('from', {}).get('is_bot')
-    if head in ('/done', 'done', '✅'):
+    if head in ('/done', 'done'):
         return mark(rest, True, who, m['message_id']) if rest else say('Which task? For example <code>done 1 3</code>.', reply_to=m['message_id'])
     if head in ('/undo', 'undo'):
         return mark(rest, False, who, m['message_id']) if rest else say('Which task? For example <code>undo 2</code>.', reply_to=m['message_id'])
@@ -487,7 +475,7 @@ def handle(u):
             if it:
                 cur = it['id'] in done_set(period(g['id']))
                 set_done(g, it, not cur, who)
-                note = ('↩️ Not done: ' if cur else '✅ Done: ') + short(it['en'], 60)
+                note = ('Undone: ' if cur else 'Done: ') + label(it)
         elif data.startswith('g:'):
             target = data[2:]
         text, kb = view(target)
