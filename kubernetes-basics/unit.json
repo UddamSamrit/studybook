@@ -1,0 +1,427 @@
+{
+ "slug": "kubernetes-basics",
+ "title_ko": "Kubernetes basics",
+ "title_en": "មូលដ្ឋាន Kubernetes",
+ "subtitle": "និយាយអំពី Kubernetes ជាភាសាអង់គ្លេស នៅកន្លែងធ្វើការ",
+ "description": "Talk about Kubernetes in English at work: containers, clusters, pods, deployments and fixing problems. Picture cards with native audio, Q&A and 18 words, with Khmer translations.",
+ "sections": [
+  {
+   "id": "idea",
+   "ko": "The idea",
+   "en": "គំនិតមូលដ្ឋាន",
+   "color": "#0052A4"
+  },
+  {
+   "id": "cluster",
+   "ko": "The cluster",
+   "en": "Cluster",
+   "color": "#00A84D"
+  },
+  {
+   "id": "deploy",
+   "ko": "Deploy",
+   "en": "ដាក់ឲ្យដំណើរការ",
+   "color": "#996CAC"
+  },
+  {
+   "id": "heal",
+   "ko": "Scale and heal",
+   "en": "ពង្រីក និងជួសជុលខ្លួនឯង",
+   "color": "#EF7C1C"
+  },
+  {
+   "id": "work",
+   "ko": "At work",
+   "en": "នៅកន្លែងធ្វើការ",
+   "color": "#CD7C2F"
+  }
+ ],
+ "spine": {
+  "title": "Line map · ពីកុងតឺន័រ ដល់ការងារប្រចាំថ្ងៃ",
+  "note": "តាមលំដាប់៖ គំនិត → cluster → deploy → ពង្រីក និងជួសជុល → និយាយនៅកន្លែងធ្វើការ។"
+ },
+ "explain": {
+  "title": "The big picture · រូបភាពរួម",
+  "why": "Kubernetes ដូចជាអ្នកគ្រប់គ្រងកំពង់ផែ៖ វាដាក់កុងតឺន័រលើម៉ាស៊ីន រាប់ចំនួន ហើយជំនួសអាដែលខូច។",
+  "tiles": [
+   {
+    "img": "img/c01-container.svg",
+    "ko": "Container",
+    "en": "កម្មវិធី + អ្វីៗដែលវាត្រូវការ",
+    "color": "#0052A4"
+   },
+   {
+    "img": "img/c03-nodes.svg",
+    "ko": "Nodes",
+    "en": "ម៉ាស៊ីនដែលដំណើរការកុងតឺន័រ",
+    "color": "#00A84D"
+   },
+   {
+    "img": "img/c05-yaml.svg",
+    "ko": "YAML",
+    "en": "សរសេរអ្វីដែលអ្នកចង់បាន",
+    "color": "#996CAC"
+   },
+   {
+    "img": "img/c08-scale.svg",
+    "ko": "Scale",
+    "en": "ច្រើន pod ពេលមនុស្សច្រើន",
+    "color": "#EF7C1C"
+   },
+   {
+    "img": "img/c09-heal.svg",
+    "ko": "Self-heal",
+    "en": "pod ខូច → pod ថ្មី",
+    "color": "#EF7C1C"
+   }
+  ]
+ },
+ "cards": [
+  {
+   "sec": "idea",
+   "img": "img/c01-container.svg",
+   "flat": true,
+   "alt": "A shipping container",
+   "hook": "container",
+   "ko": "A container packs an app with everything it needs.",
+   "en": "កុងតឺន័រ វេចខ្ចប់កម្មវិធី ជាមួយអ្វីៗទាំងអស់ដែលវាត្រូវការ។",
+   "audio": "audio/c01.mp3"
+  },
+  {
+   "sec": "idea",
+   "img": "img/c02-wheel.svg",
+   "flat": true,
+   "alt": "A ship's steering wheel",
+   "hook": "manage",
+   "ko": "Kubernetes runs and manages many containers for us.",
+   "en": "Kubernetes ដំណើរការ និងគ្រប់គ្រងកុងតឺន័រជាច្រើនជំនួសយើង។",
+   "audio": "audio/c02.mp3"
+  },
+  {
+   "sec": "cluster",
+   "img": "img/c03-nodes.svg",
+   "flat": true,
+   "alt": "Three servers in a rack",
+   "hook": "node",
+   "ko": "A cluster is a group of machines called nodes.",
+   "en": "Cluster គឺជាក្រុមម៉ាស៊ីន ដែលហៅថា node។",
+   "audio": "audio/c03.mp3"
+  },
+  {
+   "sec": "cluster",
+   "img": "img/c04-pod.svg",
+   "flat": true,
+   "alt": "A green pea pod with peas inside",
+   "hook": "pod",
+   "ko": "A pod is the smallest unit. It holds one or more containers.",
+   "en": "Pod គឺជាឯកតាតូចបំផុត។ វាផ្ទុកកុងតឺន័រមួយ ឬច្រើន។",
+   "audio": "audio/c04.mp3"
+  },
+  {
+   "sec": "deploy",
+   "img": "img/c05-yaml.svg",
+   "flat": true,
+   "alt": "A document with indented lines",
+   "hook": "describe",
+   "ko": "We describe what we want in a YAML file.",
+   "en": "យើងសរសេរពីអ្វីដែលយើងចង់បាន នៅក្នុងឯកសារ YAML។",
+   "audio": "audio/c05.mp3"
+  },
+  {
+   "sec": "deploy",
+   "img": "img/c06-replicas.svg",
+   "flat": true,
+   "alt": "Three identical boxes with the number 3",
+   "hook": "deployment",
+   "ko": "A deployment keeps the right number of pods running.",
+   "en": "Deployment ធានាថា ចំនួន pod ត្រឹមត្រូវ កំពុងដំណើរការជានិច្ច។",
+   "audio": "audio/c06.mp3"
+  },
+  {
+   "sec": "deploy",
+   "img": "img/c07-sign.svg",
+   "flat": true,
+   "alt": "A signpost pointing to three boxes",
+   "hook": "service",
+   "ko": "A service gives the pods one stable address.",
+   "en": "Service ផ្តល់អាសយដ្ឋានថេរមួយ ឲ្យ pod ទាំងនោះ។",
+   "audio": "audio/c07.mp3"
+  },
+  {
+   "sec": "heal",
+   "img": "img/c08-scale.svg",
+   "flat": true,
+   "alt": "An upward arrow over more boxes",
+   "hook": "scale up",
+   "ko": "When traffic goes up, Kubernetes adds more pods.",
+   "en": "ពេលចរាចរណ៍កើនឡើង Kubernetes បន្ថែម pod ទៀត។",
+   "audio": "audio/c08.mp3"
+  },
+  {
+   "sec": "heal",
+   "img": "img/c09-heal.svg",
+   "flat": true,
+   "alt": "A cracked box and a new box with a circular arrow",
+   "hook": "crash",
+   "ko": "If a pod crashes, Kubernetes starts a new one.",
+   "en": "បើ pod មួយគាំង Kubernetes ចាប់ផ្តើម pod ថ្មីមួយ។",
+   "audio": "audio/c09.mp3"
+  },
+  {
+   "sec": "work",
+   "img": "img/c10-logs.svg",
+   "flat": true,
+   "alt": "A magnifying glass over lines of text",
+   "hook": "logs",
+   "ko": "Let me check the pod logs first.",
+   "en": "ចាំខ្ញុំពិនិត្យ log របស់ pod សិន។",
+   "audio": "audio/c10.mp3"
+  },
+  {
+   "sec": "work",
+   "img": "img/c11-rollback.svg",
+   "flat": true,
+   "alt": "A curved arrow pointing back",
+   "hook": "roll back",
+   "ko": "The new version broke, so I rolled it back.",
+   "en": "កំណែថ្មីមានបញ្ហា ដូច្នេះខ្ញុំបាន rollback វាវិញ។",
+   "audio": "audio/c11.mp3"
+  }
+ ],
+ "qa": [
+  {
+   "title": "Traps · កំហុសដែលងាយធ្វើ",
+   "small": "អានមុនគេ",
+   "note": "ពាក្យពីរដែលគេច្រឡំញឹកញាប់។",
+   "kind": "trap",
+   "items": [
+    {
+     "q": "Is a pod the same as a container?",
+     "qen": "Pod និងកុងតឺន័រ ដូចគ្នាទេ?",
+     "qaudio": "audio/qt1.mp3",
+     "a": "No. A pod can hold one or more containers. Most pods hold just one.",
+     "aen": "ទេ។ Pod អាចផ្ទុកកុងតឺន័រមួយ ឬច្រើន។ ភាគច្រើនផ្ទុកតែមួយ។",
+     "why": "Pod ជាសំបក ហើយកុងតឺន័រនៅខាងក្នុង ដូចគ្រាប់សណ្តែកក្នុងសំបក។",
+     "audio": "audio/at1.mp3"
+    },
+    {
+     "q": "Why do people write K8s?",
+     "qen": "ហេតុអ្វីគេសរសេរ K8s?",
+     "qaudio": "audio/qt2.mp3",
+     "a": "It's a short name. There are eight letters between the K and the s.",
+     "aen": "វាជាឈ្មោះខ្លី។ មានអក្សរប្រាំបីរវាង K និង s។",
+     "why": "អានថា \"Kates\" ឬ \"K eights\"។ ពាក្យពេញ Kubernetes អានថា koo-ber-NET-eez។",
+     "audio": "audio/at2.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Questions · សំណួរនៅកន្លែងធ្វើការ",
+   "small": "ឆ្លើយក្នុងចិត្ត រួចចុច Listen ដើម្បីប្រៀបធៀប",
+   "kind": "qa",
+   "items": [
+    {
+     "q": "What does Kubernetes do?",
+     "qen": "Kubernetes ធ្វើអ្វី?",
+     "qaudio": "audio/qc1.mp3",
+     "a": "It runs and manages containers across many machines.",
+     "aen": "វាដំណើរការ និងគ្រប់គ្រងកុងតឺន័រ លើម៉ាស៊ីនជាច្រើន។",
+     "audio": "audio/ac1.mp3"
+    },
+    {
+     "q": "Why do we use it?",
+     "qen": "ហេតុអ្វីយើងប្រើវា?",
+     "qaudio": "audio/qc2.mp3",
+     "a": "It scales our app and restarts it when something fails.",
+     "aen": "វាពង្រីកកម្មវិធីរបស់យើង ហើយចាប់ផ្តើមវាឡើងវិញ ពេលមានអ្វីខូច។",
+     "audio": "audio/ac2.mp3"
+    },
+    {
+     "q": "How do you deploy a new version?",
+     "qen": "តើអ្នកដាក់កំណែថ្មីយ៉ាងដូចម្តេច?",
+     "qaudio": "audio/qc3.mp3",
+     "a": "I update the image tag in the YAML file and apply it.",
+     "aen": "ខ្ញុំប្តូរ image tag ក្នុងឯកសារ YAML ហើយ apply វា។",
+     "audio": "audio/ac3.mp3"
+    },
+    {
+     "q": "What happened to the server last night?",
+     "qen": "យប់មិញ server មានបញ្ហាអ្វី?",
+     "qaudio": "audio/qc4.mp3",
+     "a": "A pod ran out of memory and crashed, but Kubernetes restarted it.",
+     "aen": "Pod មួយអស់ memory ហើយគាំង ប៉ុន្តែ Kubernetes បានចាប់ផ្តើមវាឡើងវិញ។",
+     "check": true,
+     "audio": "audio/ac4.mp3"
+    }
+   ]
+  },
+  {
+   "title": "When you're stuck · ពេលនឹកមិនឃើញ",
+   "small": "ឃ្លាជួយសង្គ្រោះ",
+   "note": "ប្រើពេលស្តាប់ពាក្យបច្ចេកទេសមិនយល់។",
+   "kind": "surv",
+   "items": [
+    {
+     "ko": "Sorry, what does that term mean?",
+     "en": "សុំទោស ពាក្យនោះមានន័យថាអ្វី?",
+     "audio": "audio/s1.mp3"
+    },
+    {
+     "ko": "Could you show me on the screen?",
+     "en": "អាចបង្ហាញខ្ញុំលើអេក្រង់បានទេ?",
+     "audio": "audio/s2.mp3"
+    },
+    {
+     "ko": "Let me look into it and get back to you.",
+     "en": "ចាំខ្ញុំពិនិត្យមើលសិន ហើយប្រាប់អ្នកវិញ។",
+     "audio": "audio/s3.mp3"
+    }
+   ]
+  }
+ ],
+ "vocab": [
+  {
+   "title": "Building blocks",
+   "color": "#0052A4",
+   "items": [
+    {
+     "ko": "container",
+     "en": "កុងតឺន័រ",
+     "audio": "audio/v01.mp3"
+    },
+    {
+     "ko": "image",
+     "en": "image (គំរូសម្រាប់បង្កើតកុងតឺន័រ)",
+     "audio": "audio/v02.mp3"
+    },
+    {
+     "ko": "pod",
+     "en": "ឯកតាតូចបំផុត ដែលផ្ទុកកុងតឺន័រ",
+     "audio": "audio/v03.mp3"
+    },
+    {
+     "ko": "node",
+     "en": "ម៉ាស៊ីនមួយក្នុង cluster",
+     "audio": "audio/v04.mp3"
+    },
+    {
+     "ko": "cluster",
+     "en": "ក្រុមម៉ាស៊ីន",
+     "audio": "audio/v05.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Running the app",
+   "color": "#996CAC",
+   "items": [
+    {
+     "ko": "deployment",
+     "en": "អ្វីដែលរក្សាចំនួន pod",
+     "audio": "audio/v06.mp3"
+    },
+    {
+     "ko": "service",
+     "en": "អាសយដ្ឋានថេរសម្រាប់ pod",
+     "audio": "audio/v07.mp3"
+    },
+    {
+     "ko": "namespace",
+     "en": "ផ្នែកដាច់ដោយឡែកក្នុង cluster",
+     "audio": "audio/v08.mp3"
+    },
+    {
+     "ko": "replica",
+     "en": "ច្បាប់ចម្លង",
+     "audio": "audio/v09.mp3"
+    },
+    {
+     "ko": "YAML file",
+     "en": "ឯកសារ YAML",
+     "audio": "audio/v10.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Verbs",
+   "color": "#EF7C1C",
+   "items": [
+    {
+     "ko": "deploy",
+     "en": "ដាក់ឲ្យដំណើរការ",
+     "audio": "audio/v11.mp3"
+    },
+    {
+     "ko": "scale up",
+     "en": "បន្ថែមចំនួន",
+     "audio": "audio/v12.mp3"
+    },
+    {
+     "ko": "scale down",
+     "en": "បន្ថយចំនួន",
+     "audio": "audio/v13.mp3"
+    },
+    {
+     "ko": "roll out",
+     "en": "ចេញកំណែថ្មីបន្តិចម្តងៗ",
+     "audio": "audio/v14.mp3"
+    },
+    {
+     "ko": "roll back",
+     "en": "ត្រឡប់ទៅកំណែមុន",
+     "audio": "audio/v15.mp3"
+    },
+    {
+     "ko": "restart",
+     "en": "ចាប់ផ្តើមឡើងវិញ",
+     "audio": "audio/v16.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Problems",
+   "color": "#CD7C2F",
+   "items": [
+    {
+     "ko": "crash",
+     "en": "គាំង",
+     "audio": "audio/v17.mp3"
+    },
+    {
+     "ko": "logs",
+     "en": "កំណត់ហេតុ (log)",
+     "audio": "audio/v18.mp3"
+    }
+   ]
+  }
+ ],
+ "full_title": "Kubernetes basics · ពីដើមដល់ចប់",
+ "full": [
+  {
+   "title": "The idea · គំនិតមូលដ្ឋាន",
+   "ko": "A container packs an app with everything it needs. Kubernetes runs and manages many containers for us.",
+   "en": "កុងតឺន័រ វេចខ្ចប់កម្មវិធី ជាមួយអ្វីៗទាំងអស់ដែលវាត្រូវការ។ Kubernetes ដំណើរការ និងគ្រប់គ្រងកុងតឺន័រជាច្រើនជំនួសយើង។"
+  },
+  {
+   "title": "The cluster · Cluster",
+   "ko": "A cluster is a group of machines called nodes. A pod is the smallest unit. It holds one or more containers.",
+   "en": "Cluster គឺជាក្រុមម៉ាស៊ីន ដែលហៅថា node។ Pod គឺជាឯកតាតូចបំផុត។ វាផ្ទុកកុងតឺន័រមួយ ឬច្រើន។"
+  },
+  {
+   "title": "Deploy · ដាក់ឲ្យដំណើរការ",
+   "ko": "We describe what we want in a YAML file. A deployment keeps the right number of pods running. A service gives the pods one stable address.",
+   "en": "យើងសរសេរពីអ្វីដែលយើងចង់បាន នៅក្នុងឯកសារ YAML។ Deployment ធានាថា ចំនួន pod ត្រឹមត្រូវ កំពុងដំណើរការជានិច្ច។ Service ផ្តល់អាសយដ្ឋានថេរមួយ ឲ្យ pod ទាំងនោះ។"
+  },
+  {
+   "title": "Scale and heal · ពង្រីក និងជួសជុលខ្លួនឯង",
+   "ko": "When traffic goes up, Kubernetes adds more pods. If a pod crashes, Kubernetes starts a new one.",
+   "en": "ពេលចរាចរណ៍កើនឡើង Kubernetes បន្ថែម pod ទៀត។ បើ pod មួយគាំង Kubernetes ចាប់ផ្តើម pod ថ្មីមួយ។"
+  },
+  {
+   "title": "At work · នៅកន្លែងធ្វើការ",
+   "ko": "Let me check the pod logs first. The new version broke, so I rolled it back.",
+   "en": "ចាំខ្ញុំពិនិត្យ log របស់ pod សិន។ កំណែថ្មីមានបញ្ហា ដូច្នេះខ្ញុំបាន rollback វាវិញ។"
+  }
+ ],
+ "published": "2026-11-10"
+}
