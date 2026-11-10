@@ -1,3 +1,33 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# ------------------------------------------------------------------
+# Secrets: this repo is PUBLIC. Never commit tokens, keys or passwords.
+# The Telegram bot reads its token from ~/.studybook-bot/config.env,
+# outside this folder. These rules stop a copy from being pushed by mistake.
+# ------------------------------------------------------------------
+.env
+.env.*
+*.env
+config.env
+secrets/
+secret*
+*.secret
+*token*
+!tools/*token*.py
+*.key
+*.pem
+*.p12
+credentials*.json
+service-account*.json
+
+# Bot data: history, notes and logs stay on the machine that runs the bot
+*.db
+*.sqlite
+*.sqlite3
+*.log
+.studybook-bot/
+
+# Personal drafts that are not public yet
+interview/
