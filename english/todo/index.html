@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>This week: 5 AM, running, Second Chance, English · Studybook</title>
-<meta name="description" content="One simple list for every day, and four goals for the week: wake up at 5:00, run, read Second Chance, and practise English.">
+<title>Daily productivity dashboard · Studybook</title>
+<meta name="description" content="Top 3 priorities, work, learning (the 4 English skills and Second Chance), personal projects, follow-ups, blockers, achievements, a timed plan from 5:00 to 22:00 and an end-of-day review.">
 <meta name="theme-color" content="#1C2A4A">
 <link rel="manifest" href="../../manifest.webmanifest">
 <link rel="icon" href="../../icons/icon.svg" type="image/svg+xml">
@@ -38,7 +38,7 @@ ul{list-style:none;margin:0;padding:0}
 li{display:flex;align-items:flex-start;gap:8px;padding:10px 0;border-top:1px solid var(--line)}
 li:first-child{border-top:0}
 label{flex:1;display:flex;gap:12px;cursor:pointer;min-width:0}
-input{position:absolute;opacity:0;width:1px;height:1px}
+input[type=checkbox]{position:absolute;opacity:0;width:1px;height:1px}
 .box{flex:none;width:24px;height:24px;border:2px solid var(--c);border-radius:6px;margin-top:1px;display:grid;place-items:center}
 input:checked+.box{background:var(--c)}
 input:checked+.box::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
@@ -48,68 +48,190 @@ input:focus-visible+.box{outline:3px solid #F5B700;outline-offset:2px}
 input:checked~.txt .en{text-decoration:line-through;color:var(--mute)}
 a.go{flex:none;font-size:.85rem;font-weight:700;color:var(--c);text-decoration:none;border:1.5px solid var(--c);border-radius:999px;padding:2px 10px;margin-top:2px}
 footer{color:var(--mute);font-size:.85rem;padding:0 16px 32px}
+li.sec{display:block;font-weight:800;font-size:.85rem;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;padding:12px 0 2px}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:.85rem;color:var(--c);margin-right:2px}
+.tm{font-family:ui-monospace,Menlo,monospace;font-size:.85rem;color:var(--mute);font-weight:700}
+ul.notes li,ul.track li,li.note{display:flex;align-items:center;gap:10px}
+ul.notes li span,ul.track li span:first-child{flex:none;min-width:9.5em;color:var(--mute);font-size:.9rem}
+input[type=text],input[type=number]{position:static;opacity:1;width:auto;height:auto;flex:1;min-width:0;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+input[type=number]{flex:0 0 5.5em}
+li.note{padding-top:0;border-top:0}
+.sub{font-weight:800;font-size:.85rem;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 0}
+.prog{font-family:ui-monospace,Menlo,monospace;white-space:pre;margin:4px 0 10px}
+.foot{text-align:center;font-weight:800;letter-spacing:.04em}
 </style>
 </head>
 <body>
 <header><div class="wrap">
   <a class="back" href="../">&larr; English</a>
-  <h1>This week: 5 AM, running, Second Chance, English</h1>
-  <p class="km" lang="km">សប្តាហ៍នេះ៖ ក្រោក 5 ព្រឹក រត់ អានសៀវភៅ Second Chance និងភាសាអង់គ្លេស</p>
-  <div class="total"><div class="bar"><span id="totalBar"></span></div><b id="totalTxt">0/11</b></div>
+  <h1>Daily productivity dashboard</h1>
+  <p class="km" lang="km">ផ្ទាំងការងារប្រចាំថ្ងៃ</p>
+  <div class="total"><div class="bar"><span id="totalBar"></span></div><b id="totalTxt">0/29</b></div>
 </div></header>
 <main class="wrap">
-  <p class="note">"Every day" resets each morning; the other groups reset each Monday. Ticks are saved on this phone. To tick together and keep history, use <b>/todo</b> in the Telegram group.</p>
-  <section class="grp" data-group="daily" style="--c:#1C2A4A">
-    <h2>Every day <span class="km" lang="km">រៀងរាល់ថ្ងៃ</span><span class="cnt"></span></h2>
+  <p class="note">Daily goal: <b>Stay focused and productive</b>. Everything resets each morning, except the week goals, which reset each Monday. For history and reports, use the Telegram bot.</p>
+  <section class="grp" data-group="priorities" data-weekly="0" style="--c:#D7372B">
+    <h2>1. TOP 3 PRIORITIES <span class="km" lang="km">អាទិភាពកំពូលទាំង 3</span><span class="cnt"></span></h2>
     <div class="bar"><span></span></div>
     <ul>
-      <li><label><input type="checkbox" data-id="d1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Wake up at 5:00 AM. Get out of bed straight away.</span><span class="km" lang="km">ក្រោកម៉ោង 5:00 ព្រឹក។ ចេញពីគ្រែភ្លាម។</span></span></label></li>
-      <li><label><input type="checkbox" data-id="d2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Run for 30 minutes at an easy pace.</span><span class="km" lang="km">រត់ 30 នាទី ក្នុងល្បឿនស្រាល។</span></span></label></li>
-      <li><label><input type="checkbox" data-id="d3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Read 20 pages of Second Chance by Robert Kiyosaki.</span><span class="km" lang="km">អានសៀវភៅ Second Chance របស់ Robert Kiyosaki 20 ទំព័រ។</span></span></label></li>
-      <li><label><input type="checkbox" data-id="d4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Write down 5 new English words from the book, with their Khmer meaning.</span><span class="km" lang="km">កត់ពាក្យអង់គ្លេសថ្មី 5 ពីសៀវភៅ ជាមួយអត្ថន័យខ្មែរ។</span></span></label></li>
-      <li><label><input type="checkbox" data-id="d5"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Listen to 10 minutes of BBC 6 Minute English or VOA Learning English.</span><span class="km" lang="km">ស្តាប់ BBC 6 Minute English ឬ VOA Learning English 10 នាទី។</span></span></label> <a class="go" href="https://www.bbc.co.uk/learningenglish" target=_blank rel=noopener>open</a></li>
-      <li><label><input type="checkbox" data-id="d6"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Say in English, for 1 minute, what you read today. Record it on your phone.</span><span class="km" lang="km">និយាយជាភាសាអង់គ្លេស 1 នាទី អំពីអ្វីដែលអ្នកបានអានថ្ងៃនេះ។ ថតទុកក្នុងទូរស័ព្ទ។</span></span></label></li>
-      <li><label><input type="checkbox" data-id="d7"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Write 3 English sentences about your day, using today&#x27;s new words.</span><span class="km" lang="km">សរសេរប្រយោគអង់គ្លេស 3 អំពីថ្ងៃរបស់អ្នក ដោយប្រើពាក្យថ្មីថ្ងៃនេះ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="p1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">P1</b> Most important task</span><span class="km" lang="km">ការងារសំខាន់បំផុតថ្ងៃនេះ</span></span></label></li>
+      <li class="note"><input type="text" data-note="p1" placeholder="Write your most important task"></li>
+      <li><label><input type="checkbox" data-id="p2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">P2</b> Second important task</span><span class="km" lang="km">ការងារសំខាន់ទីពីរ</span></span></label></li>
+      <li class="note"><input type="text" data-note="p2" placeholder="Write your second important task"></li>
+      <li><label><input type="checkbox" data-id="p3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">P3</b> Third important task</span><span class="km" lang="km">ការងារសំខាន់ទីបី</span></span></label></li>
+      <li class="note"><input type="text" data-note="p3" placeholder="Write your third important task"></li>
     </ul>
   </section>
-  <section class="grp" data-group="goals" style="--c:#D7372B">
-    <h2>This week <span class="km" lang="km">សប្តាហ៍នេះ</span><span class="cnt"></span></h2>
+  <section class="grp" data-group="work" data-weekly="0" style="--c:#0052A4">
+    <h2>2. WORK AND DEVELOPMENT <span class="km" lang="km">ការងារ និងការអភិវឌ្ឍ</span><span class="cnt"></span></h2>
     <div class="bar"><span></span></div>
     <ul>
-      <li><label><input type="checkbox" data-id="a1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Wake up at 5:00 AM on at least 5 days this week.</span><span class="km" lang="km">ក្រោកម៉ោង 5:00 ព្រឹក យ៉ាងហោចណាស់ 5 ថ្ងៃក្នុងសប្តាហ៍នេះ។</span></span></label></li>
-      <li><label><input type="checkbox" data-id="a2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Run on at least 5 days this week.</span><span class="km" lang="km">រត់យ៉ាងហោចណាស់ 5 ថ្ងៃក្នុងសប្តាហ៍នេះ។</span></span></label></li>
-      <li><label><input type="checkbox" data-id="a3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Read 100 pages of Second Chance this week.</span><span class="km" lang="km">អានសៀវភៅ Second Chance 100 ទំព័រក្នុងសប្តាហ៍នេះ។</span></span></label></li>
-      <li><label><input type="checkbox" data-id="a4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">On Sunday, write a 100-word summary in English of what you read this week.</span><span class="km" lang="km">ថ្ងៃអាទិត្យ សរសេរសេចក្តីសង្ខេប 100 ពាក្យជាភាសាអង់គ្លេស អំពីអ្វីដែលអ្នកបានអានក្នុងសប្តាហ៍នេះ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="w1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">W1</b> Backend development</span><span class="km" lang="km">ការអភិវឌ្ឍ backend</span></span></label></li>
+      <li><label><input type="checkbox" data-id="w2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">W2</b> Frontend development</span><span class="km" lang="km">ការអភិវឌ្ឍ frontend</span></span></label></li>
+      <li><label><input type="checkbox" data-id="w3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">W3</b> API / Integration</span><span class="km" lang="km">API និងការភ្ជាប់ប្រព័ន្ធ</span></span></label></li>
+      <li><label><input type="checkbox" data-id="w4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">W4</b> Bug fixing</span><span class="km" lang="km">ជួសជុល bug</span></span></label></li>
+      <li><label><input type="checkbox" data-id="w5"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">W5</b> Code review</span><span class="km" lang="km">ពិនិត្យកូដរបស់ក្រុម</span></span></label></li>
+      <li><label><input type="checkbox" data-id="w6"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">W6</b> Testing and deployment</span><span class="km" lang="km">តេស្ត និង deploy</span></span></label></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="learn" data-weekly="0" style="--c:#00A84D">
+    <h2>3. LEARNING AND GROWTH <span class="km" lang="km">ការរៀន និងការរីកចម្រើន</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="l1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L1</b> English reading: Second Chance, 20 pages, 5 new words</span><span class="km" lang="km">អានសៀវភៅ Second Chance 20 ទំព័រ ហើយសរសេរពាក្យថ្មី 5 ជាមួយអត្ថន័យខ្មែរ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="l2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L2</b> English listening: 10 minutes</span><span class="km" lang="km">ស្តាប់ BBC 6 Minute English ឬ VOA 10 នាទី។</span></span></label> <a class="go" href="https://www.bbc.co.uk/learningenglish" target=_blank rel=noopener>open</a></li>
+      <li><label><input type="checkbox" data-id="l3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L3</b> English speaking: 1 minute, recorded</span><span class="km" lang="km">និយាយជាភាសាអង់គ្លេស 1 នាទី អំពីអ្វីដែលអ្នកបានអាន ហើយថតទុក។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="l4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L4</b> English writing: 3 sentences</span><span class="km" lang="km">សរសេរប្រយោគ 3 ដោយប្រើពាក្យថ្មីថ្ងៃនេះ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="l5"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L5</b> Technical learning: one Kubernetes unit</span><span class="km" lang="km">រៀនមេរៀន Kubernetes មួយនៅលើ studybook។</span></span></label> <a class="go" href="../../kubernetes/">open</a></li>
+      <li><label><input type="checkbox" data-id="l6"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">L6</b> AI / New technology</span><span class="km" lang="km">អាន ឬសាកល្បងរឿងថ្មីមួយអំពី AI ឬបច្ចេកវិទ្យាថ្មី។</span></span></label></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="projects" data-weekly="0" style="--c:#996CAC">
+    <h2>4. PERSONAL PROJECTS <span class="km" lang="km">គម្រោងផ្ទាល់ខ្លួន</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="j1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">J1</b> Studybook</span><span class="km" lang="km">ធ្វើការលើ studybook</span></span></label></li>
+      <li><label><input type="checkbox" data-id="j2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">J2</b> Project 2</span><span class="km" lang="km">គម្រោងទីពីរ</span></span></label></li>
+      <li><label><input type="checkbox" data-id="j3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">J3</b> Business development</span><span class="km" lang="km">ការអភិវឌ្ឍអាជីវកម្ម</span></span></label></li>
+      <li><label><input type="checkbox" data-id="j4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">J4</b> Research and innovation</span><span class="km" lang="km">ការស្រាវជ្រាវ និងគំនិតថ្មី</span></span></label></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="pending" data-weekly="0" style="--c:#5A6C93">
+    <h2>5. FOLLOW-UP / PENDING <span class="km" lang="km">តាមដាន / កំពុងរង់ចាំ</span><span class="cnt"></span></h2>
+    <ul class="notes">
+      <li><span>Follow up with</span><input type="text" data-note="follow" placeholder="-"></li>
+      <li><span>Waiting for</span><input type="text" data-note="waiting" placeholder="-"></li>
+      <li><span>Need to review</span><input type="text" data-note="review" placeholder="-"></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="blockers" data-weekly="0" style="--c:#5A6C93">
+    <h2>6. BLOCKERS / CHALLENGES <span class="km" lang="km">ឧបសគ្គ / បញ្ហា</span><span class="cnt"></span></h2>
+    <ul class="notes">
+      <li><span>Issue</span><input type="text" data-note="issue" placeholder="-"></li>
+      <li><span>Reason</span><input type="text" data-note="reason" placeholder="-"></li>
+      <li><span>Next action</span><input type="text" data-note="next" placeholder="-"></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="wins" data-weekly="0" style="--c:#5A6C93">
+    <h2>7. TODAY&#x27;S ACHIEVEMENTS <span class="km" lang="km">សមិទ្ធផលថ្ងៃនេះ</span><span class="cnt"></span></h2>
+    <ul class="notes">
+      <li><span>1.</span><input type="text" data-note="win-0" placeholder="-"></li>
+      <li><span>2.</span><input type="text" data-note="win-1" placeholder="-"></li>
+      <li><span>3.</span><input type="text" data-note="win-2" placeholder="-"></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="progress" data-weekly="0" style="--c:#5A6C93">
+    <h2>8. DAILY PROGRESS <span class="km" lang="km">វឌ្ឍនភាពប្រចាំថ្ងៃ</span><span class="cnt"></span></h2>
+    <p class="prog" id="prog"></p>
+  </section>
+  <section class="grp" data-group="schedule" data-weekly="0" style="--c:#1C2A4A">
+    <h2>9. TIME MANAGEMENT <span class="km" lang="km">ការគ្រប់គ្រងពេលវេលា</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li class="sec">Morning (05:00 - 12:00)</li>
+      <li><label><input type="checkbox" data-id="t1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">05:00</b> <b class="code">T1</b> Wake up</span><span class="km" lang="km">ក្រោកម៉ោង 5:00។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="t2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">05:15</b> <b class="code">T2</b> Run 30 minutes</span><span class="km" lang="km">រត់ 30 នាទី។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="t3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">06:00</b> <b class="code">T3</b> Shower / Breakfast</span><span class="km" lang="km">ងូតទឹក និងញ៉ាំអាហារពេលព្រឹក។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="l1" data-ref=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">06:30</b> <b class="code">L1</b> English reading: Second Chance, 20 pages, 5 new words</span><span class="km" lang="km">អានសៀវភៅ Second Chance 20 ទំព័រ ហើយសរសេរពាក្យថ្មី 5 ជាមួយអត្ថន័យខ្មែរ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="l2" data-ref=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">07:15</b> <b class="code">L2</b> English listening: 10 minutes</span><span class="km" lang="km">ស្តាប់ BBC 6 Minute English ឬ VOA 10 នាទី។</span></span></label> <a class="go" href="https://www.bbc.co.uk/learningenglish" target=_blank rel=noopener>open</a></li>
+      <li><label><input type="checkbox" data-id="t4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">08:00</b> <b class="code">T4</b> Start work: P1 first</span><span class="km" lang="km">ចាប់ផ្តើមការងារជាមួយអាទិភាពទីមួយ។</span></span></label></li>
+      <li class="sec">Afternoon (12:00 - 18:00)</li>
+      <li><label><input type="checkbox" data-id="t5"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">12:00</b> <b class="code">T5</b> Lunch / Break</span><span class="km" lang="km">អាហារថ្ងៃត្រង់ និងសម្រាក។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="t6"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">13:00</b> <b class="code">T6</b> Deep work: development</span><span class="km" lang="km">ការងារអភិវឌ្ឍដោយផ្តោតអារម្មណ៍។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="t7"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">17:00</b> <b class="code">T7</b> Review daily progress</span><span class="km" lang="km">ពិនិត្យអ្វីដែលបានធ្វើ ហើយកត់ម៉ោង។</span></span></label></li>
+      <li class="sec">Evening (18:00 - 22:00)</li>
+      <li><label><input type="checkbox" data-id="t8"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">20:00</b> <b class="code">T8</b> Personal projects</span><span class="km" lang="km">ធ្វើគម្រោងផ្ទាល់ខ្លួន។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="l3" data-ref=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">21:00</b> <b class="code">L3</b> English speaking: 1 minute, recorded</span><span class="km" lang="km">និយាយជាភាសាអង់គ្លេស 1 នាទី អំពីអ្វីដែលអ្នកបានអាន ហើយថតទុក។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="l4" data-ref=1><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">21:15</b> <b class="code">L4</b> English writing: 3 sentences</span><span class="km" lang="km">សរសេរប្រយោគ 3 ដោយប្រើពាក្យថ្មីថ្ងៃនេះ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="t9"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">21:30</b> <b class="code">T9</b> Review the day, plan tomorrow</span><span class="km" lang="km">សរសេរការពិនិត្យថ្ងៃ ហើយរៀបចំសម្លៀកបំពាក់រត់។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="t10"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="tm">22:00</b> <b class="code">T10</b> Sleep</span><span class="km" lang="km">គេង។ ដាក់ទូរស័ព្ទឲ្យឆ្ងាយពីគ្រែ។</span></span></label></li>
+    </ul>
+    <p class="sub">Time tracking</p>
+    <ul class="track">
+      <li><span>Working hours</span><input type="number" min="0" max="24" step="0.5" data-note="track-work" placeholder="__"><span>h (plan 8h)</span></li>
+      <li><span>Learning hours</span><input type="number" min="0" max="24" step="0.5" data-note="track-learn" placeholder="__"><span>h (plan 2h)</span></li>
+      <li><span>Deep work hours</span><input type="number" min="0" max="24" step="0.5" data-note="track-deep" placeholder="__"><span>h (plan 4h)</span></li>
+      <li><span>Focus score</span><input type="number" min="0" max="10" step="0.5" data-note="track-focus" placeholder="__"><span>/10</span></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="review" data-weekly="0" style="--c:#5A6C93">
+    <h2>10. END-OF-DAY REVIEW <span class="km" lang="km">ការពិនិត្យចុងថ្ងៃ</span><span class="cnt"></span></h2>
+    <ul class="notes">
+      <li><span>What went well?</span><input type="text" data-note="well" placeholder="-"></li>
+      <li><span>What needs improvement?</span><input type="text" data-note="improve" placeholder="-"></li>
+      <li><span>Tomorrow&#x27;s main priority</span><input type="text" data-note="tomorrow" placeholder="-"></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="goals" data-weekly="1" style="--c:#CD7C2F">
+    <h2>THIS WEEK <span class="km" lang="km">សប្តាហ៍នេះ</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="a1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">A1</b> Up at 5:00 on 5 days</span><span class="km" lang="km">ក្រោកម៉ោង 5:00 យ៉ាងហោចណាស់ 5 ថ្ងៃ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="a2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">A2</b> Run on 5 days</span><span class="km" lang="km">រត់យ៉ាងហោចណាស់ 5 ថ្ងៃ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="a3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">A3</b> Read 100 pages of Second Chance</span><span class="km" lang="km">អាន Second Chance 100 ទំព័រ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="a4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">A4</b> Sunday: 100-word summary</span><span class="km" lang="km">ថ្ងៃអាទិត្យ សរសេរសេចក្តីសង្ខេប 100 ពាក្យ។</span></span></label></li>
     </ul>
   </section>
 </main>
-<footer class="wrap">The same list is in the Telegram bot, so both always match.</footer>
+<footer class="wrap"><p class="foot">DISCIPLINE &gt; MOTIVATION</p><p class="foot">Small progress every day.</p><p>The same dashboard is in the Telegram bot, so both always match. Notes and ticks on this page are saved on this phone only.</p></footer>
 <script>
 (function(){
   function pad(n){return (n<10?'0':'')+n;}
   var d=new Date(), day=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
   var t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())); var dn=t.getUTCDay()||7; t.setUTCDate(t.getUTCDate()+4-dn);
   var y0=new Date(Date.UTC(t.getUTCFullYear(),0,1)), wk=t.getUTCFullYear()+'-W'+pad(Math.ceil(((t-y0)/864e5+1)/7));
-  function key(g,id){return 'todo:'+(g==='daily'?day:wk)+':'+id;}
+  function key(w,id){return 'todo:'+(w?wk:day)+':'+id;}
   function get(k){try{return localStorage.getItem(k)==='1';}catch(e){return false;}}
   function put(k,v){try{v?localStorage.setItem(k,'1'):localStorage.removeItem(k);}catch(e){}}
-  var all=0, done=0;
   function count(){
-    all=0; done=0;
+    var all=0, done=0;
     document.querySelectorAll('.grp').forEach(function(s){
-      var bs=s.querySelectorAll('input'), n=0; bs.forEach(function(b){if(b.checked)n++;});
-      all+=bs.length; done+=n;
+      var bs=s.querySelectorAll('input[type=checkbox]:not([data-ref])'), n=0;
+      if(!bs.length)return;
+      bs.forEach(function(b){if(b.checked)n++;});
+      if(s.dataset.weekly!=='1'){all+=bs.length; done+=n;}
       s.querySelector('.cnt').textContent=n+'/'+bs.length;
-      s.querySelector('.bar span').style.width=(100*n/bs.length)+'%';
+      var bar=s.querySelector('.bar span'); if(bar)bar.style.width=(100*n/bs.length)+'%';
     });
     document.getElementById('totalTxt').textContent=done+'/'+all;
     document.getElementById('totalBar').style.width=(100*done/all)+'%';
+    var p=document.getElementById('prog');
+    if(p)p.textContent='Total tasks:  '+all+'\nCompleted:    '+done+'\nPending:      '+(all-done)+'\nCompletion:   '+Math.round(100*done/all)+'%';
   }
   document.querySelectorAll('.grp').forEach(function(s){
-    var g=s.dataset.group;
-    s.querySelectorAll('input').forEach(function(b){
-      b.checked=get(key(g,b.dataset.id));
-      b.addEventListener('change',function(){put(key(g,b.dataset.id),b.checked);count();});
+    var w=s.dataset.weekly==='1';
+    s.querySelectorAll('input[type=checkbox]').forEach(function(b){
+      b.checked=get(key(w,b.dataset.id));
+      b.addEventListener('change',function(){
+        put(key(w,b.dataset.id),b.checked);
+        document.querySelectorAll('input[data-id="'+b.dataset.id+'"]').forEach(function(o){o.checked=b.checked;});
+        count();
+      });
+    });
+    s.querySelectorAll('input[data-note]').forEach(function(t){
+      var k='todo:'+day+':note:'+t.dataset.note;
+      try{t.value=localStorage.getItem(k)||'';}catch(e){}
+      t.addEventListener('input',function(){try{t.value?localStorage.setItem(k,t.value):localStorage.removeItem(k);}catch(e){}});
     });
   });
   count();

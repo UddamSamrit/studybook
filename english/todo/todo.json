@@ -1,34 +1,118 @@
 {
- "title": "This week: 5 AM, running, Second Chance, English",
- "title_km": "សប្តាហ៍នេះ៖ ក្រោក 5 ព្រឹក រត់ អានសៀវភៅ Second Chance និងភាសាអង់គ្លេស",
- "description": "One simple list for every day, and four goals for the week: wake up at 5:00, run, read Second Chance, and practise English.",
+ "title": "Daily productivity dashboard",
+ "title_km": "ផ្ទាំងការងារប្រចាំថ្ងៃ",
+ "description": "Top 3 priorities, work, learning (the 4 English skills and Second Chance), personal projects, follow-ups, blockers, achievements, a timed plan from 5:00 to 22:00 and an end-of-day review.",
  "order": 0,
+ "goal": "Stay focused and productive",
+ "footer": ["DISCIPLINE > MOTIVATION", "Small progress every day."],
  "groups": [
   {
-   "id": "daily",
-   "title": "Every day",
-   "km": "រៀងរាល់ថ្ងៃ",
-   "color": "#1C2A4A",
+   "id": "priorities", "kind": "priorities", "num": 1, "title": "TOP 3 PRIORITIES", "km": "អាទិភាពកំពូលទាំង 3", "color": "#D7372B",
    "items": [
-    {"id": "d1", "short": "Wake up at 5:00 AM", "en": "Wake up at 5:00 AM. Get out of bed straight away.", "km": "ក្រោកម៉ោង 5:00 ព្រឹក។ ចេញពីគ្រែភ្លាម។"},
-    {"id": "d2", "short": "Run 30 minutes", "en": "Run for 30 minutes at an easy pace.", "km": "រត់ 30 នាទី ក្នុងល្បឿនស្រាល។"},
-    {"id": "d3", "short": "Read Second Chance, 20 pages", "en": "Read 20 pages of Second Chance by Robert Kiyosaki.", "km": "អានសៀវភៅ Second Chance របស់ Robert Kiyosaki 20 ទំព័រ។"},
-    {"id": "d4", "short": "Reading: 5 new words", "en": "Write down 5 new English words from the book, with their Khmer meaning.", "km": "កត់ពាក្យអង់គ្លេសថ្មី 5 ពីសៀវភៅ ជាមួយអត្ថន័យខ្មែរ។"},
-    {"id": "d5", "short": "Listening: 10 minutes", "en": "Listen to 10 minutes of BBC 6 Minute English or VOA Learning English.", "km": "ស្តាប់ BBC 6 Minute English ឬ VOA Learning English 10 នាទី។", "link": "https://www.bbc.co.uk/learningenglish"},
-    {"id": "d6", "short": "Speaking: 1 minute", "en": "Say in English, for 1 minute, what you read today. Record it on your phone.", "km": "និយាយជាភាសាអង់គ្លេស 1 នាទី អំពីអ្វីដែលអ្នកបានអានថ្ងៃនេះ។ ថតទុកក្នុងទូរស័ព្ទ។"},
-    {"id": "d7", "short": "Writing: 3 sentences", "en": "Write 3 English sentences about your day, using today's new words.", "km": "សរសេរប្រយោគអង់គ្លេស 3 អំពីថ្ងៃរបស់អ្នក ដោយប្រើពាក្យថ្មីថ្ងៃនេះ។"}
+    {"id": "p1", "code": "P1", "short": "Most important task", "en": "Your most important task today. Set it with: p1 your task", "km": "ការងារសំខាន់បំផុតថ្ងៃនេះ"},
+    {"id": "p2", "code": "P2", "short": "Second important task", "en": "Your second task. Set it with: p2 your task", "km": "ការងារសំខាន់ទីពីរ"},
+    {"id": "p3", "code": "P3", "short": "Third important task", "en": "Your third task. Set it with: p3 your task", "km": "ការងារសំខាន់ទីបី"}
    ]
   },
   {
-   "id": "goals",
-   "title": "This week",
-   "km": "សប្តាហ៍នេះ",
-   "color": "#D7372B",
+   "id": "work", "kind": "checklist", "num": 2, "title": "WORK AND DEVELOPMENT", "km": "ការងារ និងការអភិវឌ្ឍ", "color": "#0052A4",
    "items": [
-    {"id": "a1", "short": "Up at 5:00 on 5 days", "en": "Wake up at 5:00 AM on at least 5 days this week.", "km": "ក្រោកម៉ោង 5:00 ព្រឹក យ៉ាងហោចណាស់ 5 ថ្ងៃក្នុងសប្តាហ៍នេះ។"},
-    {"id": "a2", "short": "Run on 5 days", "en": "Run on at least 5 days this week.", "km": "រត់យ៉ាងហោចណាស់ 5 ថ្ងៃក្នុងសប្តាហ៍នេះ។"},
-    {"id": "a3", "short": "Read 100 pages", "en": "Read 100 pages of Second Chance this week.", "km": "អានសៀវភៅ Second Chance 100 ទំព័រក្នុងសប្តាហ៍នេះ។"},
-    {"id": "a4", "short": "Sunday: 100-word summary", "en": "On Sunday, write a 100-word summary in English of what you read this week.", "km": "ថ្ងៃអាទិត្យ សរសេរសេចក្តីសង្ខេប 100 ពាក្យជាភាសាអង់គ្លេស អំពីអ្វីដែលអ្នកបានអានក្នុងសប្តាហ៍នេះ។"}
+    {"id": "w1", "short": "Backend development", "en": "Backend development.", "km": "ការអភិវឌ្ឍ backend"},
+    {"id": "w2", "short": "Frontend development", "en": "Frontend development.", "km": "ការអភិវឌ្ឍ frontend"},
+    {"id": "w3", "short": "API / Integration", "en": "API and integration work.", "km": "API និងការភ្ជាប់ប្រព័ន្ធ"},
+    {"id": "w4", "short": "Bug fixing", "en": "Fix bugs.", "km": "ជួសជុល bug"},
+    {"id": "w5", "short": "Code review", "en": "Review your team's code.", "km": "ពិនិត្យកូដរបស់ក្រុម"},
+    {"id": "w6", "short": "Testing and deployment", "en": "Test and deploy.", "km": "តេស្ត និង deploy"}
+   ]
+  },
+  {
+   "id": "learn", "kind": "checklist", "num": 3, "title": "LEARNING AND GROWTH", "km": "ការរៀន និងការរីកចម្រើន", "color": "#00A84D",
+   "items": [
+    {"id": "l1", "short": "English reading: Second Chance, 20 pages, 5 new words", "en": "Read 20 pages of Second Chance and write 5 new words with the Khmer meaning.", "km": "អានសៀវភៅ Second Chance 20 ទំព័រ ហើយសរសេរពាក្យថ្មី 5 ជាមួយអត្ថន័យខ្មែរ។"},
+    {"id": "l2", "short": "English listening: 10 minutes", "en": "Listen to 10 minutes of BBC 6 Minute English or VOA Learning English.", "km": "ស្តាប់ BBC 6 Minute English ឬ VOA 10 នាទី។", "link": "https://www.bbc.co.uk/learningenglish"},
+    {"id": "l3", "short": "English speaking: 1 minute, recorded", "en": "Say in English, for 1 minute, what you read today. Record it.", "km": "និយាយជាភាសាអង់គ្លេស 1 នាទី អំពីអ្វីដែលអ្នកបានអាន ហើយថតទុក។"},
+    {"id": "l4", "short": "English writing: 3 sentences", "en": "Write 3 sentences with today's new words.", "km": "សរសេរប្រយោគ 3 ដោយប្រើពាក្យថ្មីថ្ងៃនេះ។"},
+    {"id": "l5", "short": "Technical learning: one Kubernetes unit", "en": "Study one Kubernetes unit on the studybook.", "km": "រៀនមេរៀន Kubernetes មួយនៅលើ studybook។", "link": "../../kubernetes/"},
+    {"id": "l6", "short": "AI / New technology", "en": "Read or try one new thing about AI or new technology.", "km": "អាន ឬសាកល្បងរឿងថ្មីមួយអំពី AI ឬបច្ចេកវិទ្យាថ្មី។"}
+   ]
+  },
+  {
+   "id": "projects", "kind": "checklist", "num": 4, "title": "PERSONAL PROJECTS", "km": "គម្រោងផ្ទាល់ខ្លួន", "color": "#996CAC",
+   "items": [
+    {"id": "j1", "short": "Studybook", "en": "Work on the studybook site.", "km": "ធ្វើការលើ studybook"},
+    {"id": "j2", "short": "Project 2", "en": "Work on your second project.", "km": "គម្រោងទីពីរ"},
+    {"id": "j3", "short": "Business development", "en": "Business development.", "km": "ការអភិវឌ្ឍអាជីវកម្ម"},
+    {"id": "j4", "short": "Research and innovation", "en": "Research and new ideas.", "km": "ការស្រាវជ្រាវ និងគំនិតថ្មី"}
+   ]
+  },
+  {
+   "id": "pending", "kind": "notes", "num": 5, "title": "FOLLOW-UP / PENDING", "km": "តាមដាន / កំពុងរង់ចាំ", "color": "#5A6C93",
+   "fields": [
+    {"key": "follow", "label": "Follow up with"},
+    {"key": "waiting", "label": "Waiting for"},
+    {"key": "review", "label": "Need to review"}
+   ]
+  },
+  {
+   "id": "blockers", "kind": "notes", "num": 6, "title": "BLOCKERS / CHALLENGES", "km": "ឧបសគ្គ / បញ្ហា", "color": "#5A6C93",
+   "fields": [
+    {"key": "issue", "label": "Issue"},
+    {"key": "reason", "label": "Reason"},
+    {"key": "next", "label": "Next action"}
+   ]
+  },
+  {
+   "id": "wins", "kind": "list", "num": 7, "title": "TODAY'S ACHIEVEMENTS", "km": "សមិទ្ធផលថ្ងៃនេះ", "color": "#5A6C93",
+   "key": "win", "slots": 3
+  },
+  {
+   "id": "progress", "kind": "progress", "num": 8, "title": "DAILY PROGRESS", "km": "វឌ្ឍនភាពប្រចាំថ្ងៃ"
+  },
+  {
+   "id": "schedule", "kind": "schedule", "num": 9, "title": "TIME MANAGEMENT", "km": "ការគ្រប់គ្រងពេលវេលា", "color": "#1C2A4A",
+   "sections": [
+    {"id": "morning", "title": "Morning", "range": "05:00 - 12:00"},
+    {"id": "afternoon", "title": "Afternoon", "range": "12:00 - 18:00"},
+    {"id": "evening", "title": "Evening", "range": "18:00 - 22:00"}
+   ],
+   "items": [
+    {"id": "t1", "code": "T1", "section": "morning", "time": "05:00", "short": "Wake up", "en": "Wake up at 5:00. Get out of bed straight away.", "km": "ក្រោកម៉ោង 5:00។"},
+    {"id": "t2", "code": "T2", "section": "morning", "time": "05:15", "short": "Run 30 minutes", "en": "Run for 30 minutes at an easy pace.", "km": "រត់ 30 នាទី។"},
+    {"id": "t3", "code": "T3", "section": "morning", "time": "06:00", "short": "Shower / Breakfast", "en": "Shower and eat breakfast.", "km": "ងូតទឹក និងញ៉ាំអាហារពេលព្រឹក។"},
+    {"ref": "l1", "section": "morning", "time": "06:30"},
+    {"ref": "l2", "section": "morning", "time": "07:15"},
+    {"id": "t4", "code": "T4", "section": "morning", "time": "08:00", "short": "Start work: P1 first", "en": "Start work with your first priority.", "km": "ចាប់ផ្តើមការងារជាមួយអាទិភាពទីមួយ។"},
+    {"id": "t5", "code": "T5", "section": "afternoon", "time": "12:00", "short": "Lunch / Break", "en": "Lunch and a real break.", "km": "អាហារថ្ងៃត្រង់ និងសម្រាក។"},
+    {"id": "t6", "code": "T6", "section": "afternoon", "time": "13:00", "short": "Deep work: development", "en": "Deep development work. No chat, no phone.", "km": "ការងារអភិវឌ្ឍដោយផ្តោតអារម្មណ៍។"},
+    {"id": "t7", "code": "T7", "section": "afternoon", "time": "17:00", "short": "Review daily progress", "en": "Look at what you finished and log your hours.", "km": "ពិនិត្យអ្វីដែលបានធ្វើ ហើយកត់ម៉ោង។"},
+    {"id": "t8", "code": "T8", "section": "evening", "time": "20:00", "short": "Personal projects", "en": "Work on a personal project.", "km": "ធ្វើគម្រោងផ្ទាល់ខ្លួន។"},
+    {"ref": "l3", "section": "evening", "time": "21:00"},
+    {"ref": "l4", "section": "evening", "time": "21:15"},
+    {"id": "t9", "code": "T9", "section": "evening", "time": "21:30", "short": "Review the day, plan tomorrow", "en": "Write the end-of-day review and put your running clothes out.", "km": "សរសេរការពិនិត្យថ្ងៃ ហើយរៀបចំសម្លៀកបំពាក់រត់។"},
+    {"id": "t10", "code": "T10", "section": "evening", "time": "22:00", "short": "Sleep", "en": "Sleep. Phone away from the bed.", "km": "គេង។ ដាក់ទូរស័ព្ទឲ្យឆ្ងាយពីគ្រែ។"}
+   ],
+   "tracking": [
+    {"key": "work", "label": "Working hours", "unit": "h", "plan": 8},
+    {"key": "learn", "label": "Learning hours", "unit": "h", "plan": 2},
+    {"key": "deep", "label": "Deep work hours", "unit": "h", "plan": 4},
+    {"key": "focus", "label": "Focus score", "unit": "/10"}
+   ]
+  },
+  {
+   "id": "review", "kind": "notes", "num": 10, "title": "END-OF-DAY REVIEW", "km": "ការពិនិត្យចុងថ្ងៃ", "color": "#5A6C93",
+   "fields": [
+    {"key": "well", "label": "What went well?"},
+    {"key": "improve", "label": "What needs improvement?"},
+    {"key": "tomorrow", "label": "Tomorrow's main priority"}
+   ]
+  },
+  {
+   "id": "goals", "kind": "checklist", "weekly": true, "title": "THIS WEEK", "km": "សប្តាហ៍នេះ", "color": "#CD7C2F",
+   "items": [
+    {"id": "a1", "short": "Up at 5:00 on 5 days", "en": "Wake up at 5:00 on at least 5 days this week.", "km": "ក្រោកម៉ោង 5:00 យ៉ាងហោចណាស់ 5 ថ្ងៃ។"},
+    {"id": "a2", "short": "Run on 5 days", "en": "Run on at least 5 days this week.", "km": "រត់យ៉ាងហោចណាស់ 5 ថ្ងៃ។"},
+    {"id": "a3", "short": "Read 100 pages of Second Chance", "en": "Read 100 pages of Second Chance this week.", "km": "អាន Second Chance 100 ទំព័រ។"},
+    {"id": "a4", "short": "Sunday: 100-word summary", "en": "On Sunday, write a 100-word summary in English of what you read.", "km": "ថ្ងៃអាទិត្យ សរសេរសេចក្តីសង្ខេប 100 ពាក្យ។"}
    ]
   }
  ]
