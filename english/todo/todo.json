@@ -1,21 +1,120 @@
 {
- "title": "English to-do list",
- "title_km": "បញ្ជីការងាររៀនភាសាអង់គ្លេស",
- "description": "What to practise every day and every week: the 4 skills, work English, interview English, grammar and words.",
+ "title": "This week: 5 AM, running, Second Chance, English",
+ "title_km": "សប្តាហ៍នេះ៖ ក្រោក 5 ព្រឹក រត់ អានសៀវភៅ Second Chance និងភាសាអង់គ្លេស",
+ "description": "This week's focus: wake up at 5:00, run, read Second Chance by Robert Kiyosaki, and practise the 4 English skills every day.",
  "order": 0,
  "groups": [
   {
    "id": "daily",
-   "title": "Every day · 30 minutes",
-   "km": "រៀងរាល់ថ្ងៃ · 30 នាទី",
+   "title": "Every day",
+   "km": "រៀងរាល់ថ្ងៃ",
    "color": "#1C2A4A",
    "items": [
-    {"id": "d1", "en": "Study one studybook unit for 15 minutes: cards, then Hide, then Q&A.", "km": "រៀនមេរៀនមួយ 15 នាទី៖ កាត → Hide → Q&A។", "link": "../speaking/introducing-yourself/"},
-    {"id": "d2", "en": "Learn 5 new words and make one sentence with each.", "km": "រៀនពាក្យថ្មី 5 ហើយបង្កើតប្រយោគមួយសម្រាប់ពាក្យនីមួយៗ។"},
-    {"id": "d3", "en": "Listen to one VOA Learning English story and read its text.", "km": "ស្តាប់រឿងមួយពី VOA Learning English ហើយអានអត្ថបទ។", "link": "https://learningenglish.voanews.com/"},
-    {"id": "d4", "en": "Look up one hard word on YouGlish and hear three people say it.", "km": "រកពាក្យពិបាកមួយលើ YouGlish ហើយស្តាប់មនុស្សបីនាក់និយាយវា។", "link": "https://youglish.com/"},
-    {"id": "d5", "en": "Write your stand-up update in English: yesterday, today, blockers.", "km": "សរសេរ stand-up ជាភាសាអង់គ្លេស៖ ម្សិលមិញ ថ្ងៃនេះ និងបញ្ហា។"}
-   ]
+    {
+     "id": "d1",
+     "en": "Wake up at 5:00 AM. Feet on the floor, no snooze.",
+     "km": "ក្រោកម៉ោង 5:00 ព្រឹក។ ជើងដល់ដី កុំចុច snooze។",
+     "short": "Wake up 5:00 AM"
+    },
+    {
+     "id": "d2",
+     "en": "Run for 25 minutes at an easy pace, where you can still talk.",
+     "km": "រត់ 25 នាទី ក្នុងល្បឿនស្រាល ដែលអ្នកនៅតែអាចនិយាយបាន។",
+     "short": "Run 25 min"
+    },
+    {
+     "id": "d3",
+     "en": "Read Second Chance for 30 minutes, about 20 pages.",
+     "km": "អានសៀវភៅ Second Chance 30 នាទី ប្រហែល 20 ទំព័រ។",
+     "short": "Read Second Chance · 30 min"
+    },
+    {
+     "id": "d4",
+     "en": "Reading: write 5 new English words from the book, with the Khmer meaning.",
+     "km": "ការអាន៖ សរសេរពាក្យអង់គ្លេសថ្មី 5 ពីសៀវភៅ ជាមួយអត្ថន័យខ្មែរ។",
+     "short": "5 new words"
+    },
+    {
+     "id": "d5",
+     "en": "Listening: 10 minutes of VOA Learning English or BBC 6 Minute English.",
+     "km": "ការស្តាប់៖ 10 នាទីជាមួយ VOA Learning English ឬ BBC 6 Minute English។",
+     "link": "https://www.bbc.co.uk/learningenglish",
+     "short": "Listen 10 min"
+    },
+    {
+     "id": "d6",
+     "en": "Speaking: say in English, for one minute, what you read today. Record it.",
+     "km": "ការនិយាយ៖ និយាយជាភាសាអង់គ្លេសមួយនាទី អំពីអ្វីដែលអ្នកបានអានថ្ងៃនេះ។ ថតសំឡេងទុក។",
+     "short": "Speak 1 min · record"
+    },
+    {
+     "id": "d7",
+     "en": "Writing: write 3 English sentences about today: your run, your reading, one lesson.",
+     "km": "ការសរសេរ៖ សរសេរប្រយោគអង់គ្លេស 3 អំពីថ្ងៃនេះ៖ ការរត់ ការអាន និងមេរៀនមួយ។",
+     "short": "Write 3 sentences"
+    }
+   ],
+   "icon": "☀️"
+  },
+  {
+   "id": "goals",
+   "title": "Week goals",
+   "km": "គោលដៅសប្តាហ៍",
+   "color": "#D7372B",
+   "items": [
+    {
+     "id": "a1",
+     "en": "Wake up at 5:00 on at least 5 days this week.",
+     "km": "ក្រោកម៉ោង 5:00 យ៉ាងហោចណាស់ 5 ថ្ងៃក្នុងសប្តាហ៍នេះ។",
+     "short": "5 AM on 5 days"
+    },
+    {
+     "id": "a2",
+     "en": "Run at least 5 times, about 15 km in total.",
+     "km": "រត់យ៉ាងហោចណាស់ 5 ដង សរុបប្រហែល 15 គីឡូម៉ែត្រ។",
+     "short": "Run 5× · 15 km"
+    },
+    {
+     "id": "a3",
+     "en": "Read about 100 pages of Second Chance.",
+     "km": "អានសៀវភៅ Second Chance ប្រហែល 100 ទំព័រ។",
+     "short": "Read 100 pages"
+    },
+    {
+     "id": "a4",
+     "en": "Do the English tasks (4 to 7) on at least 5 days.",
+     "km": "ធ្វើកិច្ចការភាសាអង់គ្លេស (4 ដល់ 7) យ៉ាងហោចណាស់ 5 ថ្ងៃ។",
+     "short": "English 5 days"
+    }
+   ],
+   "icon": "🎯"
+  },
+  {
+   "id": "habits",
+   "title": "Make 5 AM easy",
+   "km": "ធ្វើឲ្យការក្រោក 5 ព្រឹកងាយស្រួល",
+   "color": "#996CAC",
+   "items": [
+    {
+     "id": "h1",
+     "en": "Be in bed by 10:00 PM on at least 5 nights.",
+     "km": "ចូលគេងមុនម៉ោង 10:00 យប់ យ៉ាងហោចណាស់ 5 យប់។",
+     "short": "Bed by 10 PM · 5 nights"
+    },
+    {
+     "id": "h2",
+     "en": "Put your running clothes and shoes out the night before.",
+     "km": "រៀបចំសម្លៀកបំពាក់ និងស្បែកជើងរត់ តាំងពីយប់មុន។",
+     "short": "Clothes ready at night"
+    },
+    {
+     "id": "h3",
+     "en": "Put your phone away from the bed, so you must stand up to stop the alarm.",
+     "km": "ដាក់ទូរស័ព្ទឲ្យឆ្ងាយពីគ្រែ ដើម្បីឲ្យអ្នកត្រូវក្រោកឈរ ទើបបិទម៉ោងរោទិ៍បាន។",
+     "short": "Phone away from bed"
+    }
+   ],
+   "icon": "🌙"
   },
   {
    "id": "reading",
@@ -23,10 +122,27 @@
    "km": "ការអាន",
    "color": "#0052A4",
    "items": [
-    {"id": "r1", "en": "Read three VOA stories this week and note five new words from each.", "km": "អានរឿង VOA បីក្នុងសប្តាហ៍នេះ ហើយកត់ពាក្យថ្មីប្រាំពីរឿងនីមួយៗ។", "link": "https://learningenglish.voanews.com/"},
-    {"id": "r2", "en": "Read one page of the Kubernetes docs in English, then the matching studybook unit.", "km": "អានឯកសារ Kubernetes មួយទំព័រជាភាសាអង់គ្លេស រួចរៀនមេរៀនដែលត្រូវគ្នា។", "link": "../../kubernetes/"},
-    {"id": "r3", "en": "Read one pull request or design doc from your team and summarise it in two sentences.", "km": "អាន pull request ឬឯកសាររចនាមួយពីក្រុម ហើយសង្ខេបវាជាពីរប្រយោគ។"}
-   ]
+    {
+     "id": "r1",
+     "en": "Collect 30 new words from Second Chance in one list.",
+     "km": "ប្រមូលពាក្យថ្មី 30 ពីសៀវភៅ Second Chance ក្នុងបញ្ជីមួយ។",
+     "short": "30 new words"
+    },
+    {
+     "id": "r2",
+     "en": "Write the big idea of each chapter you finish in one English sentence.",
+     "km": "សរសេរគំនិតធំនៃជំពូកនីមួយៗដែលអ្នកអានចប់ ជាប្រយោគអង់គ្លេសមួយ។",
+     "short": "1 line per chapter"
+    },
+    {
+     "id": "r3",
+     "en": "Read one VOA Learning English story about money or business.",
+     "km": "អានរឿង VOA Learning English មួយអំពីលុយ ឬអាជីវកម្ម។",
+     "link": "https://learningenglish.voanews.com/",
+     "short": "VOA money story"
+    }
+   ],
+   "icon": "📖"
   },
   {
    "id": "listening",
@@ -34,68 +150,83 @@
    "km": "ការស្តាប់",
    "color": "#00A84D",
    "items": [
-    {"id": "l1", "en": "Listen to two BBC 6 Minute English episodes this week.", "km": "ស្តាប់ BBC 6 Minute English ពីរភាគក្នុងសប្តាហ៍នេះ។", "link": "https://www.bbc.co.uk/learningenglish"},
-    {"id": "l2", "en": "Play a whole Kubernetes unit with Play all, without reading the text.", "km": "ចាក់មេរៀន Kubernetes ទាំងមូលដោយ Play all ដោយមិនមើលអត្ថបទ។", "link": "../../kubernetes/01-containers/"},
-    {"id": "l3", "en": "Watch one tech talk with English subtitles, then again without them.", "km": "មើលការបង្ហាញបច្ចេកវិទ្យាមួយជាមួយ subtitle អង់គ្លេស រួចមើលម្តងទៀតដោយគ្មាន subtitle។"}
-   ]
+    {
+     "id": "l1",
+     "en": "Listen to two BBC 6 Minute English episodes.",
+     "km": "ស្តាប់ BBC 6 Minute English ពីរភាគ។",
+     "link": "https://www.bbc.co.uk/learningenglish",
+     "short": "2× BBC 6 Minute"
+    },
+    {
+     "id": "l2",
+     "en": "Watch one Robert Kiyosaki interview with English subtitles, then again without.",
+     "km": "មើលបទសម្ភាសន៍ Robert Kiyosaki មួយជាមួយ subtitle អង់គ្លេស រួចមើលម្តងទៀតដោយគ្មាន subtitle។",
+     "short": "Kiyosaki interview"
+    },
+    {
+     "id": "l3",
+     "en": "Hear three of your new words on YouGlish.",
+     "km": "ស្តាប់ពាក្យថ្មីបីរបស់អ្នកនៅលើ YouGlish។",
+     "link": "https://youglish.com/",
+     "short": "3 words on YouGlish"
+    }
+   ],
+   "icon": "🎧"
   },
   {
    "id": "speaking",
    "title": "Speaking",
    "km": "ការនិយាយ",
-   "color": "#996CAC",
+   "color": "#EF7C1C",
    "items": [
-    {"id": "s1", "en": "Say all ten Introducing yourself cards without looking.", "km": "និយាយកាត Introducing yourself ទាំងដប់ដោយមិនមើល។", "link": "../speaking/introducing-yourself/"},
-    {"id": "s2", "en": "Explain one Kubernetes idea in one minute, like pods or deployments.", "km": "ពន្យល់គំនិត Kubernetes មួយក្នុងមួយនាទី ដូចជា pod ឬ deployment។", "link": "../../kubernetes/"},
-    {"id": "s3", "en": "Record yourself for one minute, listen back, and fix one thing.", "km": "ថតសំឡេងខ្លួនឯងមួយនាទី ស្តាប់វិញ ហើយកែចំណុចមួយ។"}
-   ]
+    {
+     "id": "s1",
+     "en": "Explain three lessons from Second Chance in English to a friend, or record it.",
+     "km": "ពន្យល់មេរៀនបីពីសៀវភៅ Second Chance ជាភាសាអង់គ្លេសដល់មិត្ត ឬថតសំឡេងទុក។",
+     "short": "Explain 3 lessons"
+    },
+    {
+     "id": "s2",
+     "en": "Listen back to one of your recordings and fix one sound or word.",
+     "km": "ស្តាប់សំឡេងដែលអ្នកបានថតមួយ ហើយកែសំឡេង ឬពាក្យមួយ។",
+     "short": "Fix one sound"
+    },
+    {
+     "id": "s3",
+     "en": "Say all ten Introducing yourself cards without looking.",
+     "km": "និយាយកាត Introducing yourself ទាំងដប់ដោយមិនមើល។",
+     "link": "../speaking/introducing-yourself/",
+     "short": "Introducing yourself"
+    }
+   ],
+   "icon": "🗣"
   },
   {
    "id": "writing",
    "title": "Writing",
    "km": "ការសរសេរ",
-   "color": "#EF7C1C",
-   "items": [
-    {"id": "w1", "en": "Write one short work email: ask a teammate to review your pull request.", "km": "សរសេរអ៊ីមែលការងារខ្លីមួយ៖ សុំឲ្យមិត្តរួមក្រុម review pull request របស់អ្នក។"},
-    {"id": "w2", "en": "Write your pull request descriptions in English: what, why and how to test.", "km": "សរសេរការពិពណ៌នា pull request ជាភាសាអង់គ្លេស៖ អ្វី ហេតុអ្វី និងរបៀបតេស្ត។"},
-    {"id": "w3", "en": "Write three sentences with this week's new words.", "km": "សរសេរប្រយោគបីដោយប្រើពាក្យថ្មីប្រចាំសប្តាហ៍។"}
-   ]
-  },
-  {
-   "id": "work",
-   "title": "Work English",
-   "km": "ភាសាអង់គ្លេសសម្រាប់ការងារ",
    "color": "#CD7C2F",
    "items": [
-    {"id": "k1", "en": "Learn ten meeting phrases, like Could you clarify that? and Let me share my screen.", "km": "រៀនឃ្លាប្រជុំដប់ ដូចជា Could you clarify that? និង Let me share my screen។"},
-    {"id": "k2", "en": "Speak once in English in a meeting, even one sentence.", "km": "និយាយជាភាសាអង់គ្លេសម្តងក្នុងការប្រជុំ ទោះប្រយោគតែមួយក៏ដោយ។"},
-    {"id": "k3", "en": "Explain a bug you fixed to a teammate in English: cause, fix and test.", "km": "ពន្យល់ bug ដែលអ្នកបានជួសជុលដល់មិត្តរួមក្រុមជាភាសាអង់គ្លេស៖ មូលហេតុ ការជួសជុល និងការតេស្ត។"}
-   ]
-  },
-  {
-   "id": "interview",
-   "title": "Interview English",
-   "km": "ភាសាអង់គ្លេសសម្រាប់សម្ភាសន៍",
-   "color": "#D7372B",
-   "items": [
-    {"id": "i1", "en": "Practise Tell me about yourself in ninety seconds, twice a week.", "km": "ហាត់ Tell me about yourself ក្នុងកៅសិបវិនាទី ពីរដងក្នុងមួយសប្តាហ៍។"},
-    {"id": "i2", "en": "Prepare three STAR stories: a hard problem, a disagreement and a mistake.", "km": "រៀបចំរឿង STAR បី៖ បញ្ហាពិបាក ការមិនយល់ស្រប និងកំហុស។"},
-    {"id": "i3", "en": "Talk through one system design out loud: a prepaid top-up platform.", "km": "ពន្យល់ system design មួយដោយនិយាយឮៗ៖ platform បញ្ចូលលុយ prepaid។"},
-    {"id": "i4", "en": "Do one mock interview with a friend or with Claude.", "km": "ធ្វើការសម្ភាសន៍សាកល្បងមួយជាមួយមិត្ត ឬជាមួយ Claude។"}
-   ]
-  },
-  {
-   "id": "grammar",
-   "title": "Grammar and words",
-   "km": "វេយ្យាករណ៍ និងពាក្យ",
-   "color": "#5A6C93",
-   "items": [
-    {"id": "g1", "en": "Fix I am work: say I work, or I'm a developer.", "km": "កែ I am work៖ និយាយ I work ឬ I'm a developer។"},
-    {"id": "g2", "en": "Use the past for yesterday: I fixed, I went, I had.", "km": "ប្រើអតីតកាលសម្រាប់ម្សិលមិញ៖ I fixed, I went, I had។"},
-    {"id": "g3", "en": "Add -s for he, she and it: she works, it runs.", "km": "បន្ថែម -s សម្រាប់ he, she និង it៖ she works, it runs។"},
-    {"id": "g4", "en": "Use a and the: a pod (any one), the pod (the one we know).", "km": "ប្រើ a និង the៖ a pod (មួយណាក៏បាន) the pod (មួយដែលយើងស្គាល់)។"},
-    {"id": "g5", "en": "Reach 150 new words this month: five a day.", "km": "ឲ្យដល់ពាក្យថ្មី 150 ក្នុងខែនេះ៖ ប្រាំក្នុងមួយថ្ងៃ។"}
-   ]
+    {
+     "id": "w1",
+     "en": "Write a 100-word summary of what you read this week.",
+     "km": "សរសេរសេចក្តីសង្ខេប 100 ពាក្យ អំពីអ្វីដែលអ្នកបានអានក្នុងសប្តាហ៍នេះ។",
+     "short": "100-word summary"
+    },
+    {
+     "id": "w2",
+     "en": "Use five of this week's new words in five sentences.",
+     "km": "ប្រើពាក្យថ្មីប្រាំក្នុងសប្តាហ៍នេះ ក្នុងប្រយោគប្រាំ។",
+     "short": "5 words · 5 sentences"
+    },
+    {
+     "id": "w3",
+     "en": "Sunday review in English: what went well, what was hard, what to change.",
+     "km": "ការពិនិត្យថ្ងៃអាទិត្យជាភាសាអង់គ្លេស៖ អ្វីដែលល្អ អ្វីដែលពិបាក និងអ្វីដែលត្រូវកែ។",
+     "short": "Sunday review"
+    }
+   ],
+   "icon": "✍️"
   }
  ]
 }
