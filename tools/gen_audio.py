@@ -72,10 +72,10 @@ def main():
                 os.makedirs(os.path.dirname(out), exist_ok=True)
                 said = text if keep_apostrophe else text.replace("'", '')
                 for attempt in range(8):  # the free voice service drops some requests; try again
-                    try:
-                        await edge_tts.Communicate(said, voice, rate='-5%').save(out)
+                    try:  # a request that never answers must not hang the whole run: 60 s per clip, then retry
+                        await asyncio.wait_for(edge_tts.Communicate(said, voice, rate='-5%').save(out), timeout=60)
                         return
-                    except edge_tts.exceptions.NoAudioReceived:
+                    except (edge_tts.exceptions.NoAudioReceived, asyncio.TimeoutError):
                         await asyncio.sleep(1.5 * (attempt + 1))
                 raise RuntimeError(f'no audio after 8 tries: {text!r}')
         await asyncio.gather(*(one(t, o) for t, o in todo))
