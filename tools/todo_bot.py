@@ -130,18 +130,27 @@ def my_tasks(day=None):
     return [{'id': f'x{i}', 'code': f'X{i}', 'short': t, 'en': t, 'km': '', 'group': 'priorities', 'mine': True} for i, t in rows]
 
 
-def tasks(g):
-    """The tickable tasks of a group (schedule lines that point elsewhere are not counted twice)."""
+def is_weekend(day=None):
+    return (day or now().date()).weekday() >= 5
+
+
+def active(it, g=None, day=None):
+    """Office-work tasks ("weekdays": true on the task or its group) only count Monday to Friday."""
+    return not (is_weekend(day) and (it.get('weekdays') or (g or {}).get('weekdays')))
+
+
+def tasks(g, day=None):
+    """The tickable tasks of a group for that day (schedule lines that point elsewhere are not counted twice)."""
     own = my_tasks() if g.get('kind') == 'priorities' else []
-    return [it for it in g.get('items', []) if 'id' in it] + own
+    return [it for it in g.get('items', []) if 'id' in it and active(it, g, day)] + own
 
 
 def find_item(item_id):
     return todo()['_items'].get(item_id) or next((it for it in my_tasks() if it['id'] == item_id), None)
 
 
-def daily_tasks():
-    return [it for g in groups() if not g.get('weekly') for it in tasks(g)]
+def daily_tasks(day=None):
+    return [it for g in groups() if not g.get('weekly') for it in tasks(g, day)]
 
 
 def weekly_tasks():
@@ -272,7 +281,7 @@ def track_lines(day):
 
 
 def counts(day=None):
-    sts = [status(it, day) for it in daily_tasks()]
+    sts = [status(it, day) for it in daily_tasks(day)]
     return len(sts), sts.count(DONE), sts.count(DOING)
 
 
@@ -286,6 +295,8 @@ def section(g):
     k = g.get('kind')
     head = f'<b>{g["num"]}. {esc(g["title"])}</b>' if g.get('num') else f'<b>{esc(g["title"])}</b>'
     if k in ('priorities', 'checklist'):
+        if g.get('weekdays') and is_weekend():
+            return [head, esc(g.get('weekend_note', 'Weekend: nothing here today.'))]
         if g.get('weekly'):
             ws, we = week_range()
             head += f' ({ws:%d %b} - {we:%d %b})'
@@ -310,7 +321,7 @@ def section(g):
         out = [head]
         for sec in g['sections']:
             out.append(f'<i>{esc(sec["title"])} ({esc(sec["range"])})</i>')
-            out += [task_line(it, it.get('time', '') + '  ') for it in g['items'] if it.get('section') == sec['id']]
+            out += [task_line(it, it.get('time', '') + '  ') for it in g['items'] if it.get('section') == sec['id'] and active(it, g)]
         if g.get('tracking'):
             out += ['<i>Time tracking</i>'] + track_lines(today_iso())
         return out
