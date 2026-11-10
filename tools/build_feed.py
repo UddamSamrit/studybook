@@ -52,7 +52,7 @@ def content(u):
 
 
 units = [json.load(io.open(p, encoding='utf-8')) for p in glob.glob(os.path.join(ROOT, '*', 'unit.json'))]
-units.sort(key=lambda u: u.get('published', ''), reverse=True)
+units.sort(key=lambda u: (u.get('published', ''), u.get('order', 0), u.get('slug', '')), reverse=True)
 date = lambda u: format_datetime(datetime.strptime(u.get('published', '2026-01-01'), '%Y-%m-%d').replace(hour=12, tzinfo=timezone.utc))
 items = []
 for u in units:

@@ -1,6 +1,6 @@
 {
  "slug": "kubernetes-basics",
- "title_ko": "Kubernetes basics",
+ "title_ko": "K8s 0 · Kubernetes basics",
  "title_en": "មូលដ្ឋាន Kubernetes",
  "subtitle": "និយាយអំពី Kubernetes ជាភាសាអង់គ្លេស នៅកន្លែងធ្វើការ",
  "description": "Talk about Kubernetes in English at work: containers, clusters, pods, deployments and fixing problems. Picture cards with native audio, Q&A and 18 words, with Khmer translations.",
@@ -423,5 +423,7 @@
    "en": "ចាំខ្ញុំពិនិត្យ log របស់ pod សិន។ កំណែថ្មីមានបញ្ហា ដូច្នេះខ្ញុំបាន rollback វាវិញ។"
   }
  ],
- "published": "2026-11-10"
+ "published": "2026-11-10",
+ "order": 0,
+ "station_en": "Step 0 of 11 · និយាយអំពី Kubernetes ជាភាសាអង់គ្លេស នៅកន្លែងធ្វើការ"
 }

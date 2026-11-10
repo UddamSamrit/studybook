@@ -37,7 +37,7 @@ def main():
     for p in glob.glob(os.path.join(ROOT, '*', 'unit.json')):
         u = json.load(io.open(p, encoding='utf-8'))
         units.append(u)
-    units.sort(key=lambda u: u.get('published', ''))
+    units.sort(key=lambda u: (u.get('published', ''), u.get('order', 0), u.get('slug', '')))
     stops = []
     for i, u in enumerate(units):
         cards = len(u['cards'])

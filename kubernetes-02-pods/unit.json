@@ -1,0 +1,346 @@
+{
+ "slug": "kubernetes-02-pods",
+ "order": 2,
+ "title_ko": "K8s 2 · Pods and kubectl",
+ "title_en": "Pod និង kubectl",
+ "subtitle": "ផ្នែកនៃ cluster និងរបៀបនិយាយជាមួយវា",
+ "description": "Kubernetes zero to hero, step 2 of 11: Pods and kubectl. Picture cards with native audio, Q&A and 13 words, with Khmer translations.",
+ "station_en": "Step 2 of 11 · ផ្នែកនៃ cluster និងរបៀបនិយាយជាមួយវា",
+ "sections": [
+  {
+   "id": "parts",
+   "ko": "Cluster parts",
+   "en": "ផ្នែកនៃ cluster",
+   "color": "#0052A4"
+  },
+  {
+   "id": "kubectl",
+   "ko": "kubectl",
+   "en": "kubectl",
+   "color": "#00A84D"
+  },
+  {
+   "id": "life",
+   "ko": "Pod life",
+   "en": "ជីវិតរបស់ pod",
+   "color": "#996CAC"
+  },
+  {
+   "id": "debug",
+   "ko": "Debug",
+   "en": "រកបញ្ហា",
+   "color": "#EF7C1C"
+  }
+ ],
+ "spine": {
+  "title": "Line map · Pods and kubectl",
+  "note": "តាមលំដាប់៖ ផ្នែកនៃ cluster → kubectl → pod ចាប់ផ្តើម → រកបញ្ហា។"
+ },
+ "explain": {
+  "title": "The big picture · រូបភាពរួម",
+  "why": "Cluster មានខួរក្បាល (control plane) និងកម្មករ (worker node)។ យើងប្រើ kubectl ដើម្បីបញ្ជាវា។",
+  "tiles": [
+   {
+    "img": "img/c01.svg",
+    "ko": "Control plane",
+    "en": "ខួរក្បាល",
+    "color": "#0052A4"
+   },
+   {
+    "img": "img/c02.svg",
+    "ko": "Worker nodes",
+    "en": "កម្មករ",
+    "color": "#0052A4"
+   },
+   {
+    "img": "img/c04.svg",
+    "ko": "kubectl",
+    "en": "ឧបករណ៍បញ្ជា",
+    "color": "#00A84D"
+   },
+   {
+    "img": "img/c07.svg",
+    "ko": "Status",
+    "en": "Pending → Running",
+    "color": "#996CAC"
+   }
+  ]
+ },
+ "cards": [
+  {
+   "sec": "parts",
+   "img": "img/c01.svg",
+   "flat": true,
+   "alt": "Two gears turning together",
+   "hook": "brain",
+   "ko": "The control plane is the brain of the cluster.",
+   "en": "Control plane គឺជាខួរក្បាលរបស់ cluster។",
+   "audio": "audio/c01.mp3"
+  },
+  {
+   "sec": "parts",
+   "img": "img/c02.svg",
+   "flat": true,
+   "alt": "Three servers, each with a container",
+   "hook": "workers",
+   "ko": "Worker nodes do the real work. They run the pods.",
+   "en": "Worker node ធ្វើការងារពិតប្រាកដ។ វាដំណើរការ pod។",
+   "audio": "audio/c02.mp3"
+  },
+  {
+   "sec": "parts",
+   "img": "img/c03.svg",
+   "flat": true,
+   "alt": "One pod with arrows to two servers",
+   "hook": "scheduler",
+   "ko": "The scheduler decides which node runs each pod.",
+   "en": "Scheduler សម្រេចថា node មួយណាដំណើរការ pod នីមួយៗ។",
+   "audio": "audio/c03.mp3"
+  },
+  {
+   "sec": "kubectl",
+   "img": "img/c04.svg",
+   "flat": true,
+   "alt": "A terminal sending a command to a gear",
+   "hook": "kubectl",
+   "ko": "We talk to the cluster with a tool called kubectl.",
+   "en": "យើងនិយាយជាមួយ cluster ដោយប្រើឧបករណ៍មួយឈ្មោះ kubectl។",
+   "audio": "audio/c04.mp3"
+  },
+  {
+   "sec": "kubectl",
+   "img": "img/c05.svg",
+   "flat": true,
+   "alt": "A list of pods, each marked Running",
+   "hook": "get pods",
+   "ko": "kubectl get pods shows every pod and its status.",
+   "en": "kubectl get pods បង្ហាញ pod ទាំងអស់ និងស្ថានភាពរបស់វា។",
+   "audio": "audio/c05.mp3"
+  },
+  {
+   "sec": "kubectl",
+   "img": "img/c06.svg",
+   "flat": true,
+   "alt": "A YAML file sent to the servers",
+   "hook": "apply",
+   "ko": "kubectl apply sends our YAML file to the cluster.",
+   "en": "kubectl apply បញ្ជូនឯកសារ YAML របស់យើងទៅ cluster។",
+   "audio": "audio/c06.mp3"
+  },
+  {
+   "sec": "life",
+   "img": "img/c07.svg",
+   "flat": true,
+   "alt": "Pending changing to Running",
+   "hook": "Pending",
+   "ko": "A new pod starts as Pending, then becomes Running.",
+   "en": "Pod ថ្មីចាប់ផ្តើមជា Pending បន្ទាប់មកក្លាយជា Running។",
+   "audio": "audio/c07.mp3"
+  },
+  {
+   "sec": "debug",
+   "img": "img/c08.svg",
+   "flat": true,
+   "alt": "A magnifying glass over a grey container",
+   "hook": "describe",
+   "ko": "kubectl describe pod tells us why a pod is stuck.",
+   "en": "kubectl describe pod ប្រាប់យើងថា ហេតុអ្វី pod ជាប់គាំង។",
+   "audio": "audio/c08.mp3"
+  },
+  {
+   "sec": "debug",
+   "img": "img/c09.svg",
+   "flat": true,
+   "alt": "Lines of text with one red line and a magnifier",
+   "hook": "logs",
+   "ko": "kubectl logs shows what the app printed.",
+   "en": "kubectl logs បង្ហាញអ្វីដែលកម្មវិធីបាន print ចេញ។",
+   "audio": "audio/c09.mp3"
+  }
+ ],
+ "qa": [
+  {
+   "title": "Traps · កំហុសដែលងាយធ្វើ",
+   "small": "អានមុនគេ",
+   "kind": "trap",
+   "items": [
+    {
+     "q": "Should I create pods directly?",
+     "qen": "គួរបង្កើត pod ដោយផ្ទាល់ទេ?",
+     "qaudio": "audio/qt1.mp3",
+     "a": "Usually no. Let a deployment create them, so they come back if they die.",
+     "aen": "ជាធម្មតា មិនគួរទេ។ ឲ្យ deployment បង្កើតវា ដើម្បីឲ្យវាត្រឡប់មកវិញ ពេលវាស្លាប់។",
+     "why": "Pod ដែលបង្កើតដោយផ្ទាល់ នឹងមិនត្រឡប់មកវិញទេ ពេលវាស្លាប់។",
+     "audio": "audio/at1.mp3"
+    },
+    {
+     "q": "What does CrashLoopBackOff mean?",
+     "qen": "CrashLoopBackOff មានន័យថាអ្វី?",
+     "qaudio": "audio/qt2.mp3",
+     "a": "The container keeps crashing, and Kubernetes waits longer before each restart.",
+     "aen": "កុងតឺន័រគាំងម្តងហើយម្តងទៀត ហើយ Kubernetes រង់ចាំយូរជាងមុន មុនពេល restart ម្តងៗ។",
+     "why": "មើល logs ជាមុនសិន ដើម្បីរកមូលហេតុ។",
+     "audio": "audio/at2.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Questions · សំណួរនៅកន្លែងធ្វើការ",
+   "small": "ឆ្លើយក្នុងចិត្ត រួចចុច Listen ដើម្បីប្រៀបធៀប",
+   "kind": "qa",
+   "items": [
+    {
+     "q": "How many nodes does our cluster have?",
+     "qen": "Cluster របស់យើងមាន node ប៉ុន្មាន?",
+     "qaudio": "audio/qc1.mp3",
+     "a": "Three worker nodes and one control plane.",
+     "aen": "Worker node បី និង control plane មួយ។",
+     "audio": "audio/ac1.mp3",
+     "check": true
+    },
+    {
+     "q": "Why is my pod Pending?",
+     "qen": "ហេតុអ្វី pod របស់ខ្ញុំនៅតែ Pending?",
+     "qaudio": "audio/qc2.mp3",
+     "a": "No node has enough CPU or memory for it.",
+     "aen": "គ្មាន node ណាមួយមាន CPU ឬ memory គ្រប់គ្រាន់សម្រាប់វាទេ។",
+     "audio": "audio/ac2.mp3"
+    },
+    {
+     "q": "How do I get into a running pod?",
+     "qen": "តើខ្ញុំចូលទៅក្នុង pod ដែលកំពុងដំណើរការយ៉ាងដូចម្តេច?",
+     "qaudio": "audio/qc3.mp3",
+     "a": "Use kubectl exec to open a shell inside it.",
+     "aen": "ប្រើ kubectl exec ដើម្បីបើក shell នៅខាងក្នុងវា។",
+     "audio": "audio/ac3.mp3"
+    }
+   ]
+  },
+  {
+   "title": "When you're stuck · ពេលនឹកមិនឃើញ",
+   "small": "ឃ្លាជួយសង្គ្រោះ",
+   "kind": "surv",
+   "items": [
+    {
+     "ko": "Could you share your screen?",
+     "en": "អាចចែករំលែកអេក្រង់បានទេ?",
+     "audio": "audio/s1.mp3"
+    },
+    {
+     "ko": "Which namespace is it in?",
+     "en": "វានៅក្នុង namespace មួយណា?",
+     "audio": "audio/s2.mp3"
+    }
+   ]
+  }
+ ],
+ "vocab": [
+  {
+   "title": "Cluster parts",
+   "color": "#0052A4",
+   "items": [
+    {
+     "ko": "control plane",
+     "en": "ខួរក្បាលរបស់ cluster",
+     "audio": "audio/v01.mp3"
+    },
+    {
+     "ko": "worker node",
+     "en": "ម៉ាស៊ីនដែលដំណើរការ pod",
+     "audio": "audio/v02.mp3"
+    },
+    {
+     "ko": "scheduler",
+     "en": "អ្នកសម្រេចថា pod ទៅ node ណា",
+     "audio": "audio/v03.mp3"
+    },
+    {
+     "ko": "API server",
+     "en": "ច្រកចូលរបស់ cluster",
+     "audio": "audio/v04.mp3"
+    }
+   ]
+  },
+  {
+   "title": "kubectl commands",
+   "color": "#996CAC",
+   "items": [
+    {
+     "ko": "get",
+     "en": "បង្ហាញបញ្ជី",
+     "audio": "audio/v05.mp3"
+    },
+    {
+     "ko": "describe",
+     "en": "ពិពណ៌នាលម្អិត",
+     "audio": "audio/v06.mp3"
+    },
+    {
+     "ko": "apply",
+     "en": "អនុវត្តឯកសារ YAML",
+     "audio": "audio/v07.mp3"
+    },
+    {
+     "ko": "logs",
+     "en": "មើល log",
+     "audio": "audio/v08.mp3"
+    },
+    {
+     "ko": "exec",
+     "en": "រត់ពាក្យបញ្ជាក្នុង pod",
+     "audio": "audio/v09.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Pod status",
+   "color": "#EF7C1C",
+   "items": [
+    {
+     "ko": "Pending",
+     "en": "កំពុងរង់ចាំ",
+     "audio": "audio/v10.mp3"
+    },
+    {
+     "ko": "Running",
+     "en": "កំពុងដំណើរការ",
+     "audio": "audio/v11.mp3"
+    },
+    {
+     "ko": "CrashLoopBackOff",
+     "en": "គាំងម្តងហើយម្តងទៀត",
+     "audio": "audio/v12.mp3"
+    },
+    {
+     "ko": "status",
+     "en": "ស្ថានភាព",
+     "audio": "audio/v13.mp3"
+    }
+   ]
+  }
+ ],
+ "full_title": "Pods and kubectl · ពីដើមដល់ចប់",
+ "full": [
+  {
+   "title": "Cluster parts · ផ្នែកនៃ cluster",
+   "ko": "The control plane is the brain of the cluster. Worker nodes do the real work. They run the pods. The scheduler decides which node runs each pod.",
+   "en": "Control plane គឺជាខួរក្បាលរបស់ cluster។ Worker node ធ្វើការងារពិតប្រាកដ។ វាដំណើរការ pod។ Scheduler សម្រេចថា node មួយណាដំណើរការ pod នីមួយៗ។"
+  },
+  {
+   "title": "kubectl · kubectl",
+   "ko": "We talk to the cluster with a tool called kubectl. kubectl get pods shows every pod and its status. kubectl apply sends our YAML file to the cluster.",
+   "en": "យើងនិយាយជាមួយ cluster ដោយប្រើឧបករណ៍មួយឈ្មោះ kubectl។ kubectl get pods បង្ហាញ pod ទាំងអស់ និងស្ថានភាពរបស់វា។ kubectl apply បញ្ជូនឯកសារ YAML របស់យើងទៅ cluster។"
+  },
+  {
+   "title": "Pod life · ជីវិតរបស់ pod",
+   "ko": "A new pod starts as Pending, then becomes Running.",
+   "en": "Pod ថ្មីចាប់ផ្តើមជា Pending បន្ទាប់មកក្លាយជា Running។"
+  },
+  {
+   "title": "Debug · រកបញ្ហា",
+   "ko": "kubectl describe pod tells us why a pod is stuck. kubectl logs shows what the app printed.",
+   "en": "kubectl describe pod ប្រាប់យើងថា ហេតុអ្វី pod ជាប់គាំង។ kubectl logs បង្ហាញអ្វីដែលកម្មវិធីបាន print ចេញ។"
+  }
+ ],
+ "published": "2026-11-10"
+}
