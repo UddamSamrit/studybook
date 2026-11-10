@@ -1,0 +1,101 @@
+{
+ "title": "English to-do list",
+ "title_km": "បញ្ជីការងាររៀនភាសាអង់គ្លេស",
+ "description": "What to practise every day and every week: the 4 skills, work English, interview English, grammar and words.",
+ "order": 0,
+ "groups": [
+  {
+   "id": "daily",
+   "title": "Every day · 30 minutes",
+   "km": "រៀងរាល់ថ្ងៃ · 30 នាទី",
+   "color": "#1C2A4A",
+   "items": [
+    {"id": "d1", "en": "Study one studybook unit for 15 minutes: cards, then Hide, then Q&A.", "km": "រៀនមេរៀនមួយ 15 នាទី៖ កាត → Hide → Q&A។", "link": "../speaking/introducing-yourself/"},
+    {"id": "d2", "en": "Learn 5 new words and make one sentence with each.", "km": "រៀនពាក្យថ្មី 5 ហើយបង្កើតប្រយោគមួយសម្រាប់ពាក្យនីមួយៗ។"},
+    {"id": "d3", "en": "Listen to one VOA Learning English story and read its text.", "km": "ស្តាប់រឿងមួយពី VOA Learning English ហើយអានអត្ថបទ។", "link": "https://learningenglish.voanews.com/"},
+    {"id": "d4", "en": "Look up one hard word on YouGlish and hear three people say it.", "km": "រកពាក្យពិបាកមួយលើ YouGlish ហើយស្តាប់មនុស្សបីនាក់និយាយវា។", "link": "https://youglish.com/"},
+    {"id": "d5", "en": "Write your stand-up update in English: yesterday, today, blockers.", "km": "សរសេរ stand-up ជាភាសាអង់គ្លេស៖ ម្សិលមិញ ថ្ងៃនេះ និងបញ្ហា។"}
+   ]
+  },
+  {
+   "id": "reading",
+   "title": "Reading",
+   "km": "ការអាន",
+   "color": "#0052A4",
+   "items": [
+    {"id": "r1", "en": "Read three VOA stories this week and note five new words from each.", "km": "អានរឿង VOA បីក្នុងសប្តាហ៍នេះ ហើយកត់ពាក្យថ្មីប្រាំពីរឿងនីមួយៗ។", "link": "https://learningenglish.voanews.com/"},
+    {"id": "r2", "en": "Read one page of the Kubernetes docs in English, then the matching studybook unit.", "km": "អានឯកសារ Kubernetes មួយទំព័រជាភាសាអង់គ្លេស រួចរៀនមេរៀនដែលត្រូវគ្នា។", "link": "../../kubernetes/"},
+    {"id": "r3", "en": "Read one pull request or design doc from your team and summarise it in two sentences.", "km": "អាន pull request ឬឯកសាររចនាមួយពីក្រុម ហើយសង្ខេបវាជាពីរប្រយោគ។"}
+   ]
+  },
+  {
+   "id": "listening",
+   "title": "Listening",
+   "km": "ការស្តាប់",
+   "color": "#00A84D",
+   "items": [
+    {"id": "l1", "en": "Listen to two BBC 6 Minute English episodes this week.", "km": "ស្តាប់ BBC 6 Minute English ពីរភាគក្នុងសប្តាហ៍នេះ។", "link": "https://www.bbc.co.uk/learningenglish"},
+    {"id": "l2", "en": "Play a whole Kubernetes unit with Play all, without reading the text.", "km": "ចាក់មេរៀន Kubernetes ទាំងមូលដោយ Play all ដោយមិនមើលអត្ថបទ។", "link": "../../kubernetes/01-containers/"},
+    {"id": "l3", "en": "Watch one tech talk with English subtitles, then again without them.", "km": "មើលការបង្ហាញបច្ចេកវិទ្យាមួយជាមួយ subtitle អង់គ្លេស រួចមើលម្តងទៀតដោយគ្មាន subtitle។"}
+   ]
+  },
+  {
+   "id": "speaking",
+   "title": "Speaking",
+   "km": "ការនិយាយ",
+   "color": "#996CAC",
+   "items": [
+    {"id": "s1", "en": "Say all ten Introducing yourself cards without looking.", "km": "និយាយកាត Introducing yourself ទាំងដប់ដោយមិនមើល។", "link": "../speaking/introducing-yourself/"},
+    {"id": "s2", "en": "Explain one Kubernetes idea in one minute, like pods or deployments.", "km": "ពន្យល់គំនិត Kubernetes មួយក្នុងមួយនាទី ដូចជា pod ឬ deployment។", "link": "../../kubernetes/"},
+    {"id": "s3", "en": "Record yourself for one minute, listen back, and fix one thing.", "km": "ថតសំឡេងខ្លួនឯងមួយនាទី ស្តាប់វិញ ហើយកែចំណុចមួយ។"}
+   ]
+  },
+  {
+   "id": "writing",
+   "title": "Writing",
+   "km": "ការសរសេរ",
+   "color": "#EF7C1C",
+   "items": [
+    {"id": "w1", "en": "Write one short work email: ask a teammate to review your pull request.", "km": "សរសេរអ៊ីមែលការងារខ្លីមួយ៖ សុំឲ្យមិត្តរួមក្រុម review pull request របស់អ្នក។"},
+    {"id": "w2", "en": "Write your pull request descriptions in English: what, why and how to test.", "km": "សរសេរការពិពណ៌នា pull request ជាភាសាអង់គ្លេស៖ អ្វី ហេតុអ្វី និងរបៀបតេស្ត។"},
+    {"id": "w3", "en": "Write three sentences with this week's new words.", "km": "សរសេរប្រយោគបីដោយប្រើពាក្យថ្មីប្រចាំសប្តាហ៍។"}
+   ]
+  },
+  {
+   "id": "work",
+   "title": "Work English",
+   "km": "ភាសាអង់គ្លេសសម្រាប់ការងារ",
+   "color": "#CD7C2F",
+   "items": [
+    {"id": "k1", "en": "Learn ten meeting phrases, like Could you clarify that? and Let me share my screen.", "km": "រៀនឃ្លាប្រជុំដប់ ដូចជា Could you clarify that? និង Let me share my screen។"},
+    {"id": "k2", "en": "Speak once in English in a meeting, even one sentence.", "km": "និយាយជាភាសាអង់គ្លេសម្តងក្នុងការប្រជុំ ទោះប្រយោគតែមួយក៏ដោយ។"},
+    {"id": "k3", "en": "Explain a bug you fixed to a teammate in English: cause, fix and test.", "km": "ពន្យល់ bug ដែលអ្នកបានជួសជុលដល់មិត្តរួមក្រុមជាភាសាអង់គ្លេស៖ មូលហេតុ ការជួសជុល និងការតេស្ត។"}
+   ]
+  },
+  {
+   "id": "interview",
+   "title": "Interview English",
+   "km": "ភាសាអង់គ្លេសសម្រាប់សម្ភាសន៍",
+   "color": "#D7372B",
+   "items": [
+    {"id": "i1", "en": "Practise Tell me about yourself in ninety seconds, twice a week.", "km": "ហាត់ Tell me about yourself ក្នុងកៅសិបវិនាទី ពីរដងក្នុងមួយសប្តាហ៍។"},
+    {"id": "i2", "en": "Prepare three STAR stories: a hard problem, a disagreement and a mistake.", "km": "រៀបចំរឿង STAR បី៖ បញ្ហាពិបាក ការមិនយល់ស្រប និងកំហុស។"},
+    {"id": "i3", "en": "Talk through one system design out loud: a prepaid top-up platform.", "km": "ពន្យល់ system design មួយដោយនិយាយឮៗ៖ platform បញ្ចូលលុយ prepaid។"},
+    {"id": "i4", "en": "Do one mock interview with a friend or with Claude.", "km": "ធ្វើការសម្ភាសន៍សាកល្បងមួយជាមួយមិត្ត ឬជាមួយ Claude។"}
+   ]
+  },
+  {
+   "id": "grammar",
+   "title": "Grammar and words",
+   "km": "វេយ្យាករណ៍ និងពាក្យ",
+   "color": "#5A6C93",
+   "items": [
+    {"id": "g1", "en": "Fix I am work: say I work, or I'm a developer.", "km": "កែ I am work៖ និយាយ I work ឬ I'm a developer។"},
+    {"id": "g2", "en": "Use the past for yesterday: I fixed, I went, I had.", "km": "ប្រើអតីតកាលសម្រាប់ម្សិលមិញ៖ I fixed, I went, I had។"},
+    {"id": "g3", "en": "Add -s for he, she and it: she works, it runs.", "km": "បន្ថែម -s សម្រាប់ he, she និង it៖ she works, it runs។"},
+    {"id": "g4", "en": "Use a and the: a pod (any one), the pod (the one we know).", "km": "ប្រើ a និង the៖ a pod (មួយណាក៏បាន) the pod (មួយដែលយើងស្គាល់)។"},
+    {"id": "g5", "en": "Reach 150 new words this month: five a day.", "km": "ឲ្យដល់ពាក្យថ្មី 150 ក្នុងខែនេះ៖ ប្រាំក្នុងមួយថ្ងៃ។"}
+   ]
+  }
+ ]
+}

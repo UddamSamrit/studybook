@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English to-do list · Studybook</title>
+<meta name="description" content="What to practise every day and every week: the 4 skills, work English, interview English, grammar and words.">
+<meta name="theme-color" content="#1C2A4A">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="icon" href="../../icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700;800&family=Noto+Sans+Khmer:wght@400;600&display=swap">
+<style>
+:root{--bg:#F4F6FA;--card:#FFFFFF;--ink:#23262D;--mute:#5A6270;--line:#DDE1E8;--navy:#1C2A4A}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#12151C;--card:#1B2029;--ink:#E8EAEE;--mute:#9AA3B2;--line:#2C3340}}
+:root[data-theme="dark"]{--bg:#12151C;--card:#1B2029;--ink:#E8EAEE;--mute:#9AA3B2;--line:#2C3340}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Gothic A1",system-ui,sans-serif}
+.km{font-family:"Noto Sans Khmer","Gothic A1",sans-serif}
+header{background:var(--navy);color:#fff;padding:18px 16px 16px}
+.wrap{max-width:760px;margin:0 auto}
+header a.back{color:#fff;opacity:.85;text-decoration:none;font-weight:700;font-size:.9rem}
+header h1{margin:.3rem 0 .1rem;font-size:1.5rem;line-height:1.25}
+header p{margin:0;opacity:.85}
+.total{display:flex;align-items:center;gap:12px;margin-top:12px}
+.total .bar{flex:1;background:rgba(255,255,255,.18)}
+.total .bar span{background:#F5B700}
+main{padding:16px}
+.note{color:var(--mute);font-size:.9rem;margin:0 0 14px}
+.grp{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:12px;padding:14px 14px 6px;margin:0 0 14px}
+.grp h2{font-size:1.05rem;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.grp h2 .km{font-weight:400;color:var(--mute);font-size:.9rem}
+.grp h2 .cnt{margin-left:auto;font-size:.85rem;color:var(--mute);font-weight:700}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-bottom:6px}
+.bar span{display:block;height:100%;width:0;background:var(--c);transition:width .25s}
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;align-items:flex-start;gap:8px;padding:10px 0;border-top:1px solid var(--line)}
+li:first-child{border-top:0}
+label{flex:1;display:flex;gap:12px;cursor:pointer;min-width:0}
+input{position:absolute;opacity:0;width:1px;height:1px}
+.box{flex:none;width:24px;height:24px;border:2px solid var(--c);border-radius:6px;margin-top:1px;display:grid;place-items:center}
+input:checked+.box{background:var(--c)}
+input:checked+.box::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+input:focus-visible+.box{outline:3px solid #F5B700;outline-offset:2px}
+.txt{display:flex;flex-direction:column;min-width:0}
+.txt .km{color:var(--mute);font-size:.88rem}
+input:checked~.txt .en{text-decoration:line-through;color:var(--mute)}
+a.go{flex:none;font-size:.85rem;font-weight:700;color:var(--c);text-decoration:none;border:1.5px solid var(--c);border-radius:999px;padding:2px 10px;margin-top:2px}
+footer{color:var(--mute);font-size:.85rem;padding:0 16px 32px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="back" href="../">&larr; English</a>
+  <h1>English to-do list</h1>
+  <p class="km" lang="km">បញ្ជីការងាររៀនភាសាអង់គ្លេស</p>
+  <div class="total"><div class="bar"><span id="totalBar"></span></div><b id="totalTxt">0/29</b></div>
+</div></header>
+<main class="wrap">
+  <p class="note">"Every day" resets each morning; the other groups reset each Monday. Ticks are saved on this phone. To tick together and keep history, use <b>/todo</b> in the Telegram group.</p>
+  <section class="grp" data-group="daily" style="--c:#1C2A4A">
+    <h2>Every day · 30 minutes <span class="km" lang="km">រៀងរាល់ថ្ងៃ · 30 នាទី</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="d1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Study one studybook unit for 15 minutes: cards, then Hide, then Q&amp;A.</span><span class="km" lang="km">រៀនមេរៀនមួយ 15 នាទី៖ កាត → Hide → Q&amp;A។</span></span></label> <a class="go" href="../speaking/introducing-yourself/">open</a></li>
+      <li><label><input type="checkbox" data-id="d2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Learn 5 new words and make one sentence with each.</span><span class="km" lang="km">រៀនពាក្យថ្មី 5 ហើយបង្កើតប្រយោគមួយសម្រាប់ពាក្យនីមួយៗ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="d3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Listen to one VOA Learning English story and read its text.</span><span class="km" lang="km">ស្តាប់រឿងមួយពី VOA Learning English ហើយអានអត្ថបទ។</span></span></label> <a class="go" href="https://learningenglish.voanews.com/" target=_blank rel=noopener>open</a></li>
+      <li><label><input type="checkbox" data-id="d4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Look up one hard word on YouGlish and hear three people say it.</span><span class="km" lang="km">រកពាក្យពិបាកមួយលើ YouGlish ហើយស្តាប់មនុស្សបីនាក់និយាយវា។</span></span></label> <a class="go" href="https://youglish.com/" target=_blank rel=noopener>open</a></li>
+      <li><label><input type="checkbox" data-id="d5"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Write your stand-up update in English: yesterday, today, blockers.</span><span class="km" lang="km">សរសេរ stand-up ជាភាសាអង់គ្លេស៖ ម្សិលមិញ ថ្ងៃនេះ និងបញ្ហា។</span></span></label></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="reading" style="--c:#0052A4">
+    <h2>Reading <span class="km" lang="km">ការអាន</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="r1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Read three VOA stories this week and note five new words from each.</span><span class="km" lang="km">អានរឿង VOA បីក្នុងសប្តាហ៍នេះ ហើយកត់ពាក្យថ្មីប្រាំពីរឿងនីមួយៗ។</span></span></label> <a class="go" href="https://learningenglish.voanews.com/" target=_blank rel=noopener>open</a></li>
+      <li><label><input type="checkbox" data-id="r2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Read one page of the Kubernetes docs in English, then the matching studybook unit.</span><span class="km" lang="km">អានឯកសារ Kubernetes មួយទំព័រជាភាសាអង់គ្លេស រួចរៀនមេរៀនដែលត្រូវគ្នា។</span></span></label> <a class="go" href="../../kubernetes/">open</a></li>
+      <li><label><input type="checkbox" data-id="r3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Read one pull request or design doc from your team and summarise it in two sentences.</span><span class="km" lang="km">អាន pull request ឬឯកសាររចនាមួយពីក្រុម ហើយសង្ខេបវាជាពីរប្រយោគ។</span></span></label></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="listening" style="--c:#00A84D">
+    <h2>Listening <span class="km" lang="km">ការស្តាប់</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="l1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Listen to two BBC 6 Minute English episodes this week.</span><span class="km" lang="km">ស្តាប់ BBC 6 Minute English ពីរភាគក្នុងសប្តាហ៍នេះ។</span></span></label> <a class="go" href="https://www.bbc.co.uk/learningenglish" target=_blank rel=noopener>open</a></li>
+      <li><label><input type="checkbox" data-id="l2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Play a whole Kubernetes unit with Play all, without reading the text.</span><span class="km" lang="km">ចាក់មេរៀន Kubernetes ទាំងមូលដោយ Play all ដោយមិនមើលអត្ថបទ។</span></span></label> <a class="go" href="../../kubernetes/01-containers/">open</a></li>
+      <li><label><input type="checkbox" data-id="l3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Watch one tech talk with English subtitles, then again without them.</span><span class="km" lang="km">មើលការបង្ហាញបច្ចេកវិទ្យាមួយជាមួយ subtitle អង់គ្លេស រួចមើលម្តងទៀតដោយគ្មាន subtitle។</span></span></label></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="speaking" style="--c:#996CAC">
+    <h2>Speaking <span class="km" lang="km">ការនិយាយ</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="s1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Say all ten Introducing yourself cards without looking.</span><span class="km" lang="km">និយាយកាត Introducing yourself ទាំងដប់ដោយមិនមើល។</span></span></label> <a class="go" href="../speaking/introducing-yourself/">open</a></li>
+      <li><label><input type="checkbox" data-id="s2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Explain one Kubernetes idea in one minute, like pods or deployments.</span><span class="km" lang="km">ពន្យល់គំនិត Kubernetes មួយក្នុងមួយនាទី ដូចជា pod ឬ deployment។</span></span></label> <a class="go" href="../../kubernetes/">open</a></li>
+      <li><label><input type="checkbox" data-id="s3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Record yourself for one minute, listen back, and fix one thing.</span><span class="km" lang="km">ថតសំឡេងខ្លួនឯងមួយនាទី ស្តាប់វិញ ហើយកែចំណុចមួយ។</span></span></label></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="writing" style="--c:#EF7C1C">
+    <h2>Writing <span class="km" lang="km">ការសរសេរ</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="w1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Write one short work email: ask a teammate to review your pull request.</span><span class="km" lang="km">សរសេរអ៊ីមែលការងារខ្លីមួយ៖ សុំឲ្យមិត្តរួមក្រុម review pull request របស់អ្នក។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="w2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Write your pull request descriptions in English: what, why and how to test.</span><span class="km" lang="km">សរសេរការពិពណ៌នា pull request ជាភាសាអង់គ្លេស៖ អ្វី ហេតុអ្វី និងរបៀបតេស្ត។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="w3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Write three sentences with this week&#x27;s new words.</span><span class="km" lang="km">សរសេរប្រយោគបីដោយប្រើពាក្យថ្មីប្រចាំសប្តាហ៍។</span></span></label></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="work" style="--c:#CD7C2F">
+    <h2>Work English <span class="km" lang="km">ភាសាអង់គ្លេសសម្រាប់ការងារ</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="k1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Learn ten meeting phrases, like Could you clarify that? and Let me share my screen.</span><span class="km" lang="km">រៀនឃ្លាប្រជុំដប់ ដូចជា Could you clarify that? និង Let me share my screen។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="k2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Speak once in English in a meeting, even one sentence.</span><span class="km" lang="km">និយាយជាភាសាអង់គ្លេសម្តងក្នុងការប្រជុំ ទោះប្រយោគតែមួយក៏ដោយ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="k3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Explain a bug you fixed to a teammate in English: cause, fix and test.</span><span class="km" lang="km">ពន្យល់ bug ដែលអ្នកបានជួសជុលដល់មិត្តរួមក្រុមជាភាសាអង់គ្លេស៖ មូលហេតុ ការជួសជុល និងការតេស្ត។</span></span></label></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="interview" style="--c:#D7372B">
+    <h2>Interview English <span class="km" lang="km">ភាសាអង់គ្លេសសម្រាប់សម្ភាសន៍</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="i1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Practise Tell me about yourself in ninety seconds, twice a week.</span><span class="km" lang="km">ហាត់ Tell me about yourself ក្នុងកៅសិបវិនាទី ពីរដងក្នុងមួយសប្តាហ៍។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="i2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Prepare three STAR stories: a hard problem, a disagreement and a mistake.</span><span class="km" lang="km">រៀបចំរឿង STAR បី៖ បញ្ហាពិបាក ការមិនយល់ស្រប និងកំហុស។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="i3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Talk through one system design out loud: a prepaid top-up platform.</span><span class="km" lang="km">ពន្យល់ system design មួយដោយនិយាយឮៗ៖ platform បញ្ចូលលុយ prepaid។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="i4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Do one mock interview with a friend or with Claude.</span><span class="km" lang="km">ធ្វើការសម្ភាសន៍សាកល្បងមួយជាមួយមិត្ត ឬជាមួយ Claude។</span></span></label></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="grammar" style="--c:#5A6C93">
+    <h2>Grammar and words <span class="km" lang="km">វេយ្យាករណ៍ និងពាក្យ</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="g1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Fix I am work: say I work, or I&#x27;m a developer.</span><span class="km" lang="km">កែ I am work៖ និយាយ I work ឬ I&#x27;m a developer។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="g2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Use the past for yesterday: I fixed, I went, I had.</span><span class="km" lang="km">ប្រើអតីតកាលសម្រាប់ម្សិលមិញ៖ I fixed, I went, I had។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="g3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Add -s for he, she and it: she works, it runs.</span><span class="km" lang="km">បន្ថែម -s សម្រាប់ he, she និង it៖ she works, it runs។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="g4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Use a and the: a pod (any one), the pod (the one we know).</span><span class="km" lang="km">ប្រើ a និង the៖ a pod (មួយណាក៏បាន) the pod (មួយដែលយើងស្គាល់)។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="g5"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en">Reach 150 new words this month: five a day.</span><span class="km" lang="km">ឲ្យដល់ពាក្យថ្មី 150 ក្នុងខែនេះ៖ ប្រាំក្នុងមួយថ្ងៃ។</span></span></label></li>
+    </ul>
+  </section>
+</main>
+<footer class="wrap">The same list is in the Telegram bot, so both always match.</footer>
+<script>
+(function(){
+  function pad(n){return (n<10?'0':'')+n;}
+  var d=new Date(), day=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+  var t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())); var dn=t.getUTCDay()||7; t.setUTCDate(t.getUTCDate()+4-dn);
+  var y0=new Date(Date.UTC(t.getUTCFullYear(),0,1)), wk=t.getUTCFullYear()+'-W'+pad(Math.ceil(((t-y0)/864e5+1)/7));
+  function key(g,id){return 'todo:'+(g==='daily'?day:wk)+':'+id;}
+  function get(k){try{return localStorage.getItem(k)==='1';}catch(e){return false;}}
+  function put(k,v){try{v?localStorage.setItem(k,'1'):localStorage.removeItem(k);}catch(e){}}
+  var all=0, done=0;
+  function count(){
+    all=0; done=0;
+    document.querySelectorAll('.grp').forEach(function(s){
+      var bs=s.querySelectorAll('input'), n=0; bs.forEach(function(b){if(b.checked)n++;});
+      all+=bs.length; done+=n;
+      s.querySelector('.cnt').textContent=n+'/'+bs.length;
+      s.querySelector('.bar span').style.width=(100*n/bs.length)+'%';
+    });
+    document.getElementById('totalTxt').textContent=done+'/'+all;
+    document.getElementById('totalBar').style.width=(100*done/all)+'%';
+  }
+  document.querySelectorAll('.grp').forEach(function(s){
+    var g=s.dataset.group;
+    s.querySelectorAll('input').forEach(function(b){
+      b.checked=get(key(g,b.dataset.id));
+      b.addEventListener('change',function(){put(key(g,b.dataset.id),b.checked);count();});
+    });
+  });
+  count();
+})();
+</script>
+</body>
+</html>

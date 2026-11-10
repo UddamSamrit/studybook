@@ -5,7 +5,8 @@
 
 The site is a shelf of books. A book is a folder with a book.json (title, title_km, description,
 order). Inside a book, a sub-folder with a book.json is a section (a book inside the book) and a
-sub-folder with a unit.json is a unit. Books can nest as deep as needed:
+sub-folder with a unit.json is a unit, and one with a page.json is a plain page (like the to-do list,
+made by build_todo.py). Books can nest as deep as needed:
 
     index.html                              the top-level books
     english/index.html                      English: Reading, Listening, Speaking, Writing
@@ -58,6 +59,10 @@ def scan(rel):
         if os.path.isfile(os.path.join(ROOT, sub, 'book.json')):
             if not jload(os.path.join(ROOT, sub, 'book.json')).get('draft'):  # "draft": true keeps a book off the site
                 book['books'].append(scan(sub))
+        elif os.path.isfile(os.path.join(ROOT, sub, 'page.json')):  # a plain page, e.g. a to-do list (build_todo.py)
+            pg = jload(os.path.join(ROOT, sub, 'page.json'))
+            pg.update(id=sub, books=[], units=[], page=True)
+            book['books'].append(pg)
         elif os.path.isfile(os.path.join(ROOT, sub, 'unit.json')):
             book['units'].append(jload(os.path.join(ROOT, sub, 'unit.json')))
     book['books'].sort(key=lambda b: (b.get('order', 0), b['id']))
@@ -87,6 +92,8 @@ def stop(i, key, href, title, sub, line, meta, lang, new=False):
 
 
 def book_stop(i, b, href):
+    if b.get('page'):
+        return stop(i, b['id'], href, b['title'], b.get('title_km', ''), b.get('description', ''), f'<span>{e(b.get("meta", ""))}</span>', CFG.get('lang', 'en'))
     us = all_units(b)
     if not us:
         meta = '<span>Coming soon</span>'
@@ -147,6 +154,8 @@ def page(b, parent_title):
     io.open(os.path.join(ROOT, rel, 'index.html'), 'w', encoding='utf-8', newline='\n').write(s)
     print(f'{(rel + "/") if rel else ""}index.html: {len(b["books"])} sections, {len(b["units"])} units')
     for sb in b['books']:
+        if sb.get('page'):
+            continue
         page(sb, b['title'] if depth else 'All books')
 
 
