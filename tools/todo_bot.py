@@ -166,7 +166,7 @@ def by_code(code):
 
 
 def note_fields():
-    return {f['key']: f for g in groups() if g.get('kind') == 'notes' for f in g['fields']}
+    return {f['key']: f for g in groups() if g.get('fields') for f in g['fields']}
 
 
 def list_keys():
@@ -301,11 +301,21 @@ def section(g):
             ws, we = week_range()
             head += f' ({ws:%d %b} - {we:%d %b})'
         rows = [task_line(it) for it in tasks(g)]
+        for f in g.get('fields', []):
+            got = notes_list(f['key'])
+            rows.append(f'{esc(f["label"])}: ' + ('; '.join(esc(x) for x in got) if got else f'- (write: {f["key"]} ...)'))
         if g.get('kind') == 'priorities':
             rows.append('Your own tasks: <code>add Call the bank</code>' if not my_tasks() else '<i>Add more: <code>add ...</code>  remove: <code>remove X1</code></i>')
         return [head] + rows
     if k == 'notes':
-        return [head] + [f'{esc(f["label"])}: {esc(note(f["key"]) or "-")}' for f in g['fields']]
+        rows = []
+        for f in g['fields']:
+            if f.get('list'):
+                got = notes_list(f['key'])
+                rows.append(f'{esc(f["label"])}: ' + ('; '.join(esc(x) for x in got) if got else f'- (write: {f["key"]} ...)'))
+            else:
+                rows.append(f'{esc(f["label"])}: {esc(note(f["key"]) or "-")}')
+        return [head] + rows
     if k == 'list':
         got = notes_list(g['key'])
         rows = [f'{i + 1}. {esc(x)}' for i, x in enumerate(got)]
@@ -328,44 +338,53 @@ def section(g):
     return [head]
 
 
-def dashboard(greet=False):
+PART2 = ('pending', 'blockers', 'wins', 'schedule', 'review', 'goals')  # the second message: the day itself
+
+
+def fit(out):
+    """Keep a message under Telegram's 4096 characters without cutting an HTML tag in half."""
+    while len('\n'.join(out)) > 4000 and len(out) > 5:
+        out = out[:-2] + ['...']
+    return '\n'.join(out)
+
+
+def dashboard(greet=False, part=1):
+    """The daily dashboard, sent as two messages: 1 = PLAN (tasks), 2 = DAY (notes, timed plan, review)."""
     d = todo()
     t = now()
+    gs = [g for g in groups() if (g['id'] in PART2) == (part == 2)]
     out = []
-    if greet:
-        out += ['<b>Good morning. It is 5:00.</b> Get up, then write <code>done T1</code>.', '']
-    out += [f'<b>{esc(d.get("title", "Daily dashboard")).upper()}</b>', LINE,
-            f'Date: {t:%A %d %B %Y}', f'Daily goal: {esc(note("goal") or d.get("goal", "-"))}']
-    for g in groups():
+    if part == 1:
+        if greet:
+            out += ['<b>Good morning, Uddam. It is 5:00.</b> Get up, then write <code>done T1</code>.', '']
+        out += [f'<b>{esc(d.get("title", "Daily dashboard")).upper()}</b>  (1 of 2: PLAN)', LINE,
+                f'Date: {t:%A %d %B %Y}', f'Daily goal: {esc(note("goal") or d.get("goal", "-"))}']
+    else:
+        out += [f'<b>{esc(d.get("title", "Daily dashboard")).upper()}</b>  (2 of 2: DAY)', LINE, f'Date: {t:%A %d %B %Y}']
+    for g in gs:
         out += ['', *section(g)]
-    out += ['', LINE, '<b>HOW TO USE</b>  (write in this group)',
-            '<code>done W1 L2</code>  tick   <code>doing W1</code>  in progress   <code>undo W1</code>',
-            '<code>p1 Finish login API</code>   set a priority   <code>add Call the bank</code>   your own task',
-            '<code>win Shipped the fix</code>   add an achievement',
-            '<code>follow</code> <code>waiting</code> <code>review</code> <code>issue</code> <code>reason</code> <code>next</code> + text',
-            '<code>well</code> <code>improve</code> <code>tomorrow</code> + text   end-of-day review',
-            '<code>work 8</code> <code>learn 2</code> <code>deep 4</code> <code>focus 8</code>   time tracking']
-    if d.get('footer'):
-        out += [LINE] + [f'<b>{esc(x)}</b>' for x in d['footer']]
-    text = '\n'.join(out)
-    if len(text) > 4000:  # Telegram's limit is 4096: drop the how-to block first
-        i = out.index('<b>HOW TO USE</b>  (write in this group)')
-        out = out[:i] + ['Write /help to see how to use the bot.'] + out[i + 7:]
-        text = '\n'.join(out)
+    if part == 2:
+        out += ['', 'Write /help to see every command.']
+        if d.get('footer'):
+            out += [LINE] + [f'<b>{esc(x)}</b>' for x in d['footer']]
     kb, row = [], []
-    for g in groups():
-        if g.get('kind') in ('priorities', 'checklist', 'schedule'):
+    for g in gs:
+        if g.get('kind') in ('priorities', 'checklist', 'schedule') and tasks(g):
             done = sum(status(it) == DONE for it in tasks(g))
-            row.append({'text': f'{g.get("num", "")} {g["title"].title()} {done}/{len(tasks(g))}'.strip(), 'callback_data': f'g:{g["id"]}'})
+            row.append({'text': f'{g.get("num", "")} {g["title"].split(" (")[0].title()} {done}/{len(tasks(g))}'.strip(), 'callback_data': f'g:{g["id"]}'})
             if len(row) == 2:
                 kb.append(row)
                 row = []
     if row:
         kb.append(row)
-    kb.append([{'text': 'Today', 'callback_data': 'r:today'}, {'text': 'Week', 'callback_data': 'r:week'},
-               {'text': 'Month', 'callback_data': 'r:month'}, {'text': 'Year', 'callback_data': 'r:year'}])
-    kb.append([{'text': 'Refresh', 'callback_data': 'home'}, {'text': 'History', 'callback_data': 'h'}, {'text': 'Website', 'url': SITE_URL}])
-    return text[:4096], {'inline_keyboard': kb}
+    if part == 1:
+        kb.append([{'text': 'Today', 'callback_data': 'r:today'}, {'text': 'Week', 'callback_data': 'r:week'},
+                   {'text': 'Month', 'callback_data': 'r:month'}, {'text': 'Year', 'callback_data': 'r:year'}])
+        kb.append([{'text': 'Refresh', 'callback_data': 'home'}, {'text': 'Ideas', 'callback_data': 'ideas'},
+                   {'text': 'People', 'callback_data': 'people'}, {'text': 'Website', 'url': SITE_URL}])
+    else:
+        kb.append([{'text': 'Refresh', 'callback_data': 'home2'}, {'text': 'History', 'callback_data': 'h'}])
+    return fit(out), {'inline_keyboard': kb}
 
 
 def group_view(gid):
@@ -381,8 +400,8 @@ def group_view(gid):
     kb = []
     for it in tasks(g):
         kb.append([{'text': f'{box(status(it))} {it["code"]}  {short(label(it), 34)}', 'callback_data': f't:{it["id"]}:{gid}'}])
-    kb.append([{'text': 'Back to dashboard', 'callback_data': 'home'}])
-    return '\n'.join(out), {'inline_keyboard': kb}
+    kb.append([{'text': 'Back to dashboard', 'callback_data': 'home2' if gid in PART2 else 'home'}])
+    return fit(out), {'inline_keyboard': kb}
 
 
 def review_prompt():
@@ -463,6 +482,12 @@ def report_view(kind):
     wins = db.execute("SELECT day, text FROM notes WHERE key='win' AND day BETWEEN ? AND ? ORDER BY day, idx", (start.isoformat(), end.isoformat())).fetchall()
     if wins:
         lines += ['', '<b>Achievements</b>'] + [f'{dt.date.fromisoformat(d_):%d %b}  {esc(x)}' for d_, x in wins[-15:]]
+    met = db.execute("SELECT day, text FROM notes WHERE key='met' AND day BETWEEN ? AND ? ORDER BY day, idx", (start.isoformat(), end.isoformat())).fetchall()
+    if met:
+        lines += ['', f'<b>New people</b> ({len(met)})'] + [f'{dt.date.fromisoformat(d_):%d %b}  {esc(x)}' for d_, x in met[-10:]]
+    ideas = db.execute("SELECT day, text FROM notes WHERE key='idea' AND day BETWEEN ? AND ? ORDER BY day, idx", (start.isoformat(), end.isoformat())).fetchall()
+    if ideas:
+        lines += ['', f'<b>Startup ideas</b> ({len(ideas)})'] + [f'{dt.date.fromisoformat(d_):%d %b}  {esc(x)}' for d_, x in ideas[-10:]]
     lines += ['', '<b>What you finished</b>']
     if not rows:
         lines.append('Nothing yet. Write <code>done T1</code> when you finish a task.')
@@ -474,7 +499,7 @@ def report_view(kind):
     kb = {'inline_keyboard': [[{'text': ('> ' if k == kind else '') + lab, 'callback_data': f'r:{k}'} for k, lab in
                                (('today', 'Today'), ('week', 'Week'), ('month', 'Month'), ('year', 'Year'))],
                               [{'text': 'Back to dashboard', 'callback_data': 'home'}, {'text': 'History', 'callback_data': 'h'}]]}
-    return '\n'.join(lines), kb
+    return fit(lines), kb
 
 
 def history_view():
@@ -512,13 +537,47 @@ def log_view(n=25):
     return '\n'.join(lines), {'inline_keyboard': [[{'text': 'Back to dashboard', 'callback_data': 'home'}, {'text': 'History', 'callback_data': 'h'}]]}
 
 
+def ideas_view(limit=30):
+    days = [r[0] for r in db.execute("SELECT DISTINCT day FROM notes WHERE key='idea' ORDER BY day DESC LIMIT ?", (limit,))]
+    total = db.execute("SELECT COUNT(*) FROM notes WHERE key='idea'").fetchone()[0]
+    lines = [f'<b>STARTUP IDEAS</b>  ({total} saved)', LINE]
+    if not days:
+        lines.append('No ideas yet. Write <code>idea ...</code> to save one.')
+    for d_ in days:
+        lines.append(f'<b>{dt.date.fromisoformat(d_):%a %d %b %Y}</b>')
+        lines += [f'- {esc(x)}' for x in notes_list('idea', d_)]
+        for k_, lab in (('problem', 'Problem'), ('customer', 'Who'), ('test', 'Test')):
+            v = note(k_, 0, d_)
+            if v:
+                lines.append(f'  {lab}: {esc(v)}')
+        lines.append('')
+    return '\n'.join(lines)[:4096], {'inline_keyboard': [[{'text': 'Back to dashboard', 'callback_data': 'home'}]]}
+
+
+def people_view(limit=40):
+    rows = db.execute("SELECT day, text FROM notes WHERE key='met' ORDER BY day DESC, idx DESC LIMIT ?", (limit,)).fetchall()
+    total = db.execute("SELECT COUNT(*) FROM notes WHERE key='met'").fetchone()[0]
+    month = db.execute("SELECT COUNT(*) FROM notes WHERE key='met' AND substr(day,1,7)=?", (today_iso()[:7],)).fetchone()[0]
+    lines = [f'<b>NEW PEOPLE</b>  ({total} in total, {month} this month)', LINE]
+    if not rows:
+        lines.append('Nobody yet. When you meet someone, write <code>met Sokha, PM at ABA, met at the meetup</code>.')
+    lines += [f'<code>{dt.date.fromisoformat(d_):%d %b %Y}</code>  {esc(x)}' for d_, x in rows]
+    return '\n'.join(lines)[:4096], {'inline_keyboard': [[{'text': 'Back to dashboard', 'callback_data': 'home'}]]}
+
+
 def view(name):
     if name == 'home':
         return dashboard()
+    if name == 'home2':
+        return dashboard(part=2)
     if name == 'h':
         return history_view()
     if name == 'log':
         return log_view()
+    if name == 'ideas':
+        return ideas_view()
+    if name == 'people':
+        return people_view()
     if name.startswith('r:'):
         return report_view(name[2:])
     return group_view(name)
@@ -536,13 +595,16 @@ def say(text, kb=None, reply_to=None):
 
 def send_home(greet=False):
     text, kb = dashboard(greet)
-    return say(text, kb)
+    r = say(text, kb)
+    text, kb = dashboard(part=2)
+    say(text, kb)
+    return r
 
 
 HELP = '\n'.join([
     '<b>HOW TO USE THIS BOT</b>', LINE,
     'Every morning at 5:00 I send your dashboard. At {evening} I remind you to write your review.', '',
-    '<b>Tasks</b>  (codes: P1-P3, X1... your own, W1-W6, L1-L6, J1-J4, T1-T10, A1-A4)',
+    '<b>Tasks</b>  (codes: P1-P3, X1... your own, W1-W6, L1-L6, J1-J4, M1-M4, N1-N3, T1-T10, A1-A8)',
     '<code>done W1 L2</code>  tick',
     '<code>doing W1</code>  mark in progress',
     '<code>undo W1</code>  untick', '',
@@ -553,6 +615,9 @@ HELP = '\n'.join([
     '<code>remove X1</code>  remove a task you added',
     '<code>goal Ship the payment fix</code>  daily goal',
     '<code>win Shipped the payment fix</code>  add an achievement',
+    '<code>idea AI tutor for Khmer students</code>  save a startup idea',
+    '<code>problem</code> <code>customer</code> <code>test</code>  describe and test the idea',
+    '<code>met Sokha, PM at ABA, met at the meetup</code>  save a new person',
     '<code>follow</code> <code>waiting</code> <code>review</code>  follow-up and pending',
     '<code>issue</code> <code>reason</code> <code>next</code>  blockers',
     '<code>well</code> <code>improve</code> <code>tomorrow</code>  end-of-day review',
@@ -561,7 +626,7 @@ HELP = '\n'.join([
     '<code>work 7.5</code>  <code>learn 1.5</code>  <code>deep 4</code>  <code>focus 8</code>', '',
     '<b>See your progress</b>',
     '/todo  the dashboard', '/today  /week  /month  /year  what you finished',
-    '/history  the last 14 days', '/log  the latest ticks'])
+    '/history  the last 14 days', '/ideas  every startup idea', '/people  everyone you met', '/log  the latest ticks'])
 
 
 def mark(codes, value, who, reply_to):
@@ -648,8 +713,18 @@ def handle_text(m):
     if head in note_fields():
         if not body:
             return say(f'Write the text too, for example <code>{head} ...</code>', reply_to=mid)
+        f = note_fields()[head]
+        if f.get('list'):
+            set_note(head, body, who, append=True)
+            got = notes_list(head)
+            extra = ''
+            if head == 'idea':
+                extra = '\n\nNext: <code>problem ...</code>  <code>customer ...</code>  <code>test ...</code>'
+            if head == 'met':
+                extra = '\n\nTick it too: <code>done N1</code>. See everyone: /people'
+            return say(f'<b>{esc(f["label"])}</b>\n' + '\n'.join(f'{i + 1}. {esc(x)}' for i, x in enumerate(got)) + extra, reply_to=mid)
         set_note(head, body, who)
-        return say(f'<b>Saved</b>  {esc(note_fields()[head]["label"])}: {esc(body)}', reply_to=mid)
+        return say(f'<b>Saved</b>  {esc(f["label"])}: {esc(body)}', reply_to=mid)
     if head in list_keys():
         if not body:
             return say(f'Write the text too, for example <code>{head} Shipped the payment fix</code>.', reply_to=mid)
@@ -674,6 +749,12 @@ def handle_text(m):
         return say(t, kb)
     if head == 'log':
         t, kb = log_view()
+        return say(t, kb)
+    if head == 'ideas':
+        t, kb = ideas_view()
+        return say(t, kb)
+    if head == 'people':
+        t, kb = people_view()
         return say(t, kb)
     if head == 'help':
         return say(HELP.format(evening=EVENING))
@@ -733,6 +814,8 @@ def main():
         {'command': 'month', 'description': 'What I finished this month'},
         {'command': 'year', 'description': 'What I finished this year'},
         {'command': 'history', 'description': 'The last 14 days'},
+        {'command': 'ideas', 'description': 'Every startup idea you saved'},
+        {'command': 'people', 'description': 'Everyone you met'},
         {'command': 'help', 'description': 'How this bot works'}])
     db.execute("INSERT OR IGNORE INTO meta VALUES ('since', ?)", (today_iso(),))
     db.commit()

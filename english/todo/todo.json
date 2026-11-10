@@ -1,7 +1,7 @@
 {
  "title": "Daily productivity dashboard",
  "title_km": "ផ្ទាំងការងារប្រចាំថ្ងៃ",
- "description": "Top 3 priorities, work, learning (the 4 English skills and Second Chance), personal projects, follow-ups, blockers, achievements, a timed plan from 5:00 to 22:00 and an end-of-day review.",
+ "description": "Top 3 priorities, Wintex work, learning, personal projects, leadership, a startup idea a day, new people and community, follow-ups, blockers, achievements, a timed plan from 5:00 to 22:00 and an end-of-day review.",
  "order": 0,
  "goal": "Stay focused and productive",
  "footer": [
@@ -171,9 +171,113 @@
    ]
   },
   {
+   "id": "leadership",
+   "kind": "checklist",
+   "title": "LEADERSHIP",
+   "km": "ភាពជាអ្នកដឹកនាំ",
+   "color": "#EF7C1C",
+   "items": [
+    {
+     "id": "m1",
+     "short": "Help or give feedback to one person",
+     "en": "Help one teammate, or give one person clear and kind feedback.",
+     "km": "ជួយមិត្តរួមក្រុមម្នាក់ ឬផ្តល់មតិច្បាស់ និងសុភាពដល់ម្នាក់។"
+    },
+    {
+     "id": "m2",
+     "short": "Make one decision, write why",
+     "en": "Make one decision and write down why in two lines.",
+     "km": "សម្រេចចិត្តមួយ ហើយសរសេរហេតុផលពីរបន្ទាត់។"
+    },
+    {
+     "id": "m3",
+     "short": "Share one team update",
+     "en": "Share one short update with your team: what is done, what is next, what is blocked.",
+     "km": "ចែករំលែកព័ត៌មានខ្លីមួយជាមួយក្រុម៖ អ្វីរួច អ្វីបន្ទាប់ អ្វីជាប់គាំង។"
+    },
+    {
+     "id": "m4",
+     "short": "Learn one leadership idea, 10 minutes",
+     "en": "Spend 10 minutes on leadership: a book, a podcast or an article.",
+     "km": "ចំណាយ 10 នាទីលើភាពជាអ្នកដឹកនាំ៖ សៀវភៅ podcast ឬអត្ថបទ។"
+    }
+   ],
+   "num": 5
+  },
+  {
+   "id": "startup",
+   "kind": "notes",
+   "title": "STARTUP IDEA",
+   "km": "គំនិតអាជីវកម្មថ្មី",
+   "color": "#996CAC",
+   "list_key": "idea",
+   "fields": [
+    {
+     "key": "idea",
+     "label": "Idea of the day",
+     "list": true
+    },
+    {
+     "key": "problem",
+     "label": "Problem it solves"
+    },
+    {
+     "key": "customer",
+     "label": "Who has this problem"
+    },
+    {
+     "key": "test",
+     "label": "Next small test"
+    }
+   ],
+   "num": 6
+  },
+  {
+   "id": "network",
+   "kind": "checklist",
+   "title": "NETWORK AND COMMUNITY",
+   "km": "មិត្តភក្តិ និងសហគមន៍",
+   "color": "#00A84D",
+   "fields": [
+    {
+     "key": "met",
+     "label": "New people today",
+     "list": true
+    }
+   ],
+   "items": [
+    {
+     "id": "n1",
+     "short": "Say hello to one new person",
+     "en": "Send one message to a new person: LinkedIn, Telegram, a meetup or at work. Say who you are and why.",
+     "km": "ផ្ញើសារមួយទៅមនុស្សថ្មីម្នាក់៖ LinkedIn Telegram ការជួបជុំ ឬនៅកន្លែងធ្វើការ។"
+    },
+    {
+     "id": "n2",
+     "short": "Help in one community",
+     "en": "Answer one question or share one useful thing in a developer community (Telegram group, Facebook group, GitHub).",
+     "km": "ឆ្លើយសំណួរមួយ ឬចែករំលែករឿងមានប្រយោជន៍មួយក្នុងសហគមន៍អ្នកអភិវឌ្ឍន៍។"
+    },
+    {
+     "id": "n3",
+     "short": "Keep in touch with one friend",
+     "en": "Message or call one friend or old colleague, just to ask how they are.",
+     "km": "ផ្ញើសារ ឬទូរស័ព្ទទៅមិត្ត ឬអតីតមិត្តរួមការងារម្នាក់ ដើម្បីសួរសុខទុក្ខ។"
+    }
+   ],
+   "num": 7
+  },
+  {
+   "id": "progress",
+   "kind": "progress",
+   "num": 8,
+   "title": "DAILY PROGRESS",
+   "km": "វឌ្ឍនភាពប្រចាំថ្ងៃ"
+  },
+  {
    "id": "pending",
    "kind": "notes",
-   "num": 5,
+   "num": 9,
    "title": "FOLLOW-UP / PENDING",
    "km": "តាមដាន / កំពុងរង់ចាំ",
    "color": "#5A6C93",
@@ -195,7 +299,7 @@
   {
    "id": "blockers",
    "kind": "notes",
-   "num": 6,
+   "num": 10,
    "title": "BLOCKERS / CHALLENGES",
    "km": "ឧបសគ្គ / បញ្ហា",
    "color": "#5A6C93",
@@ -217,7 +321,7 @@
   {
    "id": "wins",
    "kind": "list",
-   "num": 7,
+   "num": 11,
    "title": "TODAY'S ACHIEVEMENTS",
    "km": "សមិទ្ធផលថ្ងៃនេះ",
    "color": "#5A6C93",
@@ -225,16 +329,9 @@
    "slots": 3
   },
   {
-   "id": "progress",
-   "kind": "progress",
-   "num": 8,
-   "title": "DAILY PROGRESS",
-   "km": "វឌ្ឍនភាពប្រចាំថ្ងៃ"
-  },
-  {
    "id": "schedule",
    "kind": "schedule",
-   "num": 9,
+   "num": 12,
    "title": "TIME MANAGEMENT",
    "km": "ការគ្រប់គ្រងពេលវេលា",
    "color": "#1C2A4A",
@@ -399,7 +496,7 @@
   {
    "id": "review",
    "kind": "notes",
-   "num": 10,
+   "num": 13,
    "title": "END-OF-DAY REVIEW",
    "km": "ការពិនិត្យចុងថ្ងៃ",
    "color": "#5A6C93",
@@ -449,6 +546,30 @@
      "short": "Sunday: 100-word summary",
      "en": "On Sunday, write a 100-word summary in English of what you read.",
      "km": "ថ្ងៃអាទិត្យ សរសេរសេចក្តីសង្ខេប 100 ពាក្យ។"
+    },
+    {
+     "id": "a5",
+     "short": "Talk to 3 possible customers",
+     "en": "Talk to 3 people who might use one of your startup ideas. Ask about their problem, not your idea.",
+     "km": "និយាយជាមួយមនុស្ស 3 នាក់ដែលអាចប្រើគំនិតរបស់អ្នក។ សួរពីបញ្ហារបស់ពួកគេ មិនមែនពីគំនិតរបស់អ្នកទេ។"
+    },
+    {
+     "id": "a6",
+     "short": "One-page plan for the best idea",
+     "en": "Pick the best idea of the week and write a one-page plan: problem, customer, solution, first test.",
+     "km": "ជ្រើសគំនិតល្អបំផុតប្រចាំសប្តាហ៍ ហើយសរសេរផែនការមួយទំព័រ៖ បញ្ហា អតិថិជន ដំណោះស្រាយ ការសាកល្បងដំបូង។"
+    },
+    {
+     "id": "a7",
+     "short": "Go to one meetup or event",
+     "en": "Go to one tech meetup, workshop or community event, online or in person.",
+     "km": "ចូលរួមការជួបជុំ សិក្ខាសាលា ឬកម្មវិធីសហគមន៍មួយ តាមអនឡាញ ឬផ្ទាល់។"
+    },
+    {
+     "id": "a8",
+     "short": "Post one thing you learned",
+     "en": "Post one thing you learned this week on LinkedIn or Facebook, in English.",
+     "km": "បង្ហោះរឿងមួយដែលអ្នកបានរៀនក្នុងសប្តាហ៍នេះ លើ LinkedIn ឬ Facebook ជាភាសាអង់គ្លេស។"
     }
    ]
   }

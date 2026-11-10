@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Daily productivity dashboard · Studybook</title>
-<meta name="description" content="Top 3 priorities, work, learning (the 4 English skills and Second Chance), personal projects, follow-ups, blockers, achievements, a timed plan from 5:00 to 22:00 and an end-of-day review.">
+<meta name="description" content="Top 3 priorities, Wintex work, learning, personal projects, leadership, a startup idea a day, new people and community, follow-ups, blockers, achievements, a timed plan from 5:00 to 22:00 and an end-of-day review.">
 <meta name="theme-color" content="#1C2A4A">
 <link rel="manifest" href="../../manifest.webmanifest">
 <link rel="icon" href="../../icons/icon.svg" type="image/svg+xml">
@@ -66,7 +66,7 @@ li.note{padding-top:0;border-top:0}
   <a class="back" href="../">&larr; English</a>
   <h1>Daily productivity dashboard</h1>
   <p class="km" lang="km">ផ្ទាំងការងារប្រចាំថ្ងៃ</p>
-  <div class="total"><div class="bar"><span id="totalBar"></span></div><b id="totalTxt">0/29</b></div>
+  <div class="total"><div class="bar"><span id="totalBar"></span></div><b id="totalTxt">0/36</b></div>
 </div></header>
 <main class="wrap">
   <p class="note">Daily goal: <b>Stay focused and productive</b>. Everything resets each morning, except the week goals, which reset each Monday. For history and reports, use the Telegram bot.</p>
@@ -116,8 +116,43 @@ li.note{padding-top:0;border-top:0}
       <li><label><input type="checkbox" data-id="j4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">J4</b> Research and innovation</span><span class="km" lang="km">ការស្រាវជ្រាវ និងគំនិតថ្មី</span></span></label></li>
     </ul>
   </section>
+  <section class="grp" data-group="leadership" data-weekly="0" style="--c:#EF7C1C">
+    <h2>5. LEADERSHIP <span class="km" lang="km">ភាពជាអ្នកដឹកនាំ</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="m1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">M1</b> Help or give feedback to one person</span><span class="km" lang="km">ជួយមិត្តរួមក្រុមម្នាក់ ឬផ្តល់មតិច្បាស់ និងសុភាពដល់ម្នាក់។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="m2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">M2</b> Make one decision, write why</span><span class="km" lang="km">សម្រេចចិត្តមួយ ហើយសរសេរហេតុផលពីរបន្ទាត់។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="m3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">M3</b> Share one team update</span><span class="km" lang="km">ចែករំលែកព័ត៌មានខ្លីមួយជាមួយក្រុម៖ អ្វីរួច អ្វីបន្ទាប់ អ្វីជាប់គាំង។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="m4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">M4</b> Learn one leadership idea, 10 minutes</span><span class="km" lang="km">ចំណាយ 10 នាទីលើភាពជាអ្នកដឹកនាំ៖ សៀវភៅ podcast ឬអត្ថបទ។</span></span></label></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="startup" data-weekly="0" style="--c:#996CAC">
+    <h2>6. STARTUP IDEA <span class="km" lang="km">គំនិតអាជីវកម្មថ្មី</span><span class="cnt"></span></h2>
+    <ul class="notes">
+      <li><span>Idea of the day</span><input type="text" data-note="idea" placeholder="-"></li>
+      <li><span>Problem it solves</span><input type="text" data-note="problem" placeholder="-"></li>
+      <li><span>Who has this problem</span><input type="text" data-note="customer" placeholder="-"></li>
+      <li><span>Next small test</span><input type="text" data-note="test" placeholder="-"></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="network" data-weekly="0" style="--c:#00A84D">
+    <h2>7. NETWORK AND COMMUNITY <span class="km" lang="km">មិត្តភក្តិ និងសហគមន៍</span><span class="cnt"></span></h2>
+    <div class="bar"><span></span></div>
+    <ul>
+      <li><label><input type="checkbox" data-id="n1"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">N1</b> Say hello to one new person</span><span class="km" lang="km">ផ្ញើសារមួយទៅមនុស្សថ្មីម្នាក់៖ LinkedIn Telegram ការជួបជុំ ឬនៅកន្លែងធ្វើការ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="n2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">N2</b> Help in one community</span><span class="km" lang="km">ឆ្លើយសំណួរមួយ ឬចែករំលែករឿងមានប្រយោជន៍មួយក្នុងសហគមន៍អ្នកអភិវឌ្ឍន៍។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="n3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">N3</b> Keep in touch with one friend</span><span class="km" lang="km">ផ្ញើសារ ឬទូរស័ព្ទទៅមិត្ត ឬអតីតមិត្តរួមការងារម្នាក់ ដើម្បីសួរសុខទុក្ខ។</span></span></label></li>
+    </ul>
+    <ul class="notes">
+      <li><span>New people today</span><input type="text" data-note="met" placeholder="-"></li>
+    </ul>
+  </section>
+  <section class="grp" data-group="progress" data-weekly="0" style="--c:#5A6C93">
+    <h2>8. DAILY PROGRESS <span class="km" lang="km">វឌ្ឍនភាពប្រចាំថ្ងៃ</span><span class="cnt"></span></h2>
+    <p class="prog" id="prog"></p>
+  </section>
   <section class="grp" data-group="pending" data-weekly="0" style="--c:#5A6C93">
-    <h2>5. FOLLOW-UP / PENDING <span class="km" lang="km">តាមដាន / កំពុងរង់ចាំ</span><span class="cnt"></span></h2>
+    <h2>9. FOLLOW-UP / PENDING <span class="km" lang="km">តាមដាន / កំពុងរង់ចាំ</span><span class="cnt"></span></h2>
     <ul class="notes">
       <li><span>Follow up with</span><input type="text" data-note="follow" placeholder="-"></li>
       <li><span>Waiting for</span><input type="text" data-note="waiting" placeholder="-"></li>
@@ -125,7 +160,7 @@ li.note{padding-top:0;border-top:0}
     </ul>
   </section>
   <section class="grp" data-group="blockers" data-weekly="0" style="--c:#5A6C93">
-    <h2>6. BLOCKERS / CHALLENGES <span class="km" lang="km">ឧបសគ្គ / បញ្ហា</span><span class="cnt"></span></h2>
+    <h2>10. BLOCKERS / CHALLENGES <span class="km" lang="km">ឧបសគ្គ / បញ្ហា</span><span class="cnt"></span></h2>
     <ul class="notes">
       <li><span>Issue</span><input type="text" data-note="issue" placeholder="-"></li>
       <li><span>Reason</span><input type="text" data-note="reason" placeholder="-"></li>
@@ -133,19 +168,15 @@ li.note{padding-top:0;border-top:0}
     </ul>
   </section>
   <section class="grp" data-group="wins" data-weekly="0" style="--c:#5A6C93">
-    <h2>7. TODAY&#x27;S ACHIEVEMENTS <span class="km" lang="km">សមិទ្ធផលថ្ងៃនេះ</span><span class="cnt"></span></h2>
+    <h2>11. TODAY&#x27;S ACHIEVEMENTS <span class="km" lang="km">សមិទ្ធផលថ្ងៃនេះ</span><span class="cnt"></span></h2>
     <ul class="notes">
       <li><span>1.</span><input type="text" data-note="win-0" placeholder="-"></li>
       <li><span>2.</span><input type="text" data-note="win-1" placeholder="-"></li>
       <li><span>3.</span><input type="text" data-note="win-2" placeholder="-"></li>
     </ul>
   </section>
-  <section class="grp" data-group="progress" data-weekly="0" style="--c:#5A6C93">
-    <h2>8. DAILY PROGRESS <span class="km" lang="km">វឌ្ឍនភាពប្រចាំថ្ងៃ</span><span class="cnt"></span></h2>
-    <p class="prog" id="prog"></p>
-  </section>
   <section class="grp" data-group="schedule" data-weekly="0" style="--c:#1C2A4A">
-    <h2>9. TIME MANAGEMENT <span class="km" lang="km">ការគ្រប់គ្រងពេលវេលា</span><span class="cnt"></span></h2>
+    <h2>12. TIME MANAGEMENT <span class="km" lang="km">ការគ្រប់គ្រងពេលវេលា</span><span class="cnt"></span></h2>
     <div class="bar"><span></span></div>
     <ul>
       <li class="sec">Morning (05:00 - 12:00)</li>
@@ -175,7 +206,7 @@ li.note{padding-top:0;border-top:0}
     </ul>
   </section>
   <section class="grp" data-group="review" data-weekly="0" style="--c:#5A6C93">
-    <h2>10. END-OF-DAY REVIEW <span class="km" lang="km">ការពិនិត្យចុងថ្ងៃ</span><span class="cnt"></span></h2>
+    <h2>13. END-OF-DAY REVIEW <span class="km" lang="km">ការពិនិត្យចុងថ្ងៃ</span><span class="cnt"></span></h2>
     <ul class="notes">
       <li><span>What went well?</span><input type="text" data-note="well" placeholder="-"></li>
       <li><span>What needs improvement?</span><input type="text" data-note="improve" placeholder="-"></li>
@@ -190,6 +221,10 @@ li.note{padding-top:0;border-top:0}
       <li><label><input type="checkbox" data-id="a2"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">A2</b> Run on 5 days</span><span class="km" lang="km">រត់យ៉ាងហោចណាស់ 5 ថ្ងៃ។</span></span></label></li>
       <li><label><input type="checkbox" data-id="a3"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">A3</b> Read 100 pages of Second Chance</span><span class="km" lang="km">អាន Second Chance 100 ទំព័រ។</span></span></label></li>
       <li><label><input type="checkbox" data-id="a4"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">A4</b> Sunday: 100-word summary</span><span class="km" lang="km">ថ្ងៃអាទិត្យ សរសេរសេចក្តីសង្ខេប 100 ពាក្យ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="a5"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">A5</b> Talk to 3 possible customers</span><span class="km" lang="km">និយាយជាមួយមនុស្ស 3 នាក់ដែលអាចប្រើគំនិតរបស់អ្នក។ សួរពីបញ្ហារបស់ពួកគេ មិនមែនពីគំនិតរបស់អ្នកទេ។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="a6"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">A6</b> One-page plan for the best idea</span><span class="km" lang="km">ជ្រើសគំនិតល្អបំផុតប្រចាំសប្តាហ៍ ហើយសរសេរផែនការមួយទំព័រ៖ បញ្ហា អតិថិជន ដំណោះស្រាយ ការសាកល្បងដំបូង។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="a7"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">A7</b> Go to one meetup or event</span><span class="km" lang="km">ចូលរួមការជួបជុំ សិក្ខាសាលា ឬកម្មវិធីសហគមន៍មួយ តាមអនឡាញ ឬផ្ទាល់។</span></span></label></li>
+      <li><label><input type="checkbox" data-id="a8"><span class="box" aria-hidden="true"></span><span class="txt"><span class="en"><b class="code">A8</b> Post one thing you learned</span><span class="km" lang="km">បង្ហោះរឿងមួយដែលអ្នកបានរៀនក្នុងសប្តាហ៍នេះ លើ LinkedIn ឬ Facebook ជាភាសាអង់គ្លេស។</span></span></label></li>
     </ul>
   </section>
 </main>

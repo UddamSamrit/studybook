@@ -58,6 +58,9 @@ def main():
                     if kind == 'priorities':
                         rows.append(f'      <li class="note"><input type="text" data-note="{e(t["id"])}" placeholder="Write your {e(t["short"].lower())}"></li>\n')
             body = '    <div class="bar"><span></span></div>\n    <ul>\n' + ''.join(rows) + '    </ul>\n'
+            if g.get('fields'):
+                body += '    <ul class="notes">\n' + ''.join(
+                    f'      <li><span>{e(f["label"])}</span><input type="text" data-note="{e(f["key"])}" placeholder="-"></li>\n' for f in g['fields']) + '    </ul>\n'
             if g.get('tracking'):
                 body += '    <p class="sub">Time tracking</p>\n    <ul class="track">\n' + ''.join(
                     f'      <li><span>{e(t["label"])}</span><input type="number" min="0" max="{10 if t["unit"] == "/10" else 24}" step="0.5" data-note="track-{e(t["key"])}" placeholder="__"><span>{e(t["unit"])}'
