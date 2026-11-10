@@ -76,13 +76,17 @@ def log(*a):
 def api(method, **params):
     data = urllib.parse.urlencode({k: (json.dumps(v) if isinstance(v, (dict, list)) else v) for k, v in params.items()}).encode()
     try:
-        with urllib.request.urlopen(urllib.request.Request(API + method, data=data), timeout=70) as r:
+        with urllib.request.urlopen(urllib.request.Request(API + method, data=data), timeout=40) as r:
             return json.load(r)
     except urllib.error.HTTPError as e:
         body = json.load(e)
         if 'message is not modified' not in body.get('description', ''):
             log('api error', method, body.get('description'))
         return body
+    except Exception as e:  # no network yet (just woke up), DNS, timeout: report and let the loop retry
+        log('network error', method, repr(e))
+        time.sleep(5)
+        return {'ok': False, 'result': []}
 
 
 # ---------------------------------------------------------------- the dashboard definition
@@ -788,13 +792,16 @@ def handle(u):
 
 
 def due(key, hour, minute=0):
+    """True when today's message at hour:minute has not been sent yet (also after the Mac wakes up late)."""
     t = now()
     last = db.execute('SELECT v FROM meta WHERE k=?', (key,)).fetchone()
-    if (t.hour, t.minute) >= (hour, minute) and (not last or last[0] != t.date().isoformat()):
-        db.execute('INSERT OR REPLACE INTO meta VALUES (?, ?)', (key, t.date().isoformat()))
-        db.commit()
-        return True
-    return False
+    return (t.hour, t.minute) >= (hour, minute) and (not last or last[0] != t.date().isoformat())
+
+
+def sent(key):
+    """Mark today's message as sent, only after Telegram said ok, so a failed send is tried again."""
+    db.execute('INSERT OR REPLACE INTO meta VALUES (?, ?)', (key, now().date().isoformat()))
+    db.commit()
 
 
 def main():
@@ -824,12 +831,16 @@ def main():
     log('bot running for chat', CHAT, f'dashboard at {MORNING}:00, review at {EVENING}')
     while True:
         try:
-            if due('morning', MORNING):
-                send_home(greet=True)
+            if due('morning', MORNING) and send_home(greet=True).get('ok'):
+                sent('morning')
+                log('morning dashboard sent')
             if due('evening', eh, em):
                 t, kb = review_prompt()
-                say(t, kb)
-            r = api('getUpdates', offset=offset, timeout=50, allowed_updates=['message', 'callback_query'])
+                if say(t, kb).get('ok'):
+                    sent('evening')
+                    log('evening review sent')
+            # short polls, so the 5:00 and 21:30 checks run soon after the Mac wakes up
+            r = api('getUpdates', offset=offset, timeout=20, allowed_updates=['message', 'callback_query'])
             for u in r.get('result', []):
                 offset = u['update_id'] + 1
                 db.execute("INSERT OR REPLACE INTO meta VALUES ('offset', ?)", (str(offset),))
