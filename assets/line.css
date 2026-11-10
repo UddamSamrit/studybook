@@ -1,0 +1,78 @@
+/* Studybook: shared tokens and base. World: Seoul Metro wayfinding (see PRODUCT.md, DESIGN.md). */
+:root{
+  --f:'Gothic A1',system-ui,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --ground:#EEF0F4;      /* platform grey */
+  --surface:#FFFFFF;
+  --ink:#16203A;
+  --ink-2:#4F5970;
+  --ink-3:#8A93A6;
+  --rule:#D3D8E2;
+  --sign:#1C2A4A;        /* navy enamel sign */
+  --on-sign:#FFFFFF;
+  --on-sign-2:#C4CCDD;
+  --line:#00A84D;        /* Line 2 green, the stripe */
+  --line-ink:#00803A;    /* green that carries white text */
+  --here:#F5B700;        /* you are here */
+  --notice:#D7372B;      /* NEW, alerts (fill, white text) */
+  --notice-ink:#C02D22;  /* red used as text */
+  --r:14px;
+  --shadow:0 1px 2px rgba(22,32,58,.06),0 4px 14px rgba(22,32,58,.07);
+  --shadow-up:0 2px 4px rgba(22,32,58,.08),0 10px 26px rgba(22,32,58,.12);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --ground:#0E1322;
+  --surface:#18203A;
+  --ink:#EEF1F8;
+  --ink-2:#AAB3C7;
+  --ink-3:#6F7890;
+  --rule:#2C3654;
+  --sign:#0A0F1D;
+  --on-sign:#FFFFFF;
+  --on-sign-2:#AAB3C7;
+  --line:#16B95E;
+  --line-ink:#00803A;
+  --here:#FFC629;
+  --notice:#D7372B;
+  --notice-ink:#FF8F85;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.3);
+  --shadow-up:0 2px 4px rgba(0,0,0,.4),0 12px 28px rgba(0,0,0,.4);
+  color-scheme:dark;
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--f);line-height:1.5;-webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;min-height:100vh}
+.wrap{width:100%;max-width:640px;margin:0 auto;padding-left:max(1.1rem,env(safe-area-inset-left));padding-right:max(1.1rem,env(safe-area-inset-right))}
+.stripe{height:8px;background:var(--line)}
+::selection{background:var(--here);color:#16203A}
+:focus-visible{outline:3px solid var(--here);outline-offset:3px;border-radius:6px}
+a{color:inherit}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* ---------- text switch: English, Korean, Lyric (set on <html data-script> by assets/script.js) ---------- */
+.t-ro,.ui-en,.only-en,.only-ro{display:none}
+html[data-script="ro"] .t-ko,html[data-script="en"] .t-ko,
+html[data-script="ro"] .ui-ko,html[data-script="en"] .ui-ko{display:none}
+html[data-script="ro"] .t-ro,html[data-script="en"] .t-ro,
+html[data-script="ro"] .ui-en,html[data-script="en"] .ui-en,
+html[data-script="en"] .only-en{display:inline}
+html[data-script="ro"] p.only-ro{display:block}
+html[data-script="en"] .not-en,html[data-script="en"] .mk,html[data-script="en"] .hook,
+html[data-script="en"] .has-en,html[data-script="en"] .not-ko-end,html[data-script="en"] .f-hint,
+html[data-script="en"] [data-toggle="hide-ko"],html[data-script="en"] [data-toggle="hide-vko"]{display:none!important}
+.t-ro{word-break:normal;overflow-wrap:anywhere}
+.script{display:inline-flex;flex:none;gap:2px;padding:2px;background:rgba(255,255,255,.13);border-radius:10px}
+.script button{appearance:none;border:0;background:none;color:var(--on-sign-2);font:700 .78rem/1 var(--f);min-height:38px;
+  padding:0 .58rem;border-radius:8px;cursor:pointer}
+.script button:hover{color:var(--on-sign)}
+.script button[aria-pressed="true"]{background:var(--on-sign);color:#1C2A4A}
+.script button:focus-visible{outline:3px solid var(--here);outline-offset:1px}
+@media print{.script{display:none!important}}
+/* any study language other than Korean: controls always in English, no Lyric (render_unit.py sets data-ui) */
+html[data-ui="en"] .ui-ko{display:none!important}
+html[data-ui="en"] .ui-en{display:inline!important}
+html[data-ui="en"] .only-ro{display:none!important}
