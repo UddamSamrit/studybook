@@ -1,0 +1,352 @@
+{
+ "slug": "kubernetes/06-storage",
+ "order": 6,
+ "title_ko": "K8s 6 · Volumes and StatefulSets",
+ "title_en": "Volume និង StatefulSet",
+ "subtitle": "រក្សាទិន្នន័យ ទោះ pod ស្លាប់ក៏ដោយ",
+ "description": "Kubernetes zero to hero, step 6 of 11: Volumes and StatefulSets. Picture cards with native audio, Q&A and 14 words, with Khmer translations.",
+ "station_en": "Step 6 of 11 · រក្សាទិន្នន័យ ទោះ pod ស្លាប់ក៏ដោយ",
+ "sections": [
+  {
+   "id": "problem",
+   "ko": "The problem",
+   "en": "បញ្ហា",
+   "color": "#0052A4"
+  },
+  {
+   "id": "disk",
+   "ko": "Disks",
+   "en": "Disk",
+   "color": "#00A84D"
+  },
+  {
+   "id": "db",
+   "ko": "Databases",
+   "en": "Database",
+   "color": "#996CAC"
+  },
+  {
+   "id": "safe",
+   "ko": "Stay safe",
+   "en": "សុវត្ថិភាព",
+   "color": "#EF7C1C"
+  }
+ ],
+ "spine": {
+  "title": "Line map · Volumes and StatefulSets",
+  "note": "តាមលំដាប់៖ ទិន្នន័យបាត់ → volume និង disk → database → backup។"
+ },
+ "explain": {
+  "title": "The big picture · រូបភាពរួម",
+  "why": "កុងតឺន័របាត់ទិន្នន័យពេល restart។ Volume ទុកទិន្នន័យនៅក្រៅ ហើយ StatefulSet ផ្តល់ឈ្មោះ និង disk ថេរ។",
+  "tiles": [
+   {
+    "img": "img/c02.svg",
+    "ko": "Volume",
+    "en": "ទិន្នន័យនៅក្រៅ",
+    "color": "#00A84D"
+   },
+   {
+    "img": "img/c03.svg",
+    "ko": "Real disk",
+    "en": "disk ពិតប្រាកដ",
+    "color": "#00A84D"
+   },
+   {
+    "img": "img/c07.svg",
+    "ko": "Fixed names",
+    "en": "db-0, db-1",
+    "color": "#996CAC"
+   },
+   {
+    "img": "img/c09.svg",
+    "ko": "Backups",
+    "en": "ចម្លងទុក",
+    "color": "#EF7C1C"
+   }
+  ]
+ },
+ "cards": [
+  {
+   "sec": "problem",
+   "img": "img/c01.svg",
+   "flat": true,
+   "alt": "A container restarts and a file is crossed out",
+   "hook": "disappear",
+   "ko": "A container's files disappear when it restarts.",
+   "en": "ឯកសាររបស់កុងតឺន័របាត់ ពេលវា restart។",
+   "audio": "audio/c01.mp3"
+  },
+  {
+   "sec": "disk",
+   "img": "img/c02.svg",
+   "flat": true,
+   "alt": "A container connected to a disk outside it",
+   "hook": "volume",
+   "ko": "A volume keeps data outside the container.",
+   "en": "Volume រក្សាទុកទិន្នន័យ នៅក្រៅកុងតឺន័រ។",
+   "audio": "audio/c02.mp3"
+  },
+  {
+   "sec": "disk",
+   "img": "img/c03.svg",
+   "flat": true,
+   "alt": "A green disk labelled 50 GB",
+   "hook": "PV",
+   "ko": "A PersistentVolume is a piece of real storage, like a cloud disk.",
+   "en": "PersistentVolume គឺជាកន្លែងផ្ទុកពិតប្រាកដ ដូចជា disk នៅលើ cloud។",
+   "audio": "audio/c03.mp3"
+  },
+  {
+   "sec": "disk",
+   "img": "img/c04.svg",
+   "flat": true,
+   "alt": "A request ticket for 10 GB and a disk",
+   "hook": "claim",
+   "ko": "A PersistentVolumeClaim is a pod's request for storage.",
+   "en": "PersistentVolumeClaim គឺជាសំណើរបស់ pod ដើម្បីសុំកន្លែងផ្ទុក។",
+   "audio": "audio/c04.mp3"
+  },
+  {
+   "sec": "disk",
+   "img": "img/c05.svg",
+   "flat": true,
+   "alt": "A gear making a new disk",
+   "hook": "StorageClass",
+   "ko": "A StorageClass creates disks automatically when we ask.",
+   "en": "StorageClass បង្កើត disk ដោយស្វ័យប្រវត្តិ ពេលយើងសុំ។",
+   "audio": "audio/c05.mp3"
+  },
+  {
+   "sec": "db",
+   "img": "img/c06.svg",
+   "flat": true,
+   "alt": "A database with a name tag",
+   "hook": "stateful",
+   "ko": "Databases need stable names and their own disks.",
+   "en": "Database ត្រូវការឈ្មោះថេរ និង disk ផ្ទាល់ខ្លួន។",
+   "audio": "audio/c06.mp3"
+  },
+  {
+   "sec": "db",
+   "img": "img/c07.svg",
+   "flat": true,
+   "alt": "Two databases named db-0 and db-1",
+   "hook": "StatefulSet",
+   "ko": "A StatefulSet gives each pod a fixed name, like db-0 and db-1.",
+   "en": "StatefulSet ផ្តល់ឈ្មោះថេរឲ្យ pod នីមួយៗ ដូចជា db-0 និង db-1។",
+   "audio": "audio/c07.mp3"
+  },
+  {
+   "sec": "db",
+   "img": "img/c08.svg",
+   "flat": true,
+   "alt": "A pod and its disk moving together",
+   "hook": "own disk",
+   "ko": "Each pod keeps its own disk, even after it moves.",
+   "en": "Pod នីមួយៗរក្សា disk ផ្ទាល់ខ្លួន ទោះបីវាផ្លាស់ទីក៏ដោយ។",
+   "audio": "audio/c08.mp3"
+  },
+  {
+   "sec": "safe",
+   "img": "img/c09.svg",
+   "flat": true,
+   "alt": "A disk copied to a second disk",
+   "hook": "backup",
+   "ko": "We still take backups, because disks can fail.",
+   "en": "យើងនៅតែធ្វើ backup ព្រោះ disk អាចខូចបាន។",
+   "audio": "audio/c09.mp3"
+  }
+ ],
+ "qa": [
+  {
+   "title": "Traps · កំហុសដែលងាយធ្វើ",
+   "small": "អានមុនគេ",
+   "kind": "trap",
+   "items": [
+    {
+     "q": "Should I use a deployment for my database?",
+     "qen": "គួរប្រើ deployment សម្រាប់ database ទេ?",
+     "qaudio": "audio/qt1.mp3",
+     "a": "Usually no. Use a StatefulSet, or a managed database from the cloud.",
+     "aen": "ជាធម្មតា មិនគួរទេ។ ប្រើ StatefulSet ឬ database ដែល cloud គ្រប់គ្រងឲ្យ។",
+     "why": "ក្រុមជាច្រើនប្រើ database របស់ cloud ដើម្បីកុំឲ្យពិបាកថែទាំ។",
+     "audio": "audio/at1.mp3"
+    },
+    {
+     "q": "If I delete the pod, is the data gone?",
+     "qen": "បើខ្ញុំលុប pod តើទិន្នន័យបាត់ទេ?",
+     "qaudio": "audio/qt2.mp3",
+     "a": "No. The data lives on the volume, not in the pod.",
+     "aen": "ទេ។ ទិន្នន័យនៅលើ volume មិនមែននៅក្នុង pod ទេ។",
+     "why": "តែបើលុប PVC ទិន្នន័យអាចបាត់ អាស្រ័យលើ reclaim policy។",
+     "audio": "audio/at2.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Questions · សំណួរនៅកន្លែងធ្វើការ",
+   "small": "ឆ្លើយក្នុងចិត្ត រួចចុច Listen ដើម្បីប្រៀបធៀប",
+   "kind": "qa",
+   "items": [
+    {
+     "q": "Why is my PVC stuck in Pending?",
+     "qen": "ហេតុអ្វី PVC របស់ខ្ញុំជាប់ Pending?",
+     "qaudio": "audio/qc1.mp3",
+     "a": "There is no StorageClass, or no disk matches the request.",
+     "aen": "គ្មាន StorageClass ឬគ្មាន disk ណាត្រូវនឹងសំណើទេ។",
+     "audio": "audio/ac1.mp3"
+    },
+    {
+     "q": "How big is the database disk?",
+     "qen": "Disk របស់ database ធំប៉ុណ្ណា?",
+     "qaudio": "audio/qc2.mp3",
+     "a": "Fifty gigabytes, and we can expand it.",
+     "aen": "ហាសិប gigabyte ហើយយើងអាចពង្រីកវាបាន។",
+     "audio": "audio/ac2.mp3",
+     "check": true
+    },
+    {
+     "q": "How do we back up the data?",
+     "qen": "យើង backup ទិន្នន័យយ៉ាងដូចម្តេច?",
+     "qaudio": "audio/qc3.mp3",
+     "a": "We take a snapshot every night.",
+     "aen": "យើងថត snapshot រៀងរាល់យប់។",
+     "audio": "audio/ac3.mp3",
+     "check": true
+    }
+   ]
+  },
+  {
+   "title": "When you're stuck · ពេលនឹកមិនឃើញ",
+   "small": "ឃ្លាជួយសង្គ្រោះ",
+   "kind": "surv",
+   "items": [
+    {
+     "ko": "Is this data safe to delete?",
+     "en": "ទិន្នន័យនេះ លុបបានដោយសុវត្ថិភាពទេ?",
+     "audio": "audio/s1.mp3"
+    },
+    {
+     "ko": "Let me check the backup first.",
+     "en": "ចាំខ្ញុំពិនិត្យ backup ជាមុនសិន។",
+     "audio": "audio/s2.mp3"
+    }
+   ]
+  }
+ ],
+ "vocab": [
+  {
+   "title": "Storage objects",
+   "color": "#00A84D",
+   "items": [
+    {
+     "ko": "volume",
+     "en": "កន្លែងផ្ទុកទិន្នន័យ",
+     "audio": "audio/v01.mp3"
+    },
+    {
+     "ko": "PersistentVolume",
+     "en": "disk ពិតប្រាកដ",
+     "audio": "audio/v02.mp3"
+    },
+    {
+     "ko": "PersistentVolumeClaim",
+     "en": "សំណើសុំ disk",
+     "audio": "audio/v03.mp3"
+    },
+    {
+     "ko": "StorageClass",
+     "en": "ប្រភេទ disk ដែលបង្កើតដោយស្វ័យប្រវត្តិ",
+     "audio": "audio/v04.mp3"
+    },
+    {
+     "ko": "StatefulSet",
+     "en": "សម្រាប់កម្មវិធីដែលមានទិន្នន័យ",
+     "audio": "audio/v05.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Ideas",
+   "color": "#996CAC",
+   "items": [
+    {
+     "ko": "stateful",
+     "en": "មានទិន្នន័យត្រូវរក្សា",
+     "audio": "audio/v06.mp3"
+    },
+    {
+     "ko": "stateless",
+     "en": "គ្មានទិន្នន័យត្រូវរក្សា",
+     "audio": "audio/v07.mp3"
+    },
+    {
+     "ko": "capacity",
+     "en": "ទំហំផ្ទុក",
+     "audio": "audio/v08.mp3"
+    },
+    {
+     "ko": "access mode",
+     "en": "របៀបចូលប្រើ disk",
+     "audio": "audio/v09.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Keeping data safe",
+   "color": "#EF7C1C",
+   "items": [
+    {
+     "ko": "disk",
+     "en": "ថាស",
+     "audio": "audio/v10.mp3"
+    },
+    {
+     "ko": "snapshot",
+     "en": "រូបថតទិន្នន័យ",
+     "audio": "audio/v11.mp3"
+    },
+    {
+     "ko": "backup",
+     "en": "ការចម្លងទុក",
+     "audio": "audio/v12.mp3"
+    },
+    {
+     "ko": "restore",
+     "en": "យកមកវិញ",
+     "audio": "audio/v13.mp3"
+    },
+    {
+     "ko": "database",
+     "en": "មូលដ្ឋានទិន្នន័យ",
+     "audio": "audio/v14.mp3"
+    }
+   ]
+  }
+ ],
+ "full_title": "Volumes and StatefulSets · ពីដើមដល់ចប់",
+ "full": [
+  {
+   "title": "The problem · បញ្ហា",
+   "ko": "A container's files disappear when it restarts.",
+   "en": "ឯកសាររបស់កុងតឺន័របាត់ ពេលវា restart។"
+  },
+  {
+   "title": "Disks · Disk",
+   "ko": "A volume keeps data outside the container. A PersistentVolume is a piece of real storage, like a cloud disk. A PersistentVolumeClaim is a pod's request for storage. A StorageClass creates disks automatically when we ask.",
+   "en": "Volume រក្សាទុកទិន្នន័យ នៅក្រៅកុងតឺន័រ។ PersistentVolume គឺជាកន្លែងផ្ទុកពិតប្រាកដ ដូចជា disk នៅលើ cloud។ PersistentVolumeClaim គឺជាសំណើរបស់ pod ដើម្បីសុំកន្លែងផ្ទុក។ StorageClass បង្កើត disk ដោយស្វ័យប្រវត្តិ ពេលយើងសុំ។"
+  },
+  {
+   "title": "Databases · Database",
+   "ko": "Databases need stable names and their own disks. A StatefulSet gives each pod a fixed name, like db-0 and db-1. Each pod keeps its own disk, even after it moves.",
+   "en": "Database ត្រូវការឈ្មោះថេរ និង disk ផ្ទាល់ខ្លួន។ StatefulSet ផ្តល់ឈ្មោះថេរឲ្យ pod នីមួយៗ ដូចជា db-0 និង db-1។ Pod នីមួយៗរក្សា disk ផ្ទាល់ខ្លួន ទោះបីវាផ្លាស់ទីក៏ដោយ។"
+  },
+  {
+   "title": "Stay safe · សុវត្ថិភាព",
+   "ko": "We still take backups, because disks can fail.",
+   "en": "យើងនៅតែធ្វើ backup ព្រោះ disk អាចខូចបាន។"
+  }
+ ],
+ "published": "2026-11-10"
+}

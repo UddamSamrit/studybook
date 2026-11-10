@@ -281,5 +281,5 @@
     });
   }
 
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('../sw.js', { scope: '../' }).catch(function () {});
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register((document.body.dataset.root || '../') + 'sw.js', { scope: document.body.dataset.root || '../' }).catch(function () {});
 })();

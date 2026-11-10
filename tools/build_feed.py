@@ -51,7 +51,17 @@ def content(u):
     return ''.join(c)
 
 
-units = [json.load(io.open(p, encoding='utf-8')) for p in glob.glob(os.path.join(ROOT, '*', 'unit.json'))]
+def _draft(p):  # a unit inside a book whose book.json says "draft": true stays out of the feed
+    d = os.path.dirname(os.path.dirname(p))
+    while len(d) > len(ROOT):
+        b = os.path.join(d, 'book.json')
+        if os.path.isfile(b) and json.load(io.open(b, encoding='utf-8')).get('draft'):
+            return True
+        d = os.path.dirname(d)
+    return False
+
+
+units = [json.load(io.open(p, encoding='utf-8')) for p in glob.glob(os.path.join(ROOT, '**', 'unit.json'), recursive=True) if not _draft(p)]
 units.sort(key=lambda u: (u.get('published', ''), u.get('order', 0), u.get('slug', '')), reverse=True)
 date = lambda u: format_datetime(datetime.strptime(u.get('published', '2026-01-01'), '%Y-%m-%d').replace(hour=12, tzinfo=timezone.utc))
 items = []

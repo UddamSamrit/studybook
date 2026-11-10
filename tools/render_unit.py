@@ -110,6 +110,7 @@ def render(u):
     secs = {s['id']: s for s in u['sections']}
     color = lambda sid: secs.get(sid, {}).get('color', '#00A84D')
     cards = u['cards']
+    R = '../' * (u['slug'].count('/') + 1)  # path back to the site root (units can sit inside a book folder)
     vcount = sum(len(g['items']) for g in u['vocab'])
     qcount = sum(len(b['items']) for b in u['qa'] if b.get('kind') != 'surv')
 
@@ -249,25 +250,25 @@ def render(u):
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{e(u["title_ko"])} · {e(u["title_en"])}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="manifest" href="../manifest.webmanifest">
-<link rel="icon" href="../icons/icon.svg" type="image/svg+xml">
-<link rel="icon" href="../icons/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="120x120" href="../icons/apple-touch-icon-120.png">
-<link rel="apple-touch-icon" sizes="152x152" href="../icons/apple-touch-icon-152.png">
-<link rel="apple-touch-icon" sizes="167x167" href="../icons/apple-touch-icon-167.png">
-<link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+<link rel="manifest" href="{R}manifest.webmanifest">
+<link rel="icon" href="{R}icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="{R}icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{R}icons/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="120x120" href="{R}icons/apple-touch-icon-120.png">
+<link rel="apple-touch-icon" sizes="152x152" href="{R}icons/apple-touch-icon-152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="{R}icons/apple-touch-icon-167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="{R}icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-title" content="{e(CFG["short"])}">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800&display=swap">
-<link rel="stylesheet" href="../assets/line.css?{V}">
-<link rel="stylesheet" href="../assets/unit.css?{V}">
-<script src="../assets/script.js?{V}"></script>
+<link rel="stylesheet" href="{R}assets/line.css?{V}">
+<link rel="stylesheet" href="{R}assets/unit.css?{V}">
+<script src="{R}assets/script.js?{V}"></script>
 </head>
-<body data-unit="{e(u["slug"])}">
+<body data-unit="{e(u["slug"])}" data-root="{R}">
 <header class="usign">
   <div class="wrap">
     <div class="row"><a class="back" href="../">{ICON["back"]}{ui("노선도 · All units", "All units")}</a>{switch()}</div>
@@ -361,7 +362,7 @@ def render(u):
   </div>
 </section>
 
-<script src="../assets/unit.js?{V}" defer></script>
+<script src="{R}assets/unit.js?{V}" defer></script>
 </body>
 </html>
 '''

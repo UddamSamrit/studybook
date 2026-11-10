@@ -1,7 +1,7 @@
 {
-  "name": "Uddam's English Studybook",
+  "name": "Uddam's Studybook",
   "short_name": "Studybook",
-  "description": "English study units: picture cards with native audio, Q&A, vocabulary and full text.",
+  "description": "Study books with picture cards, native audio, Q&A and words: English, Kubernetes and interview prep, with Khmer translations.",
   "id": "./",
   "start_url": "./",
   "scope": "./",

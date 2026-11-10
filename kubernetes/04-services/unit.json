@@ -1,0 +1,355 @@
+{
+ "slug": "kubernetes/04-services",
+ "order": 4,
+ "title_ko": "K8s 4 · Services and Ingress",
+ "title_en": "Service និង Ingress",
+ "subtitle": "ធ្វើឲ្យកម្មវិធីរកគ្នាឃើញ និងបើកឲ្យអ្នកប្រើចូល",
+ "description": "Kubernetes zero to hero, step 4 of 11: Services and Ingress. Picture cards with native audio, Q&A and 15 words, with Khmer translations.",
+ "station_en": "Step 4 of 11 · ធ្វើឲ្យកម្មវិធីរកគ្នាឃើញ និងបើកឲ្យអ្នកប្រើចូល",
+ "sections": [
+  {
+   "id": "problem",
+   "ko": "The problem",
+   "en": "បញ្ហា",
+   "color": "#0052A4"
+  },
+  {
+   "id": "svc",
+   "ko": "Services",
+   "en": "Service",
+   "color": "#00A84D"
+  },
+  {
+   "id": "ingress",
+   "ko": "Ingress",
+   "en": "Ingress",
+   "color": "#996CAC"
+  },
+  {
+   "id": "dns",
+   "ko": "Inside",
+   "en": "នៅខាងក្នុង",
+   "color": "#EF7C1C"
+  }
+ ],
+ "spine": {
+  "title": "Line map · Services and Ingress",
+  "note": "តាមលំដាប់៖ IP ប្តូរ → service → ingress → ហៅគ្នាតាមឈ្មោះ។"
+ },
+ "explain": {
+  "title": "The big picture · រូបភាពរួម",
+  "why": "Pod ប្តូរ IP ជានិច្ច។ Service ផ្តល់ឈ្មោះថេរ ហើយ Ingress បើកទ្វារឲ្យអ្នកប្រើពីខាងក្រៅ។",
+  "tiles": [
+   {
+    "img": "img/c02.svg",
+    "ko": "Stable name",
+    "en": "ឈ្មោះថេរ",
+    "color": "#00A84D"
+   },
+   {
+    "img": "img/c05.svg",
+    "ko": "Public IP",
+    "en": "IP សាធារណៈ",
+    "color": "#996CAC"
+   },
+   {
+    "img": "img/c06.svg",
+    "ko": "Routing",
+    "en": "បញ្ជូនតាម URL",
+    "color": "#996CAC"
+   },
+   {
+    "img": "img/c09.svg",
+    "ko": "DNS",
+    "en": "ឈ្មោះ → អាសយដ្ឋាន",
+    "color": "#EF7C1C"
+   }
+  ]
+ },
+ "cards": [
+  {
+   "sec": "problem",
+   "img": "img/c01.svg",
+   "flat": true,
+   "alt": "A pod with one IP, then a new pod with another IP",
+   "hook": "IP",
+   "ko": "Pods come and go, and their IP addresses change.",
+   "en": "Pod មក ហើយទៅ ហើយ IP address របស់វាផ្លាស់ប្តូរ។",
+   "audio": "audio/c01.mp3"
+  },
+  {
+   "sec": "svc",
+   "img": "img/c02.svg",
+   "flat": true,
+   "alt": "A signpost named web pointing to three containers",
+   "hook": "service",
+   "ko": "A service gives a group of pods one stable name.",
+   "en": "Service ផ្តល់ឈ្មោះថេរមួយ ឲ្យក្រុម pod មួយ។",
+   "audio": "audio/c02.mp3"
+  },
+  {
+   "sec": "svc",
+   "img": "img/c03.svg",
+   "flat": true,
+   "alt": "A label tag above three containers",
+   "hook": "labels",
+   "ko": "It finds its pods by their labels.",
+   "en": "វារក pod របស់វា តាម label។",
+   "audio": "audio/c03.mp3"
+  },
+  {
+   "sec": "svc",
+   "img": "img/c04.svg",
+   "flat": true,
+   "alt": "Containers inside a closed dashed fence with a lock",
+   "hook": "ClusterIP",
+   "ko": "A ClusterIP service is only reachable inside the cluster.",
+   "en": "Service ប្រភេទ ClusterIP អាចចូលបានតែពីក្នុង cluster ប៉ុណ្ណោះ។",
+   "audio": "audio/c04.mp3"
+  },
+  {
+   "sec": "ingress",
+   "img": "img/c05.svg",
+   "flat": true,
+   "alt": "A globe with an arrow to servers",
+   "hook": "LoadBalancer",
+   "ko": "A LoadBalancer service gets a public IP from the cloud.",
+   "en": "Service ប្រភេទ LoadBalancer ទទួលបាន public IP ពី cloud។",
+   "audio": "audio/c05.mp3"
+  },
+  {
+   "sec": "ingress",
+   "img": "img/c06.svg",
+   "flat": true,
+   "alt": "One path splitting to /api, /web and /docs",
+   "hook": "ingress",
+   "ko": "An ingress sends web traffic to services by URL path.",
+   "en": "Ingress បញ្ជូនចរាចរណ៍ web ទៅ service តាម URL path។",
+   "audio": "audio/c06.mp3"
+  },
+  {
+   "sec": "ingress",
+   "img": "img/c07.svg",
+   "flat": true,
+   "alt": "A green lock and the word https",
+   "hook": "HTTPS",
+   "ko": "The ingress controller also handles HTTPS certificates.",
+   "en": "Ingress controller ក៏គ្រប់គ្រងវិញ្ញាបនបត្រ HTTPS ផងដែរ។",
+   "audio": "audio/c07.mp3"
+  },
+  {
+   "sec": "dns",
+   "img": "img/c08.svg",
+   "flat": true,
+   "alt": "One container calling another by the name api",
+   "hook": "by name",
+   "ko": "Inside the cluster, apps call each other by service name.",
+   "en": "ក្នុង cluster កម្មវិធីហៅគ្នាទៅវិញទៅមក តាមឈ្មោះ service។",
+   "audio": "audio/c08.mp3"
+  },
+  {
+   "sec": "dns",
+   "img": "img/c09.svg",
+   "flat": true,
+   "alt": "An open book: a name on one page, an address on the other",
+   "hook": "DNS",
+   "ko": "DNS turns that service name into an address.",
+   "en": "DNS បំប្លែងឈ្មោះ service នោះ ទៅជាអាសយដ្ឋាន។",
+   "audio": "audio/c09.mp3"
+  }
+ ],
+ "qa": [
+  {
+   "title": "Traps · កំហុសដែលងាយធ្វើ",
+   "small": "អានមុនគេ",
+   "kind": "trap",
+   "items": [
+    {
+     "q": "Why can't I open my ClusterIP service in the browser?",
+     "qen": "ហេតុអ្វីខ្ញុំបើក service ClusterIP ក្នុង browser មិនបាន?",
+     "qaudio": "audio/qt1.mp3",
+     "a": "ClusterIP is internal only. Use port-forward, an ingress or a LoadBalancer.",
+     "aen": "ClusterIP ប្រើបានតែខាងក្នុងប៉ុណ្ណោះ។ ប្រើ port-forward, ingress ឬ LoadBalancer។",
+     "why": "ClusterIP គឺជាប្រភេទលំនាំដើម ហើយវាមិនបើកទៅខាងក្រៅទេ។",
+     "audio": "audio/at1.mp3"
+    },
+    {
+     "q": "Do I need one load balancer per service?",
+     "qen": "តើខ្ញុំត្រូវការ load balancer មួយសម្រាប់ service នីមួយៗទេ?",
+     "qaudio": "audio/qt2.mp3",
+     "a": "No. One ingress can route to many services, and it costs less.",
+     "aen": "ទេ។ Ingress មួយអាចបញ្ជូនទៅ service ជាច្រើន ហើយវាថោកជាង។",
+     "why": "Load balancer នីមួយៗលើ cloud គិតលុយដាច់ដោយឡែក។",
+     "audio": "audio/at2.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Questions · សំណួរនៅកន្លែងធ្វើការ",
+   "small": "ឆ្លើយក្នុងចិត្ត រួចចុច Listen ដើម្បីប្រៀបធៀប",
+   "kind": "qa",
+   "items": [
+    {
+     "q": "How does the frontend call the backend?",
+     "qen": "Frontend ហៅ backend យ៉ាងដូចម្តេច?",
+     "qaudio": "audio/qc1.mp3",
+     "a": "It calls the backend service by its name.",
+     "aen": "វាហៅ service របស់ backend តាមឈ្មោះរបស់វា។",
+     "audio": "audio/ac1.mp3"
+    },
+    {
+     "q": "Why do I get a 503 error?",
+     "qen": "ហេតុអ្វីខ្ញុំទទួលបាន error 503?",
+     "qaudio": "audio/qc2.mp3",
+     "a": "The service has no ready pods behind it. Check the labels.",
+     "aen": "Service គ្មាន pod ដែលរួចរាល់នៅពីក្រោយវាទេ។ ពិនិត្យ label មើល។",
+     "audio": "audio/ac2.mp3"
+    },
+    {
+     "q": "How do I test a service from my laptop?",
+     "qen": "តើខ្ញុំសាក service ពី laptop យ៉ាងដូចម្តេច?",
+     "qaudio": "audio/qc3.mp3",
+     "a": "Use kubectl port-forward to open it on localhost.",
+     "aen": "ប្រើ kubectl port-forward ដើម្បីបើកវានៅលើ localhost។",
+     "audio": "audio/ac3.mp3"
+    }
+   ]
+  },
+  {
+   "title": "When you're stuck · ពេលនឹកមិនឃើញ",
+   "small": "ឃ្លាជួយសង្គ្រោះ",
+   "kind": "surv",
+   "items": [
+    {
+     "ko": "Which port does it listen on?",
+     "en": "វាស្តាប់នៅលើ port មួយណា?",
+     "audio": "audio/s1.mp3"
+    },
+    {
+     "ko": "Can you check the endpoints?",
+     "en": "អាចពិនិត្យ endpoints បានទេ?",
+     "audio": "audio/s2.mp3"
+    }
+   ]
+  }
+ ],
+ "vocab": [
+  {
+   "title": "Service types",
+   "color": "#0052A4",
+   "items": [
+    {
+     "ko": "service",
+     "en": "ឈ្មោះថេរសម្រាប់ pod",
+     "audio": "audio/v01.mp3"
+    },
+    {
+     "ko": "ClusterIP",
+     "en": "ប្រើបានតែខាងក្នុង",
+     "audio": "audio/v02.mp3"
+    },
+    {
+     "ko": "NodePort",
+     "en": "បើកតាម port លើ node",
+     "audio": "audio/v03.mp3"
+    },
+    {
+     "ko": "LoadBalancer",
+     "en": "ទទួល IP សាធារណៈ",
+     "audio": "audio/v04.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Getting in",
+   "color": "#996CAC",
+   "items": [
+    {
+     "ko": "ingress",
+     "en": "ទ្វារចូលសម្រាប់ web",
+     "audio": "audio/v05.mp3"
+    },
+    {
+     "ko": "ingress controller",
+     "en": "កម្មវិធីដែលដំណើរការ ingress",
+     "audio": "audio/v06.mp3"
+    },
+    {
+     "ko": "route",
+     "en": "ផ្លូវ",
+     "audio": "audio/v07.mp3"
+    },
+    {
+     "ko": "certificate",
+     "en": "វិញ្ញាបនបត្រ",
+     "audio": "audio/v08.mp3"
+    },
+    {
+     "ko": "traffic",
+     "en": "ចរាចរណ៍",
+     "audio": "audio/v09.mp3"
+    }
+   ]
+  },
+  {
+   "title": "Network words",
+   "color": "#EF7C1C",
+   "items": [
+    {
+     "ko": "endpoint",
+     "en": "អាសយដ្ឋានរបស់ pod",
+     "audio": "audio/v10.mp3"
+    },
+    {
+     "ko": "port",
+     "en": "ច្រក",
+     "audio": "audio/v11.mp3"
+    },
+    {
+     "ko": "DNS",
+     "en": "ប្រព័ន្ធឈ្មោះ",
+     "audio": "audio/v12.mp3"
+    },
+    {
+     "ko": "port-forward",
+     "en": "បញ្ជូន port មក laptop",
+     "audio": "audio/v13.mp3"
+    },
+    {
+     "ko": "internal",
+     "en": "ខាងក្នុង",
+     "audio": "audio/v14.mp3"
+    },
+    {
+     "ko": "public",
+     "en": "សាធារណៈ",
+     "audio": "audio/v15.mp3"
+    }
+   ]
+  }
+ ],
+ "full_title": "Services and Ingress · ពីដើមដល់ចប់",
+ "full": [
+  {
+   "title": "The problem · បញ្ហា",
+   "ko": "Pods come and go, and their IP addresses change.",
+   "en": "Pod មក ហើយទៅ ហើយ IP address របស់វាផ្លាស់ប្តូរ។"
+  },
+  {
+   "title": "Services · Service",
+   "ko": "A service gives a group of pods one stable name. It finds its pods by their labels. A ClusterIP service is only reachable inside the cluster.",
+   "en": "Service ផ្តល់ឈ្មោះថេរមួយ ឲ្យក្រុម pod មួយ។ វារក pod របស់វា តាម label។ Service ប្រភេទ ClusterIP អាចចូលបានតែពីក្នុង cluster ប៉ុណ្ណោះ។"
+  },
+  {
+   "title": "Ingress · Ingress",
+   "ko": "A LoadBalancer service gets a public IP from the cloud. An ingress sends web traffic to services by URL path. The ingress controller also handles HTTPS certificates.",
+   "en": "Service ប្រភេទ LoadBalancer ទទួលបាន public IP ពី cloud។ Ingress បញ្ជូនចរាចរណ៍ web ទៅ service តាម URL path។ Ingress controller ក៏គ្រប់គ្រងវិញ្ញាបនបត្រ HTTPS ផងដែរ។"
+  },
+  {
+   "title": "Inside · នៅខាងក្នុង",
+   "ko": "Inside the cluster, apps call each other by service name. DNS turns that service name into an address.",
+   "en": "ក្នុង cluster កម្មវិធីហៅគ្នាទៅវិញទៅមក តាមឈ្មោះ service។ DNS បំប្លែងឈ្មោះ service នោះ ទៅជាអាសយដ្ឋាន។"
+  }
+ ],
+ "published": "2026-11-10"
+}
