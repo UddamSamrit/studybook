@@ -602,7 +602,7 @@ def send_home(greet=False):
 
 
 HELP = '\n'.join([
-    '<b>HOW TO USE THIS BOT</b>', LINE,
+    '<b>SAMRIT UDDAM LIFE: HOW TO USE</b>', LINE,
     'Every morning at 5:00 I send your dashboard. At {evening} I remind you to write your review.', '',
     '<b>Tasks</b>  (codes: P1-P3, X1... your own, W1-W6, L1-L6, J1-J4, M1-M4, N1-N3, T1-T10, A1-A8)',
     '<code>done W1 L2</code>  tick',
@@ -803,7 +803,7 @@ def main():
         print('sent' if r.get('ok') else r)
         return
     api('setMyCommands', commands=[
-        {'command': 'todo', 'description': "Today's dashboard"},
+        {'command': 'todo', 'description': "Today's Samrit Uddam Life dashboard"},
         {'command': 'done', 'description': 'Tick tasks, e.g. /done W1 L2'},
         {'command': 'doing', 'description': 'Mark in progress, e.g. /doing W1'},
         {'command': 'undo', 'description': 'Untick, e.g. /undo W1'},

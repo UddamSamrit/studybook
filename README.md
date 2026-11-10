@@ -7,6 +7,7 @@ A free study site with Khmer translations. It's a shelf of books, and each book 
 ```
 studybook/
 ├── english/              English: the 4 skills
+│   ├── todo/             Samrit Uddam Life: the daily dashboard
 │   ├── reading/
 │   ├── listening/
 │   ├── speaking/         Introducing yourself
@@ -61,6 +62,13 @@ Each unit is one page with four tabs:
 Old links such as `/studybook/kubernetes-basics/` still work: they forward to the new page.
 
 An AI can read every unit as text from the feed: [feed.xml](https://uddamsamrit.github.io/studybook/feed.xml).
+
+## Samrit Uddam Life
+
+The system for my life: one daily dashboard on the site ([open](https://uddamsamrit.github.io/studybook/english/todo/)) and in a Telegram bot.
+It covers the top 3 priorities, Wintex work, learning, SOCHEATAAI, leadership, a startup idea a day, new people and community,
+a timed plan from 5:00 to 22:00 with time tracking, and an end-of-day review. The bot posts it at 5:00, reminds me at 21:30, and keeps
+the history for /today, /week, /month and /year. The list lives in `english/todo/todo.json`; the bot is `tools/todo_bot.py`.
 
 ## More English practice
 
